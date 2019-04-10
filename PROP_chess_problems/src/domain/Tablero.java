@@ -897,7 +897,7 @@ public class Tablero {
 		}
 	}
 
-	public void añadirFicha(String ficha, int i, int j) { //DONE
+	public void anadirFicha(String ficha, int i, int j) { //DONE
 		this.casillas[i][j] = ficha;
 	}
 	

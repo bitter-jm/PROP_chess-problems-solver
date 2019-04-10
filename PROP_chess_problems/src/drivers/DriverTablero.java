@@ -49,9 +49,9 @@ public class DriverTablero {
 		t.imprimirEstadoTableroConsola();
 		
 		System.out.println("Insertar piezas:");
-		t.añadirFicha("Q", 7, 3);
-		t.añadirFicha("k", 0, 3);
-		t.añadirFicha("r", 3, 0);
+		t.anadirFicha("Q", 7, 3);
+		t.anadirFicha("k", 0, 3);
+		t.anadirFicha("r", 3, 0);
 		//t.añadirFicha("R", 7, 2);
 		//t.añadirFicha("R", 7, 4);
 		t.imprimirEstadoTableroConsola();

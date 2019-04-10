@@ -24,7 +24,7 @@ public class DriverTablero {
 				
 		System.out.println("Blancas puede realizar los siguientes movimientos:");
 		List<Movimiento> movimientos = t.posiblesMovimientos("BLANCAS");
-		Iterator iterator = movimientos.iterator();
+		Iterator<Movimiento> iterator = movimientos.iterator();
 		Movimiento m = null;
 		while(iterator.hasNext()) {
 			m = (Movimiento) iterator.next();
@@ -65,6 +65,15 @@ public class DriverTablero {
 	    	System.out.println(m.ficha + ": (" + m.inicioI+","+m.inicioJ+") -> ("+m.finalI+","+m.finalJ+")");  
 	    }
 		System.out.println("");
+		
+		System.out.println("Realizar movimiento validado:");
+		t.registrarMovimientoValidando(new Movimiento(3,0,3,3,"r"));
+		t.imprimirEstadoTableroConsola();
+		
+		System.out.println("Realizar movimiento no validado:");
+		boolean res = t.registrarMovimientoValidando(new Movimiento(3,3,3,7,"r"));
+		if (!res) System.out.println("No se ha podido mover la torre negra");
+		t.imprimirEstadoTableroConsola();
 		
 	}
 	

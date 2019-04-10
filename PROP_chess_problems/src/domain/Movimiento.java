@@ -18,4 +18,15 @@ public class Movimiento {
 		this.ficha = ficha;
 	}
 	
+	@Override
+    public boolean equals(Object obj) { 
+		Movimiento m = (Movimiento) obj;
+		if (!this.ficha.equals(m.ficha)) return false;
+		if (this.inicioI != m.inicioI) return false;
+		if (this.inicioJ != m.inicioJ) return false;
+		if (this.finalI != m.finalI) return false;
+		if (this.finalJ != m.finalJ) return false;
+		return true;
+    }
+	
 }

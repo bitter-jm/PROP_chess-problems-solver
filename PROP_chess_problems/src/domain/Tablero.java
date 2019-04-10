@@ -1,7 +1,6 @@
 package domain;
 
 import domain.Movimiento;
-import domain.IntPair;
 import java.lang.Character;
 import java.util.List;
 import java.util.ArrayList;
@@ -71,44 +70,26 @@ public class Tablero {
 		return fen;
 	}
 	
-	//public void registrarMovimiento(Movimiento mov) {}
+	public boolean registrarMovimientoValidando(Movimiento mov) { //DONE
+		List<Movimiento> movimientosValidos;
+		if (Character.isUpperCase(mov.ficha.charAt(0))) movimientosValidos = this.posiblesMovimientos("BLANCAS");
+		else movimientosValidos = this.posiblesMovimientos("NEGRAS");
+		Iterator<Movimiento> iterator = movimientosValidos.iterator();
+		Movimiento m = null;
+		while(iterator.hasNext()) {
+			m = (Movimiento) iterator.next();
+			if (m.equals(mov)) {
+				this.registrarMovimientoSinValidar(mov);
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	public void registrarMovimientoSinValidar(Movimiento mov) { //DONE
 		this.casillas[mov.inicioI][mov.inicioJ] = null;
 		this.casillas[mov.finalI][mov.finalJ] = mov.ficha;
 	}
-	
-	/*
-	public boolean esMate(String color) {
-		boolean mate = true;
-		if (this.esJaque(color)) {
-			ArrayList<Movimiento> movsRey = new ArrayList<Movimiento>();
-			if (color.equals("BLANCAS")) {
-				for (int i = 0; i < 8; ++i) {
-					for (int j = 0; j < 8; ++j) {
-						if (this.casillas[i][j] != null && this.casillas[i][j].equals("K")) {
-							this.anadirPosiblesMovimientosPieza("K", i, j, movsRey);
-							if (movsRey.isEmpty()) return true;
-							else return false;
-						}
-					}
-				}
-			}
-			else {
-				for (int i = 0; i < 8; ++i) {
-					for (int j = 0; j < 8; ++j) {
-						if (this.casillas[i][j] != null && this.casillas[i][j].equals("k")) {
-							this.anadirPosiblesMovimientosPieza("k", i, j, movsRey);
-							if (movsRey.isEmpty()) return true;
-							else return false;
-						}
-					}
-				}
-			}			
-		}
-		return false;
-	}
-	*/
 	
 	public boolean esJaque(String color) { //DONE
 		String find = "";
@@ -369,19 +350,18 @@ public class Tablero {
 		}
 		
 		// TODO: Se puede optimizar si en vez de exportar y importar el FEN se hace un metodo para deshacer un movimiento
-		if (this.esJaque(color)) {
-			String FENinicial = this.exportarFEN();
-			Iterator iterator = movimientos.iterator();
-			Movimiento m = null;
-			while(iterator.hasNext()) {
-				m = (Movimiento) iterator.next();
-				this.registrarMovimientoSinValidar(m);
-				if (this.esJaque(color)) {
-					iterator.remove();
-				}
-				this.cargarFEN(FENinicial);
-		    }
-		}
+		// Elimina los movimientos ilegales (del tipo: el contrario podria matar al rey en el siguiente turno)
+		String FENinicial = this.exportarFEN();
+		Iterator<Movimiento> iterator = movimientos.iterator();
+		Movimiento m = null;
+		while(iterator.hasNext()) {
+			m = (Movimiento) iterator.next();
+			this.registrarMovimientoSinValidar(m);
+			if (this.esJaque(color)) {
+				iterator.remove();
+			}
+			this.cargarFEN(FENinicial);
+	    }
 		
 		return movimientos;
 	}
@@ -916,9 +896,7 @@ public class Tablero {
 			return;
 		}
 	}
-	
-	//public boolean movimientoValido(Movimiento mov) {}
-	
+
 	public void añadirFicha(String ficha, int i, int j) { //DONE
 		this.casillas[i][j] = ficha;
 	}

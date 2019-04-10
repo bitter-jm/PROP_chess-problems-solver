@@ -1,15 +1,17 @@
 package domain;
 
 import domain.Movimiento;
+import domain.IntPair;
 import java.lang.Character;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Tablero {
 	//pawn = "P", knight = "N", bishop = "B", rook = "R", queen = "Q" and king = "K" //BLANCAS
 	//pawn = "p", knight = "n", bishop = "b", rook = "r", queen = "q" and king = "k" //NEGRAS
 	
-	String[][] casillas = new String[8][8];
+	private String[][] casillas = new String[8][8];
 	
 	public Tablero() {} //DONE
 	
@@ -71,7 +73,42 @@ public class Tablero {
 	
 	//public void registrarMovimiento(Movimiento mov) {}
 	
-	//public boolean esMate(String color) {}
+	public void registrarMovimientoSinValidar(Movimiento mov) { //DONE
+		this.casillas[mov.inicioI][mov.inicioJ] = null;
+		this.casillas[mov.finalI][mov.finalJ] = mov.ficha;
+	}
+	
+	/*
+	public boolean esMate(String color) {
+		boolean mate = true;
+		if (this.esJaque(color)) {
+			ArrayList<Movimiento> movsRey = new ArrayList<Movimiento>();
+			if (color.equals("BLANCAS")) {
+				for (int i = 0; i < 8; ++i) {
+					for (int j = 0; j < 8; ++j) {
+						if (this.casillas[i][j] != null && this.casillas[i][j].equals("K")) {
+							this.anadirPosiblesMovimientosPieza("K", i, j, movsRey);
+							if (movsRey.isEmpty()) return true;
+							else return false;
+						}
+					}
+				}
+			}
+			else {
+				for (int i = 0; i < 8; ++i) {
+					for (int j = 0; j < 8; ++j) {
+						if (this.casillas[i][j] != null && this.casillas[i][j].equals("k")) {
+							this.anadirPosiblesMovimientosPieza("k", i, j, movsRey);
+							if (movsRey.isEmpty()) return true;
+							else return false;
+						}
+					}
+				}
+			}			
+		}
+		return false;
+	}
+	*/
 	
 	public boolean esJaque(String color) { //DONE
 		String find = "";
@@ -88,7 +125,8 @@ public class Tablero {
 		return false;
 	}
 	
-	public boolean esJaqueEnPosicionANegras(int i, int j) { //DONE (i, j) -> Posición rey negro
+	public boolean esJaqueEnPosicionANegras(int i, int j) { //DONE
+		// (i, j) -> Posición rey negro
 		boolean stop = false;
 		int ii = i;
 		int jj = j;
@@ -201,7 +239,8 @@ public class Tablero {
 		return false;
 	}
 	
-	public boolean esJaqueEnPosicionABlancas(int i, int j) { //DONE (i, j) -> Posición rey blanco
+	public boolean esJaqueEnPosicionABlancas(int i, int j) { //DONE 
+		// (i, j) -> Posición rey blanco
 		boolean stop = false;
 		int ii = i;
 		int jj = j;
@@ -314,25 +353,36 @@ public class Tablero {
 		return false;
 	}
 	
-	public List<Movimiento> posiblesMovimientos(String color) { //CASI DONE
+	public List<Movimiento> posiblesMovimientos(String color) { //DONE
 		List<Movimiento> movimientos = new ArrayList<Movimiento>();
-		if (!this.esJaque(color)) {
-			for (int i = 0; i < 8; ++i) {
-				for (int j = 0; j < 8; ++j) {
-					if (this.casillas[i][j] != null) {
-						if (color.equals("BLANCAS") && Character.isUpperCase(this.casillas[i][j].charAt(0))) {
-							this.anadirPosiblesMovimientosPieza(this.casillas[i][j], i, j, movimientos);
-						}
-						else if (color.equals("NEGRAS") && !Character.isUpperCase(this.casillas[i][j].charAt(0))) {
-							this.anadirPosiblesMovimientosPieza(this.casillas[i][j], i, j, movimientos);
-						}
+		for (int i = 0; i < 8; ++i) {
+			for (int j = 0; j < 8; ++j) {
+				if (this.casillas[i][j] != null) {
+					if (color.equals("BLANCAS") && Character.isUpperCase(this.casillas[i][j].charAt(0))) {
+						this.anadirPosiblesMovimientosPieza(this.casillas[i][j], i, j, movimientos);
+					}
+					else if (color.equals("NEGRAS") && !Character.isUpperCase(this.casillas[i][j].charAt(0))) {
+						this.anadirPosiblesMovimientosPieza(this.casillas[i][j], i, j, movimientos);
 					}
 				}
 			}
 		}
-		else {
-			//Llenar movimientos con los posibles movimientos del rey
+		
+		// TODO: Se puede optimizar si en vez de exportar y importar el FEN se hace un metodo para deshacer un movimiento
+		if (this.esJaque(color)) {
+			String FENinicial = this.exportarFEN();
+			Iterator iterator = movimientos.iterator();
+			Movimiento m = null;
+			while(iterator.hasNext()) {
+				m = (Movimiento) iterator.next();
+				this.registrarMovimientoSinValidar(m);
+				if (this.esJaque(color)) {
+					iterator.remove();
+				}
+				this.cargarFEN(FENinicial);
+		    }
 		}
+		
 		return movimientos;
 	}
 	
@@ -875,6 +925,10 @@ public class Tablero {
 	
 	public void quitarFicha(int i, int j) { //DONE
 		this.casillas[i][j] = null;
+	}
+	
+	public String consultarCasilla(int i, int j) { //DONE
+		return this.casillas[i][j];
 	}
 	
 	public void imprimirEstadoTableroConsola() { //DONE

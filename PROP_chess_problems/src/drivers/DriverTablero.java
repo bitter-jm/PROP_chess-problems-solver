@@ -23,7 +23,7 @@ public class DriverTablero {
 		System.out.println(fen + "\n");
 				
 		System.out.println("Blancas puede realizar los siguientes movimientos:");
-		List<Movimiento> movimientos = t.posiblesMovimientos("NEGRAS");
+		List<Movimiento> movimientos = t.posiblesMovimientos("BLANCAS");
 		Iterator iterator = movimientos.iterator();
 		Movimiento m = null;
 		while(iterator.hasNext()) {
@@ -31,7 +31,7 @@ public class DriverTablero {
 	    	System.out.println(m.ficha + ": (" + m.inicioI+","+m.inicioJ+") -> ("+m.finalI+","+m.finalJ+")");  
 	    }
 		System.out.println("");
-		
+
 		t.imprimirEstadoTableroConsola();
 		System.out.println("Posicion del Rey Negro:");
 		if (t.esJaqueEnPosicionANegras(3, 4)) System.out.println("(3,4) -> Jaque");
@@ -42,6 +42,29 @@ public class DriverTablero {
 		else System.out.println("(0,5) -> No jaque");
 		if (t.esJaqueEnPosicionANegras(3, 1)) System.out.println("(3,1) -> Jaque");
 		else System.out.println("(3,1) -> No jaque");
+		System.out.println("");
+		
+		System.out.println("Vaciar tablero:");
+		t.limpiarTablero();
+		t.imprimirEstadoTableroConsola();
+		
+		System.out.println("Insertar piezas:");
+		t.añadirFicha("Q", 7, 3);
+		t.añadirFicha("k", 0, 3);
+		t.añadirFicha("r", 3, 0);
+		//t.añadirFicha("R", 7, 2);
+		//t.añadirFicha("R", 7, 4);
+		t.imprimirEstadoTableroConsola();
+		
+		System.out.println("Negras puede realizar los siguientes movimientos:");
+		movimientos = t.posiblesMovimientos("NEGRAS");
+		iterator = movimientos.iterator();
+		m = null;
+		while(iterator.hasNext()) {
+			m = (Movimiento) iterator.next();
+	    	System.out.println(m.ficha + ": (" + m.inicioI+","+m.inicioJ+") -> ("+m.finalI+","+m.finalJ+")");  
+	    }
+		System.out.println("");
 		
 	}
 	

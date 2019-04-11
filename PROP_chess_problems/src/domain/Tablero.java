@@ -1,6 +1,7 @@
 package domain;
 
 import domain.Movimiento;
+import domain.MovimientoCompleto;
 import java.lang.Character;
 import java.util.List;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ public class Tablero {
 	//pawn = "p", knight = "n", bishop = "b", rook = "r", queen = "q" and king = "k" //NEGRAS
 	
 	private String[][] casillas = new String[8][8];
+	private List<MovimientoCompleto> historyStack = new ArrayList<MovimientoCompleto>();
 	
 	public Tablero() {} //DONE
 	
@@ -70,6 +72,13 @@ public class Tablero {
 		return fen;
 	}
 	
+	public void deshacer() { //DONE
+		if (this.historyStack.isEmpty()) return;
+		MovimientoCompleto mc = this.historyStack.remove(this.historyStack.size()-1);
+		this.casillas[mc.inicioI][mc.inicioJ] = mc.ficha;
+		this.casillas[mc.finalI][mc.finalJ] = mc.fichaMatada;
+	}
+	
 	public boolean registrarMovimientoValidando(Movimiento mov) { //DONE
 		List<Movimiento> movimientosValidos;
 		if (Character.isUpperCase(mov.ficha.charAt(0))) movimientosValidos = this.posiblesMovimientos("BLANCAS");
@@ -79,6 +88,7 @@ public class Tablero {
 		while(iterator.hasNext()) {
 			m = (Movimiento) iterator.next();
 			if (m.equals(mov)) {
+				this.historyStack.add(new MovimientoCompleto(mov, this.casillas[mov.finalI][mov.finalJ]));
 				this.registrarMovimientoSinValidar(mov);
 				return true;
 			}

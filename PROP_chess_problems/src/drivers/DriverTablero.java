@@ -52,6 +52,7 @@ public class DriverTablero {
 		t.anadirFicha("Q", 7, 3);
 		t.anadirFicha("k", 0, 3);
 		t.anadirFicha("r", 3, 0);
+		t.anadirFicha("P", 0, 5);
 		//t.añadirFicha("R", 7, 2);
 		//t.añadirFicha("R", 7, 4);
 		t.imprimirEstadoTableroConsola();
@@ -70,11 +71,22 @@ public class DriverTablero {
 		t.registrarMovimientoValidando(new Movimiento(3,0,3,3,"r"));
 		t.imprimirEstadoTableroConsola();
 		
-		System.out.println("Realizar movimiento no validado:");
+		System.out.println("Realizar movimiento no valido:");
 		boolean res = t.registrarMovimientoValidando(new Movimiento(3,3,3,7,"r"));
 		if (!res) System.out.println("No se ha podido mover la torre negra");
 		t.imprimirEstadoTableroConsola();
 		
+		System.out.println("Probando deshacer ultimas 3 jugadas:");
+		t.registrarMovimientoValidando(new Movimiento(0,3,0,4,"k"));
+		t.registrarMovimientoValidando(new Movimiento(0,4,0,5,"k"));
+		t.registrarMovimientoValidando(new Movimiento(0,5,0,6,"k"));
+		t.imprimirEstadoTableroConsola();
+		t.deshacer();
+		t.imprimirEstadoTableroConsola();
+		t.deshacer();
+		t.imprimirEstadoTableroConsola();
+		t.deshacer();
+		t.imprimirEstadoTableroConsola();
 	}
 	
 }

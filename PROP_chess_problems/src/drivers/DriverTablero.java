@@ -76,7 +76,7 @@ public class DriverTablero {
 		if (!res) System.out.println("No se ha podido mover la torre negra");
 		t.imprimirEstadoTableroConsola();
 		
-		System.out.println("Probando deshacer ultimas 3 jugadas:");
+		System.out.println("Deshaciendo ultimas 3 jugadas:");
 		t.registrarMovimientoValidando(new Movimiento(0,3,0,4,"k"));
 		t.registrarMovimientoValidando(new Movimiento(0,4,0,5,"k"));
 		t.registrarMovimientoValidando(new Movimiento(0,5,0,6,"k"));

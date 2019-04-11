@@ -26,6 +26,7 @@ public class Tablero {
 				this.casillas[i][j] = null;
 			}
 		}
+		this.historyStack.clear();
 	}
 	
 	public void cargarFEN(String fen) { //DONE
@@ -88,7 +89,6 @@ public class Tablero {
 		while(iterator.hasNext()) {
 			m = (Movimiento) iterator.next();
 			if (m.equals(mov)) {
-				this.historyStack.add(new MovimientoCompleto(mov, this.casillas[mov.finalI][mov.finalJ]));
 				this.registrarMovimientoSinValidar(mov);
 				return true;
 			}
@@ -97,6 +97,7 @@ public class Tablero {
 	}
 	
 	public void registrarMovimientoSinValidar(Movimiento mov) { //DONE
+		this.historyStack.add(new MovimientoCompleto(mov, this.casillas[mov.finalI][mov.finalJ]));
 		this.casillas[mov.inicioI][mov.inicioJ] = null;
 		this.casillas[mov.finalI][mov.finalJ] = mov.ficha;
 	}
@@ -359,9 +360,8 @@ public class Tablero {
 			}
 		}
 		
-		// TODO: Se puede optimizar si en vez de exportar y importar el FEN se hace un metodo para deshacer un movimiento
 		// Elimina los movimientos ilegales (del tipo: el contrario podria matar al rey en el siguiente turno)
-		String FENinicial = this.exportarFEN();
+		//String FENinicial = this.exportarFEN();
 		Iterator<Movimiento> iterator = movimientos.iterator();
 		Movimiento m = null;
 		while(iterator.hasNext()) {
@@ -370,7 +370,8 @@ public class Tablero {
 			if (this.esJaque(color)) {
 				iterator.remove();
 			}
-			this.cargarFEN(FENinicial);
+			this.deshacer();
+			//this.cargarFEN(FENinicial);
 	    }
 		
 		return movimientos;

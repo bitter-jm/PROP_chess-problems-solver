@@ -1,5 +1,7 @@
 package domain;
 
+import domain.Ficha;
+
 public class Movimiento {
 	//pawn = "P", knight = "N", bishop = "B", rook = "R", queen = "Q" and king = "K" //BLANCAS
 	//pawn = "p", knight = "n", bishop = "b", rook = "r", queen = "q" and king = "k" //NEGRAS
@@ -8,9 +10,9 @@ public class Movimiento {
 	public int inicioJ;
 	public int finalI;
 	public int finalJ;
-	public String ficha;
+	public Ficha ficha;
 	
-	public Movimiento(int ii, int ij, int fi, int fj, String ficha) {
+	public Movimiento(int ii, int ij, int fi, int fj, Ficha ficha) {
 		this.inicioI = ii;
 		this.inicioJ = ij;
 		this.finalI = fi;

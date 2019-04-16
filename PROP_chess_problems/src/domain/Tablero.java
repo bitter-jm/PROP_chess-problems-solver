@@ -201,4 +201,16 @@ public class Tablero {
 		System.out.println("");
 	}
 	
+	public Ficha[][] getCasillas() { //DONE DONE
+		return this.casillas;
+	}
+	
+	public boolean esMateColor(String color) {
+		List<Movimiento> movimientos = this.posiblesMovimientos(color);
+		//System.out.println("Posibles movimientos: " + movimientos.size());
+		if (movimientos.isEmpty()) return true;
+		return false;
+	}
+	
+	
 }

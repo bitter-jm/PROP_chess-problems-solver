@@ -8,7 +8,7 @@ import java.util.Iterator;
 
 public class M1 extends Maquina {
 	
-	private int maxDepth = 4;
+	private int maxDepth = 5;
 	private String color, colorOpuesto;
 	
 	public Movimiento realizarMovimiento(String fen) { 
@@ -21,7 +21,7 @@ public class M1 extends Maquina {
 		while(iterator.hasNext()) {
 			m = (Movimiento) iterator.next();
 			t.registrarMovimientoSinValidar(m);
-			int valor = this.minimax(t, 1, false);
+			int valor = this.minimax(t, 1, false, -10000, 10000);
 			if (valor > mejorValor) {
 				mejorMovimiento = m;
 				mejorValor = valor;
@@ -51,7 +51,7 @@ public class M1 extends Maquina {
 		return value;
 	}
 	
-	private int minimax(Tablero t, int depth, boolean max) {
+	private int minimax(Tablero t, int depth, boolean max, int alpha, int beta) {
 		if (depth == this.maxDepth) { 
 			return this.evaluarTablero(t.getCasillas());
 		}
@@ -63,8 +63,12 @@ public class M1 extends Maquina {
 			while(iterator.hasNext()) {
 				m = (Movimiento) iterator.next();
 				t.registrarMovimientoSinValidar(m);
-				mejorValor = max(mejorValor, this.minimax(t, depth+1, !max));
+				mejorValor = max(mejorValor, this.minimax(t, depth+1, !max, alpha, beta));
 				t.deshacer();
+				alpha = max(mejorValor, alpha);
+				if (beta <= alpha) {
+	                return mejorValor;
+	            }
 			}
 			return mejorValor;
 		} else {
@@ -75,8 +79,12 @@ public class M1 extends Maquina {
 			while(iterator.hasNext()) {
 				m = (Movimiento) iterator.next();
 				t.registrarMovimientoSinValidar(m);
-				mejorValor = min(mejorValor, this.minimax(t, depth+1, !max));
+				mejorValor = min(mejorValor, this.minimax(t, depth+1, !max, alpha, beta));
 				t.deshacer();
+				beta = min(mejorValor, beta);
+				if (beta <= alpha) {
+	                return mejorValor;
+	            }
 			}
 			return mejorValor;
 		}

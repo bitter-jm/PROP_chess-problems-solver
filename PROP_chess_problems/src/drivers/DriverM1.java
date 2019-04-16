@@ -18,9 +18,10 @@ public class DriverM1 {
 		m1_2.setColor("NEGRAS");
 		
 		//INICIALIZAR TABLERO
+		Tablero t = new Tablero("8/8/8/8/3p4/5K2/3rNN2/2R5");
 		//Tablero t = new Tablero("1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B");
 		//Tablero t = new Tablero("3r1n1k/ppr4b/1np2p1p/q4P2/3PN1QN/1B5P/PP4R1/3R2K1");
-		Tablero t = new Tablero("7k/2r4b/8/8/6Q1/8/6R1/6K1");
+		//Tablero t = new Tablero("7k/2r4b/8/8/6Q1/8/6R1/6K1");
 		//Tablero t = new Tablero(); t.anadirFicha(Ficha.newFicha("k"), 7, 6); t.anadirFicha(Ficha.newFicha("Q"), 4, 4); t.anadirFicha(Ficha.newFicha("Q"), 3, 5);
 		t.imprimirEstadoTableroConsola();
 		
@@ -56,7 +57,7 @@ public class DriverM1 {
 		t.imprimirEstadoTableroConsola();
 		// OUT: q: (4,6) -> (1,3)
 		
-		/*
+		
 		//REALIZAR MOVIMIENTO 3
 		System.out.println("Blancas puede realizar los siguientes movimientos:");
 		movimientos = t.posiblesMovimientos("BLANCAS");
@@ -113,7 +114,7 @@ public class DriverM1 {
 	    }
 		t.imprimirEstadoTableroConsola();
 		System.out.println("Mate?");
-		*/
+		
 	}
 
 }

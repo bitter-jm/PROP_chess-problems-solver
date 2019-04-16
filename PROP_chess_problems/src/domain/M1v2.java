@@ -6,42 +6,30 @@ import stubs.Maquina;
 import java.util.List;
 import java.util.Iterator;
 
-public class M1 extends Maquina {
+public class M1v2 extends Maquina {
 	
-	private int depth = 3;
+	private int maxDepth = 4;
 	private String color, colorOpuesto;
 	
-	public Movimiento realizarMovimiento(String fen) { // DONE
-		
+	public Movimiento realizarMovimiento(String fen) { 
 		Tablero t = new Tablero(fen);
 	    List<Movimiento> movimientosPosibles = t.posiblesMovimientos(this.color);
-	    int mejorValor = -9999;
+	    int mejorValor = -10000;
 	    Movimiento mejorMovimiento = new Movimiento(0,0,0,0,new Ficha());
 	    Iterator<Movimiento> iterator = movimientosPosibles.iterator();
 		Movimiento m = null;
 		while(iterator.hasNext()) {
 			m = (Movimiento) iterator.next();
 			t.registrarMovimientoSinValidar(m);
-			int valor = this.minimax(t, this.depth-1, true);
+			int valor = this.minimax(t, 1, false);
 			if (valor > mejorValor) {
 				mejorMovimiento = m;
 				mejorValor = valor;
 			}
 			t.deshacer();
 		}
-
 		return mejorMovimiento;
 	}
-	
-	public void setDepth(int depth) { // DONE
-		this.depth = depth;
-	} 
-	
-	public void setColor(String color) { // DONE
-		this.color = color;
-		if (color.equals("BLANCAS")) this.colorOpuesto = "NEGRAS";
-		else this.colorOpuesto = "BLANCAS";
-	} 
 	
 	private int evaluarTablero(Ficha[][] casillas) { // DONE
 		int value = 0;
@@ -63,13 +51,11 @@ public class M1 extends Maquina {
 		return value;
 	}
 	
-	private int minimax(Tablero t, int depth, boolean turnoMaquina) {
-		//if (depth == 0) { 
-		if (depth == 0 || (turnoMaquina && t.esMateColor(this.colorOpuesto)) || (!turnoMaquina && t.esMateColor(this.color))) { 
+	private int minimax(Tablero t, int depth, boolean max) {
+		if (depth == this.maxDepth) { 
 			return this.evaluarTablero(t.getCasillas());
 		}
-		//if (depth == 0) return this.evaluarTablero(t.getCasillas());
-		if (turnoMaquina) {			
+		if (max) {			
 			List<Movimiento> movimientosPosibles = t.posiblesMovimientos(this.color);
 			int mejorValor = -9999;
 			Iterator<Movimiento> iterator = movimientosPosibles.iterator();
@@ -77,7 +63,7 @@ public class M1 extends Maquina {
 			while(iterator.hasNext()) {
 				m = (Movimiento) iterator.next();
 				t.registrarMovimientoSinValidar(m);
-				mejorValor = max(mejorValor, this.minimax(t, depth-1, !turnoMaquina));
+				mejorValor = max(mejorValor, this.minimax(t, depth+1, !max));
 				t.deshacer();
 			}
 			return mejorValor;
@@ -89,12 +75,22 @@ public class M1 extends Maquina {
 			while(iterator.hasNext()) {
 				m = (Movimiento) iterator.next();
 				t.registrarMovimientoSinValidar(m);
-				mejorValor = min(mejorValor, this.minimax(t, depth-1, !turnoMaquina));
+				mejorValor = min(mejorValor, this.minimax(t, depth+1, !max));
 				t.deshacer();
 			}
 			return mejorValor;
 		}
 	}
+	
+	public void setDepth(int depth) { // DONE
+		this.maxDepth = depth;
+	} 
+	
+	public void setColor(String color) { // DONE
+		this.color = color;
+		if (color.equals("BLANCAS")) this.colorOpuesto = "NEGRAS";
+		else this.colorOpuesto = "BLANCAS";
+	} 
 	
 	private int max(int i, int j) { // DONE
 		if (i >= j) return i;

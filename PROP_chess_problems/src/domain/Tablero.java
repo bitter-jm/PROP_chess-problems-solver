@@ -153,14 +153,22 @@ public class Tablero {
 	
 	public List<Movimiento> posiblesMovimientos(String color) { //DONE DONE
 		List<Movimiento> movimientos = new ArrayList<Movimiento>();
+		boolean kingFound = false;
 		for (int i = 0; i < 8; ++i) {
 			for (int j = 0; j < 8; ++j) {
 				if (this.casillas[i][j] != null) {
 					if (this.casillas[i][j].color.equals(color)) {
+						if (this.casillas[i][j].ficha.equals("k")) kingFound = true;
 						movimientos.addAll(this.casillas[i][j].posiblesMovimientos(i, j, this.casillas));
 					}
 				}
 			}
+		}
+		
+		//Si no hay rey devuelve una lista vacia
+		if (!kingFound) {
+			System.out.println("Advertencia: Llamando a posiblesMovimientos() pero no hay rey"); 
+			return new ArrayList<Movimiento>();
 		}
 		
 		// Elimina los movimientos ilegales (del tipo: el contrario podria matar al rey en el siguiente turno)
@@ -211,6 +219,5 @@ public class Tablero {
 		if (movimientos.isEmpty()) return true;
 		return false;
 	}
-	
 	
 }

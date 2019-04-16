@@ -75,6 +75,7 @@ public class DriverTablero {
 		if (!res) System.out.println("No se ha podido mover la torre negra");
 		t.imprimirEstadoTableroConsola();
 		
+		// Deshacer jugadas
 		System.out.println("Deshaciendo ultimas 3 jugadas:");
 		t.registrarMovimientoValidando(new Movimiento(0,3,0,4,Ficha.newFicha("k")));
 		t.registrarMovimientoValidando(new Movimiento(0,4,0,5, Ficha.newFicha("k")));
@@ -87,6 +88,11 @@ public class DriverTablero {
 		t.deshacer();
 		t.imprimirEstadoTableroConsola();
 
+		//Es Mate?
+		t = new Tablero("7k/2r4p/8/8/6Q1/8/6R1/6K1");
+		t.registrarMovimientoSinValidar(new Movimiento(4, 6, 0, 6, Ficha.newFicha("Q")));
+		t.imprimirEstadoTableroConsola();
+		System.out.println("Es mate? " + t.esMateColor("NEGRAS"));
 	}
 	
 }

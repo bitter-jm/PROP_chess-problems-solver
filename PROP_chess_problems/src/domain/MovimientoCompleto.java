@@ -2,6 +2,10 @@ package domain;
 
 import domain.Ficha;
 
+/** 
+ * Extiende la clase Movimiento guardando la instancia Ficha de la pieza capturada
+ * @author Joan Marc Pastor
+ */
 public class MovimientoCompleto extends Movimiento {
 	
 	public Ficha fichaMatada;

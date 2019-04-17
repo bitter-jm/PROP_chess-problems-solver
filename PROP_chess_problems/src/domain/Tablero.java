@@ -8,6 +8,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/** 
+ * Representa un tablero de ajedrez
+ * @author Joan Marc Pastor
+ */
 public class Tablero {
 	//pawn = "P", knight = "N", bishop = "B", rook = "R", queen = "Q" and king = "K" //BLANCAS
 	//pawn = "p", knight = "n", bishop = "b", rook = "r", queen = "q" and king = "k" //NEGRAS
@@ -15,13 +19,23 @@ public class Tablero {
 	private Ficha[][] casillas = new Ficha[8][8];
 	private List<MovimientoCompleto> historyStack = new ArrayList<MovimientoCompleto>();
 	
-	public Tablero() {} //DONE DONE
+	/**
+	 * Crea un objeto Tablero vacío
+	 */
+	public Tablero() {} //DONE
 	
-	public Tablero(String fen) { //DONE DONE
+	/** 
+	 * Crea un objeto Tablero a partir de una anotación FEN
+	 * @param fen String con el estado del tablero en formato FEN
+	 */
+	public Tablero(String fen) { //DONE
 		this.cargarFEN(fen);
 	}
 	
-	public void limpiarTablero() { //DONE DONE
+	/** 
+	 * Vacía el tablero eliminando todas las instancias de Fichas
+	 */
+	public void limpiarTablero() { //DONE
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				this.casillas[i][j] = null;
@@ -30,7 +44,11 @@ public class Tablero {
 		this.historyStack.clear();
 	}
 	
-	public void cargarFEN(String fen) { //DONE DONE
+	/** 
+	 * Carga el estado del tablero según el FEN
+	 * @param fen FEN (Forsyth–Edwards Notation)
+	 */
+	public void cargarFEN(String fen) { //DONE
 		this.limpiarTablero();
 		int i = 0;
 		int j = 0;
@@ -50,7 +68,11 @@ public class Tablero {
 		}
 	}
 	
-	public String exportarFEN() { //DONE DONE
+	/** 
+	 * Devuelve el estado del tablero en anotación FEN
+	 * @return String con el estado del tablero en formato FEN
+	 */
+	public String exportarFEN() { //DONE
 		String fen = "";
 		int contador = 0;
 		for (int i = 0; i < 8; ++i) {
@@ -74,14 +96,22 @@ public class Tablero {
 		return fen;
 	}
 	
-	public void deshacer() { //DONE DONE
+	/** 
+	 * Deshace el último movimiento realizado
+	 */
+	public void deshacer() { //DONE
 		if (this.historyStack.isEmpty()) return;
 		MovimientoCompleto mc = this.historyStack.remove(this.historyStack.size()-1);
 		this.casillas[mc.inicioI][mc.inicioJ] = mc.ficha;
 		this.casillas[mc.finalI][mc.finalJ] = mc.fichaMatada;
 	}
 	
-	public boolean registrarMovimientoValidando(Movimiento mov) { //DONE DONE
+	/** 
+	 * Realiza un movimiento valido en el tablero
+	 * @param mov Objeto Movimiento indicando el movimiento a realizar
+	 * @return Booleano indicando si se ha podido realizar el movimiento o si éste era ilegal
+	 */
+	public boolean registrarMovimientoValidando(Movimiento mov) { //DONE
 		List<Movimiento> movimientosValidos;
 		if (mov.ficha.color.equals("BLANCAS")) movimientosValidos = this.posiblesMovimientos("BLANCAS");
 		else movimientosValidos = this.posiblesMovimientos("NEGRAS");
@@ -97,13 +127,22 @@ public class Tablero {
 		return false;
 	}
 	
-	public void registrarMovimientoSinValidar(Movimiento mov) { //DONE DONE
+	/** 
+	 * Realiza un movimiento en el tablero sin ser validado
+	 * @param mov Objeto Movimiento indicando el movimiento a realizar
+	 */
+	public void registrarMovimientoSinValidar(Movimiento mov) { //DONE
 		this.historyStack.add(new MovimientoCompleto(mov, this.casillas[mov.finalI][mov.finalJ]));
 		this.casillas[mov.inicioI][mov.inicioJ] = null;
 		this.casillas[mov.finalI][mov.finalJ] = mov.ficha;
 	}
 	
-	public boolean esJaque(String color) { //DONE DONE
+	/** 
+	 * Indica si un jugador se encuentra en jaque.
+	 * @param color Color del jugador a analizar
+	 * @return Booleano indicando si el jugador <em>color</em> se encuentra en jaque
+	 */
+	public boolean esJaque(String color) { //DONE
 		for (int i = 0; i < 8; ++i) {
 			for (int j = 0; j < 8; ++j) {
 				if (this.casillas[i][j] != null && this.casillas[i][j].ficha.equals("k")) {
@@ -115,7 +154,13 @@ public class Tablero {
 		return false;
 	}
 	
-	public boolean esJaqueEnPosicionANegras(int i, int j) { // DONE DONE
+	/** 
+	 * Indica si un jugador negro se encuentra en jaque.
+	 * @param i Coordenada i del rey negro
+	 * @param j Coordenada j del rey negro
+	 * @return Booleano indicando si rey negro en coordenadas <em>i</em>, <em>j</em> se encuentra en jaque
+	 */
+	public boolean esJaqueEnPosicionANegras(int i, int j) { // DONE
 		// (i, j) -> PosiciÃ³n rey negro
 		for (int ii = 0; ii < 8; ++ii) {
 			for (int jj = 0; jj < 8; ++jj) {
@@ -133,7 +178,13 @@ public class Tablero {
 		return false;
 	}
 	
-	public boolean esJaqueEnPosicionABlancas(int i, int j) { // DONE DONE
+	/** 
+	 * Indica si un jugador blanco se encuentra en jaque.
+	 * @param i Coordenada i del rey blanco
+	 * @param j Coordenada j del rey blanco
+	 * @return Booleano indicando si rey blanco en coordenadas <em>i</em>, <em>j</em> se encuentra en jaque
+	 */
+	public boolean esJaqueEnPosicionABlancas(int i, int j) { // DONE
 		// (i, j) -> PosiciÃ³n rey blanco
 		for (int ii = 0; ii < 8; ++ii) {
 			for (int jj = 0; jj < 8; ++jj) {
@@ -151,7 +202,12 @@ public class Tablero {
 		return false;
 	}
 	
-	public List<Movimiento> posiblesMovimientos(String color) { //DONE DONE
+	/** 
+	 * Obtiene los posibles movimientos que un jugador puede realizar
+	 * @param color String indicando el color del jugador a analizar
+	 * @return Devuelve un List de Movimientos conteniendo todos los posibles movimientos del jugador <em>color</em>
+	 */
+	public List<Movimiento> posiblesMovimientos(String color) { //DONE
 		List<Movimiento> movimientos = new ArrayList<Movimiento>();
 		boolean kingFound = false;
 		for (int i = 0; i < 8; ++i) {
@@ -186,19 +242,39 @@ public class Tablero {
 		return movimientos;
 	}
 	
-	public void anadirFicha(Ficha ficha, int i, int j) { //DONE DONE
+	/** 
+	 * Añade una Ficha al tablero
+	 * @param Ficha Ficha a colocar en el tablero
+	 * @param i Coordenada i de la Ficha a colocar
+	 * @param j Coordenada j de la Ficha a colocar
+	 */
+	public void anadirFicha(Ficha ficha, int i, int j) { //DONE
 		this.casillas[i][j] = ficha;
 	}
 	
-	public void quitarFicha(int i, int j) { //DONE DONE
+	/** 
+	 * Limpia una casilla del tablero
+	 * @param i Coordenada i de la Ficha a quitar
+	 * @param j Coordenada j de la Ficha a quitar
+	 */
+	public void quitarFicha(int i, int j) { //DONE
 		this.casillas[i][j] = null;
 	}
 	
-	public Ficha consultarCasilla(int i, int j) { //DONE DONE
+	/** 
+	 * Obtiene la Ficha en unas coordenadas del tablero
+	 * @param i Coordenada i de la Ficha a devolver
+	 * @param j Coordenada j de la Ficha a devolver
+	 * @return Ficha en las coordenadas <em>i</em>, <em>j</em>
+	 */
+	public Ficha consultarCasilla(int i, int j) { //DONE
 		return this.casillas[i][j];
 	}
 	
-	public void imprimirEstadoTableroConsola() { //DONE DONE
+	/** 
+	 * Imprime el estado del tablero por la salida estandar del sistema
+	 */
+	public void imprimirEstadoTableroConsola() { //DONE
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (this.casillas[i][j] == null) System.out.print("- "); 
@@ -209,13 +285,21 @@ public class Tablero {
 		System.out.println("");
 	}
 	
-	public Ficha[][] getCasillas() { //DONE DONE
+	/** 
+	 * Obtiene una matriz con el estado de cada casilla del tablero
+	 * @return Matriz Ficha[][] con el estado de cada casilla
+	 */
+	public Ficha[][] getCasillas() { //DONE
 		return this.casillas;
 	}
 	
-	public boolean esMateColor(String color) {
+	/** 
+	 * Consulta si es jaque mate para un jugador
+	 * @param color String indicando que jugador analizar
+	 * @return Booleano indicando si el jugador <em>color</em> se encuentra en jaque mate
+	 */
+	public boolean esMateColor(String color) { //DONE
 		List<Movimiento> movimientos = this.posiblesMovimientos(color);
-		//System.out.println("Posibles movimientos: " + movimientos.size());
 		if (movimientos.isEmpty()) return true;
 		return false;
 	}

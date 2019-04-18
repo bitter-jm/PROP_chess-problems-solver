@@ -8,7 +8,7 @@ public class DriverM1 {
 
 	public static void main(String[] args) {
 		
-		//Problemas faciles: http://www.ajedrezdeataque.com/17%20Aprendizaje/2/Bloque1/Bloque1.htm
+		//Problemas Jaque en 2: http://www.ajedrezdeataque.com/17%20Aprendizaje/2/Bloque1/Bloque1.htm
 
 		//INICIALIZAR MAQUINAS
 		M1 m1 = new M1();
@@ -21,6 +21,7 @@ public class DriverM1 {
 		//INICIALIZAR TABLERO
 		//Tablero t = new Tablero("8/8/8/8/3p4/5K2/3kNN2/2R5"); // 1
 		Tablero t = new Tablero("1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B"); // 2
+
 		System.out.println("Estado inicial:");
 		t.imprimirEstadoTableroConsola();
 		
@@ -28,7 +29,6 @@ public class DriverM1 {
 		System.out.println("Empezando a jugar:");
 		
 		m = m1.realizarMovimiento(t.exportarFEN());
-		System.out.println("mov calculado");
 		t.registrarMovimientoSinValidar(m);
 		t.imprimirEstadoTableroConsola();
 		System.out.println("Es mate? " + t.esMateColor("NEGRAS") + "\n");

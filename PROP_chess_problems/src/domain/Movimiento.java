@@ -2,9 +2,11 @@ package domain;
 
 import domain.Ficha;
 
+/** 
+ * Representa un movimiento de una instancia Ficha en unas coordenadas a otras
+ * @author Joan Marc Pastor
+ */
 public class Movimiento {
-	//pawn = "P", knight = "N", bishop = "B", rook = "R", queen = "Q" and king = "K" //BLANCAS
-	//pawn = "p", knight = "n", bishop = "b", rook = "r", queen = "q" and king = "k" //NEGRAS
 	
 	public int inicioI;
 	public int inicioJ;

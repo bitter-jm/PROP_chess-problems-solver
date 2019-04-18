@@ -5,6 +5,10 @@ import java.util.ArrayList;
 
 public class FichaBishop extends Ficha {
 
+	/**
+	 * Crea un objeto del tipo FichaBishop
+	 * @param color String indicando de que color es
+	 */
 	public FichaBishop(String color) {
 		this.color = color;
 		this.ficha = "b";

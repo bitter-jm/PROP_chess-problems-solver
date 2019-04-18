@@ -5,6 +5,10 @@ import java.util.ArrayList;
 
 public class FichaPawn extends Ficha {
 	
+	/**
+	 * Crea un objeto del tipo FichaPawn
+	 * @param color String indicando de que color es
+	 */
 	public FichaPawn(String color) {
 		this.color = color;
 		this.ficha = "p";

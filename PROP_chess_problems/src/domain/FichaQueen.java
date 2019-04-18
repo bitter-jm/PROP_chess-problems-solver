@@ -5,6 +5,10 @@ import java.util.ArrayList;
 
 public class FichaQueen extends Ficha {
 
+	/**
+	 * Crea un objeto del tipo FichaQueen
+	 * @param color String indicando de que color es
+	 */
 	public FichaQueen(String color) {
 		this.color = color;
 		this.ficha = "q";

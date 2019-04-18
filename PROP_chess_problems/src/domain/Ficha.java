@@ -51,7 +51,7 @@ public class Ficha {
 	}
 
 	/**
-	 * Compara si dos Fichas son equivalentes en cuanto a color y tipo
+	 * Compara si dos Fichas son equivalentes en cuanto a color y tipo (Deep Comparison)
 	 * @return Booleano indicando si dos Fichas son equivalentes
 	 */
 	@Override

@@ -9,15 +9,14 @@ public class DriverProblema {
 		//INITIALIZE PROBLEMA
 		//CREAR PROBLEMA PASANDO LOS PARAMETROS DIRECTAMENTE:
 		//mate en 2 por parte de las blancas
-		Problema prob = new Problema("Problema_1",2,
-				"4r3/2r5/Bp2R2b/1n6/2n2Q2/3kNbRq/2p1p1N1/2K1B3 w - - 0 1", false );
+		Problema prob = new Problema("Problema_1",2, "4r3/2r5/Bp2R2b/1n6/2n2Q2/3kNbRq/2p1p1N1/2K1B3 w - - 0 1", false );
 		
 		//Comprobacion de la creacion correcta de problema y de getters y setters:
-		System.out.println("Nombre Problema " + prob.getNombre() + "\n");
-		System.out.println("Numero de Jugadas " + prob.getMaxMovimientos() + "\n");
-		System.out.println("FEN " + prob.getFEN_Tablero() + "\n");
-		String s;
+		System.out.println("Nombre Problema: " + prob.getNombre() + "\n");
+		System.out.println("Numero de Jugadas: " + prob.getMaxMovimientos() + "\n");
+		System.out.println("FEN: " + prob.getFEN_Tablero() + "\n");
 		
+		String s;
 		if (prob.getColorAGanar()) s="NEGRAS";
 		else s= "BLANCAS";
 		
@@ -26,6 +25,7 @@ public class DriverProblema {
 		System.out.println("EsValido " + prob.getValidado() + "\n");
 		if(prob.getDificultad()==null) System.out.println("Dificultad sin determinar\n");
 		else System.out.println("Dificultad " + prob.getDificultad() + "\n");
+		/*
 		
 		//CREAR PROBLEMA VACIO Y USAR SETTERS PARA PASAR PARAMETROS:
 		//Este problema no es valido
@@ -49,6 +49,6 @@ public class DriverProblema {
 		if(prob.getDificultad()==null) System.out.println("Dificultad sin determinar\n");
 		else System.out.println("Dificultad " + prob.getDificultad() + "\n");
 		
-		
+		*/
 	}
 }

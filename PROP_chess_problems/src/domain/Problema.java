@@ -1,7 +1,10 @@
 package domain;
-//import domain.Tablero
-import stubs.Tablero;
+
+import domain.Tablero;
+//import stubs.Tablero;
+
 public class Problema {
+	
 //tema: maxMovimientos y ColorAGanar
 	enum Dificulty 
 	{
@@ -15,10 +18,6 @@ public class Problema {
 	private Integer VecesJugado;
 	private Integer MaxMovimientos;
 	private Boolean ColorAGanar;//quien ha de ganar empieza y es jugador1
-
-	
-	//CREADORAS:
-	//ME FALTA UNA CREADORA VACIA??
 	
 	public Problema() {
 		Nombre = null;

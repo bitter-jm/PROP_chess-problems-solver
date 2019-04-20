@@ -1,13 +1,19 @@
 package domain;
 
-public abstract class Jugador {
+public class Jugador {
+	
 	protected String nombre;
 	
 	public Jugador() {
 		this.nombre = null;
 	}
-	public abstract boolean esPersona();
-	public abstract boolean esM1();
-	public abstract String getNombre(); 
+	
+	public boolean esPersona() {
+		return true;
+	}
+	
+	public String getNombre() {
+		return this.nombre;
+	}
 	
 }

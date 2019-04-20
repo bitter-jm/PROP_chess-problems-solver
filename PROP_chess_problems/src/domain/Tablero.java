@@ -22,20 +22,20 @@ public class Tablero {
 	/**
 	 * Crea un objeto Tablero vacio
 	 */
-	public Tablero() {} //DONE
+	public Tablero() {} 
 	
 	/** 
 	 * Crea un objeto Tablero a partir de una anotacion FEN
 	 * @param fen String con el estado del tablero en formato FEN
 	 */
-	public Tablero(String fen) { //DONE
+	public Tablero(String fen) {
 		this.cargarFEN(fen);
 	}
 	
 	/** 
 	 * Vacia el tablero eliminando todas las instancias de Fichas
 	 */
-	public void limpiarTablero() { //DONE
+	public void limpiarTablero() {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				this.casillas[i][j] = null;
@@ -48,11 +48,12 @@ public class Tablero {
 	 * Carga el estado del tablero segun anotacion FEN
 	 * @param fen String en formato FEN (Forsyth Edwards Notation)
 	 */
-	public void cargarFEN(String fen) { //DONE
+	public void cargarFEN(String fen) {
 		this.limpiarTablero();
+		boolean stop = false;
 		int i = 0;
 		int j = 0;
-		for (int it = 0; it < fen.length(); ++it) {
+		for (int it = 0; it < fen.length() && !stop; ++it) {
 			String c = String.valueOf(fen.charAt(it));
 			if (Character.isDigit(c.charAt(0))) {
 				j += Integer.parseInt(c);
@@ -61,6 +62,7 @@ public class Tablero {
 				i++;
 				j = 0;
 			}
+			else if (c.equals(" ")) stop = true;
 			else {		
 				this.casillas[i][j] = Ficha.newFicha(c);
 				if (j < 7) j++;
@@ -72,7 +74,7 @@ public class Tablero {
 	 * Devuelve el estado del tablero en anotacion FEN
 	 * @return String con el estado del tablero en formato FEN
 	 */
-	public String exportarFEN() { //DONE
+	public String exportarFEN() {
 		String fen = "";
 		int contador = 0;
 		for (int i = 0; i < 8; ++i) {
@@ -99,7 +101,7 @@ public class Tablero {
 	/** 
 	 * Deshace el ultimo movimiento realizado
 	 */
-	public void deshacer() { //DONE
+	public void deshacer() {
 		if (this.historyStack.isEmpty()) return;
 		MovimientoCompleto mc = this.historyStack.remove(this.historyStack.size()-1);
 		this.casillas[mc.inicioI][mc.inicioJ] = mc.ficha;
@@ -131,7 +133,7 @@ public class Tablero {
 	 * Realiza un movimiento en el tablero sin ser validado
 	 * @param mov Objeto Movimiento indicando el movimiento a realizar
 	 */
-	public void registrarMovimientoSinValidar(Movimiento mov) { //DONE
+	public void registrarMovimientoSinValidar(Movimiento mov) {
 		this.historyStack.add(new MovimientoCompleto(mov, this.casillas[mov.finalI][mov.finalJ]));
 		this.casillas[mov.inicioI][mov.inicioJ] = null;
 		this.casillas[mov.finalI][mov.finalJ] = mov.ficha;
@@ -142,7 +144,7 @@ public class Tablero {
 	 * @param color Color del jugador a analizar
 	 * @return Booleano indicando si el jugador <em>color</em> se encuentra en jaque
 	 */
-	public boolean esJaque(String color) { //DONE
+	public boolean esJaque(String color) {
 		for (int i = 0; i < 8; ++i) {
 			for (int j = 0; j < 8; ++j) {
 				if (this.casillas[i][j] != null && this.casillas[i][j].ficha.equals("k")) {
@@ -160,7 +162,7 @@ public class Tablero {
 	 * @param j Coordenada j del rey negro
 	 * @return Booleano indicando si rey negro en coordenadas <em>i</em>, <em>j</em> se encuentra en jaque
 	 */
-	public boolean esJaqueEnPosicionANegras(int i, int j) { // DONE
+	public boolean esJaqueEnPosicionANegras(int i, int j) {
 		// (i, j) -> Posición rey negro
 		for (int ii = 0; ii < 8; ++ii) {
 			for (int jj = 0; jj < 8; ++jj) {
@@ -184,7 +186,7 @@ public class Tablero {
 	 * @param j Coordenada j del rey blanco
 	 * @return Booleano indicando si rey blanco en coordenadas <em>i</em>, <em>j</em> se encuentra en jaque
 	 */
-	public boolean esJaqueEnPosicionABlancas(int i, int j) { // DONE
+	public boolean esJaqueEnPosicionABlancas(int i, int j) {
 		// (i, j) -> Posición rey blanco
 		for (int ii = 0; ii < 8; ++ii) {
 			for (int jj = 0; jj < 8; ++jj) {
@@ -207,7 +209,7 @@ public class Tablero {
 	 * @param color String indicando el color del jugador a analizar
 	 * @return Devuelve un List de Movimientos conteniendo todos los posibles movimientos del jugador <em>color</em>
 	 */
-	public List<Movimiento> posiblesMovimientos(String color) { //DONE
+	public List<Movimiento> posiblesMovimientos(String color) {
 		List<Movimiento> movimientos = new ArrayList<Movimiento>();
 		boolean kingFound = false;
 		for (int i = 0; i < 8; ++i) {
@@ -248,7 +250,7 @@ public class Tablero {
 	 * @param i Coordenada i de la Ficha a colocar
 	 * @param j Coordenada j de la Ficha a colocar
 	 */
-	public void anadirFicha(Ficha ficha, int i, int j) { //DONE
+	public void anadirFicha(Ficha ficha, int i, int j) {
 		this.casillas[i][j] = ficha;
 	}
 	
@@ -257,7 +259,7 @@ public class Tablero {
 	 * @param i Coordenada i de la Ficha a quitar
 	 * @param j Coordenada j de la Ficha a quitar
 	 */
-	public void quitarFicha(int i, int j) { //DONE
+	public void quitarFicha(int i, int j) {
 		this.casillas[i][j] = null;
 	}
 	
@@ -267,14 +269,14 @@ public class Tablero {
 	 * @param j Coordenada j de la Ficha a devolver
 	 * @return Ficha en las coordenadas <em>i</em>, <em>j</em>
 	 */
-	public Ficha consultarCasilla(int i, int j) { //DONE
+	public Ficha consultarCasilla(int i, int j) {
 		return this.casillas[i][j];
 	}
 	
 	/** 
 	 * Imprime el estado del tablero por la salida estandar del sistema
 	 */
-	public void imprimirEstadoTableroConsola() { //DONE
+	public void imprimirEstadoTableroConsola() {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (this.casillas[i][j] == null) System.out.print("- "); 
@@ -289,7 +291,7 @@ public class Tablero {
 	 * Obtiene una matriz con el estado de cada casilla del tablero
 	 * @return Matriz Ficha[][] con el estado de cada casilla
 	 */
-	public Ficha[][] getCasillas() { //DONE
+	public Ficha[][] getCasillas() {
 		return this.casillas;
 	}
 	
@@ -298,7 +300,7 @@ public class Tablero {
 	 * @param color String indicando que jugador analizar
 	 * @return Booleano indicando si el jugador <em>color</em> se encuentra en jaque mate
 	 */
-	public boolean esMateColor(String color) { //DONE
+	public boolean esMateColor(String color) {
 		List<Movimiento> movimientos = this.posiblesMovimientos(color);
 		if (movimientos.isEmpty()) return true;
 		return false;

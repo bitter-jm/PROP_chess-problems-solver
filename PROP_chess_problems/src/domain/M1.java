@@ -2,7 +2,7 @@ package domain;
 
 import domain.Movimiento;
 import domain.Tablero;
-import stubs.Maquina;
+import domain.Maquina;
 import java.util.List;
 import java.util.Iterator;
 
@@ -12,15 +12,20 @@ import java.util.Iterator;
  */
 public class M1 extends Maquina {
 	
-	private int maxDepth = 5;
-	private String color, colorOpuesto;
+	/**
+	 * Crea un objeto M1
+	 */
+	public M1() {
+		this.nombre = "MAQUINA1";
+	}
 	
 	/**
 	 * Calcula cual es el mejor movimiento a realizar
 	 * @param fen String con el estado del tablero en formato FEN
 	 * @return Devuelve el Movimiento mas optimo 
 	 */
-	public Movimiento realizarMovimiento(String fen) { //DONE
+	@Override
+	public Movimiento realizarMovimiento(String fen) {
 		Tablero t = new Tablero(fen);
 	    List<Movimiento> movimientosPosibles = t.posiblesMovimientos(this.color);
 	    int mejorValor = -10000;
@@ -45,7 +50,7 @@ public class M1 extends Maquina {
 	 * @param casillas Ficha[][] con el contenido de las casillas a analizar
 	 * @return Integer con el valor de la heuristica
 	 */
-	private int evaluarTablero(Ficha[][] casillas) { //DONE
+	private int evaluarTablero(Ficha[][] casillas) {
 		int value = 0;
 		int sign = 1;
 		for (int i = 0; i < 8; ++i) {
@@ -112,32 +117,14 @@ public class M1 extends Maquina {
 			return mejorValor;
 		}
 	}
-	
-	/**
-	 * Especifica a que profundidad quiere evaluar el tablero
-	 * @param depth Integer indicando la profundidad de busqueda
-	 */
-	public void setDepth(int depth) { //DONE
-		this.maxDepth = depth;
-	} 
-	
-	/**
-	 * Especifica en que lado va a jugar la maquina
-	 * @param color String indicando el color del jugador
-	 */
-	public void setColor(String color) { //DONE
-		this.color = color;
-		if (color.equals("BLANCAS")) this.colorOpuesto = "NEGRAS";
-		else this.colorOpuesto = "BLANCAS";
-	} 
-	
+
 	/**
 	 * Devuelve el valor maximo
 	 * @param a Integer 1 a analizar
 	 * @param b Integer 2 a analizar
 	 * @return Integer con el valor maximo entre <em>a</em> y <em>b</em>
 	 */
-	private int max(int i, int j) { //DONE
+	private int max(int i, int j) {
 		if (i >= j) return i;
 		else return j;
 	}
@@ -148,7 +135,7 @@ public class M1 extends Maquina {
 	 * @param b Integer 2 a analizar
 	 * @return Integer con el valor minimo entre <em>a</em> y <em>b</em>
 	 */
-	private int min(int a, int b) { //DONE
+	private int min(int a, int b) {
 		if (a >= b) return b;
 		else return a;
 	}

@@ -122,7 +122,6 @@ public class Problema {
 		return count;
 	}
 
-
 	private int FigureEvaluation(char letra) {
 		if (letra=='P') return 10;
 		if (letra=='p') return -10;
@@ -138,6 +137,7 @@ public class Problema {
 		if (letra=='k') return -900;
 		return 0;
 	}
+	
 	/*
 
 	private boolean esValido (String FEN, boolean colorGanar) {
@@ -152,8 +152,7 @@ public class Problema {
 			return tab.esMateColor("NEGRAS");
 		}		
 	}
-	
-	
+		
 	private Integer minimax( MaxMov, Tab, ColorGanar,List <Movimiento>& CaminoMiniMax)  
 	{
 		if (MaxMov==0) {//caso base hemos llegado al numero maximo de movimientos

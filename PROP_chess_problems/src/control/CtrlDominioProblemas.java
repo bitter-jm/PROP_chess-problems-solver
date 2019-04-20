@@ -1,4 +1,4 @@
-package controladors;
+package control;
 
 public class CtrlDominioProblemas {
 

@@ -24,7 +24,7 @@ public class DriverCtrlPartida {
 		CtrlPartida ctrlP = CtrlPartida.getInstance();
 		ctrlP.empezarPartida("Eustaquio", "MAQUINA1", "prob1");
 		
-		while (!ctrlP.partidaFinalizada()) {						
+		while (!ctrlP.partidaFinalizada()) {
 			boolean movimientoAceptado = false;
 			while (!movimientoAceptado) {
 				Movimiento m = DriverCtrlPartida.leerMovimientoDeConsola();

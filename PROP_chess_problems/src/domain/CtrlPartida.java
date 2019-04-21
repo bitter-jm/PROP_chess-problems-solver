@@ -7,7 +7,7 @@ import domain.Jugador;
 
 /**
  * Controlador de Partidas
- * @author Joan Pastor
+ * @author
  */
 public class CtrlPartida {
 	

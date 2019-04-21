@@ -2,12 +2,12 @@ package domain;
 
 /**
  * Representa una Maquina
- * @author Joan Pastor
+ * @author
  */
 public class Maquina extends Jugador {
 
 	protected String color, colorOpuesto;
-	protected int maxDepth = 5;
+	protected int maxDepth = 4;
 	
 	@Override
 	public boolean esPersona() {

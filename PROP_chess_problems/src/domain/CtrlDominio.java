@@ -4,11 +4,11 @@ import domain.CtrlPartida;
 import domain.CtrlDominioProblema;
 
 public class CtrlDominio {
-	private CtrlDominioProblema CDprob; 
+	private CtrlProblema CDprob; 
 	private CtrlPartida CDpart;
 	
 	public CtrlDominio() {
-		CDprob= new CtrlDominioProblema();
+		CDprob= new CtrlProblema();
 		CDpart= new CtrlPartida();
 	}
 }

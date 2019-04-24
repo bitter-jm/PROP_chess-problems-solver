@@ -51,6 +51,7 @@ public class Problema {
 	public Dificulty getDificultad() {
 		return dificultad;
 	}
+	
 	public Boolean getValidado() {
 		return validado;
 	}
@@ -70,8 +71,6 @@ public class Problema {
 	public void setFEN_Tablero(String fEN_Tablero) {
 		FEN_Tablero = fEN_Tablero;
 	}
-
-
 
 	public void setVecesJugado(Integer vecesJugado) {
 		 this.vecesJugado =vecesJugado;
@@ -200,7 +199,7 @@ public class Problema {
 	
 	
 	
-	private boolean esValido (String FEN, boolean colorGanar) {
+	public boolean esValido (String FEN, boolean colorGanar) {
 		Tablero tab = new Tablero(FEN);
 		int result = minimax( (maxMovimientos*2)-1, tab, colorGanar);
 		

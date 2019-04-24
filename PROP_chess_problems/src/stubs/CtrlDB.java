@@ -14,8 +14,20 @@ public class CtrlDB {
 		return new Persona(nombre, "abcd");
 	}
 	
-	public Problema getproblema(String nombre) {
+	public Problema getProblema(String nombre) {
 		return new Problema("Problema_1", 2, "8/8/8/8/3p4/5K2/3kNN2/2R5 w - - 0 1", false);
+	}
+	
+	public void saveProblema(Problema p) {
+		// Save or update p
+	}
+	
+	public void deleteProblema(Problema p) {
+		//Elimina p
+	}
+	
+	public boolean existsProblema(String nombre) {
+		return false;
 	}
 	
 	public static CtrlDB getInstance() { 

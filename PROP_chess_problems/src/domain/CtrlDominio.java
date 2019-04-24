@@ -1,14 +1,14 @@
 package domain;
 
-import domain.CtrlDominioPartida;
+import domain.CtrlPartida;
 import domain.CtrlDominioProblema;
 
 public class CtrlDominio {
 	private CtrlDominioProblema CDprob; 
-	private CtrlDominioPartida CDpart;
+	private CtrlPartida CDpart;
 	
 	public CtrlDominio() {
 		CDprob= new CtrlDominioProblema();
-		CDpart= new CtrlDominioPartida();
+		CDpart= new CtrlPartida();
 	}
 }

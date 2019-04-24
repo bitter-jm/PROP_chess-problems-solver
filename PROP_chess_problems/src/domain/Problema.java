@@ -38,8 +38,6 @@ public class Problema {
 		
 		validado = esValido(FEN,Color);
 		
-		
-		
 		dificultad = null;
 		if (validado) CalculoDeDificultad(maxmov, FEN, Color);
 	}
@@ -72,6 +70,8 @@ public class Problema {
 	public void setFEN_Tablero(String fEN_Tablero) {
 		FEN_Tablero = fEN_Tablero;
 	}
+
+
 
 	public void setVecesJugado(Integer vecesJugado) {
 		 this.vecesJugado =vecesJugado;

@@ -9,9 +9,9 @@ import domain.Jugador;
  * Controlador de Partidas
  * @author
  */
-public class CtrlPartida {
+public class CtrlDominioPartida {
 	
-	private static CtrlPartida single_instance = null;
+	private static CtrlDominioPartida single_instance = null;
 	private Partida part;
 	/**
 	 * Instancia un objeto partida con los jugadores y el problema
@@ -51,9 +51,9 @@ public class CtrlPartida {
 	 * 
 	 * @return
 	 */
-	public static CtrlPartida getInstance() { 
+	public static CtrlDominioPartida getInstance() { 
         if (single_instance == null) 
-            single_instance = new CtrlPartida(); 
+            single_instance = new CtrlDominioPartida(); 
         return single_instance; 
     }
 	

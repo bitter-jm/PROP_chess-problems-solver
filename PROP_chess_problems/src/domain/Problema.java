@@ -40,8 +40,6 @@ public class Problema {
 		
 		Validado = esValido(FEN,Color);
 		
-		
-		
 		Dificultad = null;
 		if (Validado) CalculoDeDificultad(maxmov, FEN, Color);
 	}
@@ -66,7 +64,9 @@ public class Problema {
 	public Boolean getValidado() {
 		return Validado;
 	}
-
+	public void setValidado(String FEN, boolean Color) {
+		Validado = esValido(FEN,Color); 
+	}
 	public Integer getVecesJugado() {
 		return VecesJugado;
 	}

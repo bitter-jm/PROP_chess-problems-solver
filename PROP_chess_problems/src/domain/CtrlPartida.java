@@ -13,6 +13,7 @@ public class CtrlPartida {
 	
 	private static CtrlPartida single_instance = null;
 	private Partida part;
+	
 	/**
 	 * Instancia un objeto partida con los jugadores y el problema
 	 * @param j1 del tipo String representa el Jugador1
@@ -23,9 +24,10 @@ public class CtrlPartida {
 		CtrlDB ctrlDB = CtrlDB.getInstance();
 		Jugador j1o = ctrlDB.getJugador(j1);
 		Jugador j2o = ctrlDB.getJugador(j2);
-		Problema p = ctrlDB.getproblema("problema1");
+		Problema p = ctrlDB.getProblema("problema1");
 		this.part = new Partida(j1o, j2o, p);
 	}
+	
 	/**
 	 * Detecta una jugada por parte de la persona y actualiza el estado de la partida
 	 * @param m del tipo Movimiento representa la jugada de la persona 
@@ -34,12 +36,14 @@ public class CtrlPartida {
 	public boolean personaRealizaMovimiento(Movimiento m) {
 		return this.part.jugarPersona(m);
 	}
+	
 	/**
 	 * Cancela una partida
 	 */
 	public void cancelarPartida() { //DONE
 		this.part = null;
 	}
+	
 	/**
 	 * Comprueba si la partida ha finalizado	
 	 * @return true si ha terminado correctamente, false en caso contrario
@@ -47,9 +51,10 @@ public class CtrlPartida {
 	public boolean partidaFinalizada() { //DONE
 		return this.part.partidaAcabada();
 	}
+	
 	/**
-	 * 
-	 * @return
+	 * Obtiene la instacia del singleton CtrlPartida
+	 * @return Objeto CtrlPartida
 	 */
 	public static CtrlPartida getInstance() { 
         if (single_instance == null) 

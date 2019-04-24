@@ -1,89 +1,86 @@
 package domain;
+
 import java.util.*;
 import domain.Tablero;
-//import stubs.Tablero;
 
 public class Problema {
 	
-//tema: maxMovimientos y ColorAGanar
 	enum Dificulty 
 	{
 		Easy, Medium, Hard;
 	}
-	//INICIALIZAR VALORES ASI
-	private String Id;
+	private String id;
 	private String FEN_Tablero;
-	private Dificulty Dificultad;
-	private Boolean Validado;
-	private Integer VecesJugado;
-	private Integer MaxMovimientos;
-	private Boolean ColorAGanar;//quien ha de ganar empieza y es jugador1
+	private Dificulty dificultad;
+	private Boolean validado;
+	private Integer vecesJugado;
+	private Integer maxMovimientos;
+	private Boolean colorAGanar; //quien ha de ganar empieza y es jugador1
 	
 	public Problema() {
-		Id = null;
-		MaxMovimientos = 0;
+		id = null;
+		maxMovimientos = 0;
 		FEN_Tablero = null;
-		ColorAGanar = null;	
-		VecesJugado=0;
-		Validado = false;
-		Dificultad = null;
+		colorAGanar = null;	
+		vecesJugado=0;
+		validado = false;
+		dificultad = null;
 	}
 	
 	public Problema (String id, Integer maxmov, String FEN, Boolean Color)
 	{
-		Id = id;
-		MaxMovimientos = maxmov;
+		this.id = id;
+		maxMovimientos = maxmov;
 		FEN_Tablero = FEN;
-		ColorAGanar = Color;	
+		colorAGanar = Color;	
 		
-		VecesJugado=0;
+		this.vecesJugado=0;
 		
-		Validado = esValido(FEN,Color);
+		validado = esValido(FEN,Color);
 		
 		
 		
-		Dificultad = null;
-		if (Validado) CalculoDeDificultad(maxmov, FEN, Color);
+		dificultad = null;
+		if (validado) CalculoDeDificultad(maxmov, FEN, Color);
 	}
 	
-	
-	//TODOS LOS GETTERS Y SETTERS
 	public String getNombre() {
-		return Id;
-	}
-	public void setNombre(String id) {
-		Id = id;
+		return id;
 	}
 	public String getFEN_Tablero() {
 		return FEN_Tablero;
 	}
+	public Dificulty getDificultad() {
+		return dificultad;
+	}
+	public Boolean getValidado() {
+		return validado;
+	}
+	public Integer getVecesJugado() {
+		return vecesJugado;
+	}
+	public Integer getMaxMovimientos() {
+		return maxMovimientos;
+	}
+	public Boolean getColorAGanar() {
+		return colorAGanar;
+	}
+	
+	public void setNombre(String id) {
+		this.id = id;
+	}
 	public void setFEN_Tablero(String fEN_Tablero) {
 		FEN_Tablero = fEN_Tablero;
 	}
-	public Dificulty getDificultad() {
-		return Dificultad;
-	}
-	public Boolean getValidado() {
-		return Validado;
-	}
 
-	public Integer getVecesJugado() {
-		return VecesJugado;
-	}
 	public void setVecesJugado(Integer vecesJugado) {
-		 VecesJugado =vecesJugado;
-	}
-	public Integer getMaxMovimientos() {
-		return MaxMovimientos;
+		 this.vecesJugado =vecesJugado;
 	}
 	public void setMaxMovimientos(Integer maxMovimientos) {
-		MaxMovimientos = maxMovimientos;
-	}
-	public Boolean getColorAGanar() {
-		return ColorAGanar;
+		this.maxMovimientos = maxMovimientos;
 	}
 	public void setColorAGanar(Boolean colorAGanar) {
-		ColorAGanar = colorAGanar;
+		this.colorAGanar = colorAGanar;
 	}
 
 	
@@ -91,7 +88,6 @@ public class Problema {
 	//Miramos el numero de piezas que hay en el tablero inicial 
 	//Es decir, proporcion de piezas mias con las enemigas 
 	//el valor que tienen estas y numero de jugadas que hay
-	
 	private void CalculoDeDificultad (Integer MaxMov, String FEN, Boolean Color ) {
 		//Algoritmo que calcula la dificultad del problema
 		int Situacion = AnalizeBoard (FEN);
@@ -102,15 +98,15 @@ public class Problema {
 		
 		if (!Color) {//BLANCAS
 			Situacion += SituacionMov;
-			if (Situacion >130) Dificultad = Dificulty.Easy;
-			else if (Situacion >-130) Dificultad = Dificulty.Medium;
-			else Dificultad = Dificulty.Hard;
+			if (Situacion >130) dificultad = Dificulty.Easy;
+			else if (Situacion >-130) dificultad = Dificulty.Medium;
+			else dificultad = Dificulty.Hard;
 		}
 		else {//NEGRAS
 			Situacion -= SituacionMov;
-			if (Situacion >130) Dificultad = Dificulty.Hard;
-			else if (Situacion >-130) Dificultad = Dificulty.Medium;
-			else Dificultad = Dificulty.Easy;
+			if (Situacion >130) dificultad = Dificulty.Hard;
+			else if (Situacion >-130) dificultad = Dificulty.Medium;
+			else dificultad = Dificulty.Easy;
 		}
 		
 	}
@@ -161,30 +157,73 @@ public class Problema {
 		return value;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	private boolean esValido (String FEN, boolean colorGanar) {
 		Tablero tab = new Tablero(FEN);
-		int result = minimax( (MaxMovimientos*2)-1, tab, colorGanar);
+		int result = minimax( (maxMovimientos*2)-1, tab, colorGanar);
 		
 		if (!colorGanar && result == 9999999 ) return true;		
 		else if (colorGanar && result == -9999999) return true;
 		System.out.println("COLOR: " + colorGanar+ "result" + result + "\n");
 		return false;		
 	}
-		
-	
 
+	
+	
 	private Integer minimax(Integer MaxMov, Tablero tab, boolean ColorGanar)  
 	{
 		
-		;
+		
 		if (MaxMov==0) {
 			
 			
-			if (!ColorAGanar && tab.esMateColor("BLANCAS")) {
+			if (!colorAGanar && tab.esMateColor("BLANCAS")) {
 				System.out.println("MATEBLANCAS: " + tab.esMateColor("BLANCAS") + "\n");
 				return 9999999;//caso base hemos llegado al numero maximo de movimientos	
 			}
-			else if (ColorAGanar && tab.esMateColor("NEGRAS")) {
+			else if (colorAGanar && tab.esMateColor("NEGRAS")) {
 				System.out.println("MATENEGRAS: " + tab.esMateColor("NEGRAS") + "\n");
 				return -9999999;	
 			}
@@ -231,6 +270,69 @@ public class Problema {
 		}
 			
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 ///CARLA
 	

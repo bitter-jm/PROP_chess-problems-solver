@@ -3,6 +3,7 @@ package drivers;
 import domain.Partida;
 import stubs.Problema;
 import stubs.Jugador;
+import stubs.Tablero;
 import java.util.*;
 
 /**

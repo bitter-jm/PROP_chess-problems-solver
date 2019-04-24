@@ -1,6 +1,5 @@
 package domain;
-//partida importa problema
-//Problema importa ranking
+
 /*Se crea un ranking para cada problema donde se van añadiendo y ordenando las personas 
  * y sus calificaciones*/
 public class Ranking {

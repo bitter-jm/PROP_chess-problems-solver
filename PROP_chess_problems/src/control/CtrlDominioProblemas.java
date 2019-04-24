@@ -1,5 +1,5 @@
 package control;
-
+import domain.Problema;
 public class CtrlDominioProblemas {
 
 	//guarda los problemas en un tree map de problema??
@@ -7,14 +7,14 @@ public class CtrlDominioProblemas {
 	 * Donde la clave es String del creador y string del nom
 	 * Nose si puede tener tres parametros sino un pair??
 	 * 
-	 * private TreeMap <String, String, Problema> Problemas;
+	 * private TreeMap <int, Problema> Problemas;
 	 * 
 	 * public CtrlDominioProblemas(){
-	 * Problemas = new TreeMap<String,String,Problema>();
+	 * Problemas = new TreeMap<int,Problema>();
 	 * 
 	 */
 	
-	public void crearProblema() {
+	public void crearProblema(String nom, Integer maxmov, String FEN, Boolean Color) {
 		/*tiene que crear una entrada en el arbol con el identificador del 
 		 * pair de strings y el Problema que sera un new.problema 
 		 * La funcion ha de recibir pues todos los parametros necesarios para crear el problema
@@ -23,6 +23,24 @@ public class CtrlDominioProblemas {
 		 * 
 		 * Si no valido pedir nuevos?
 		 */
+	
+		public Problema (String nom, Integer maxmov, String FEN, Boolean Color)
+		{
+			Nombre = nom;
+			MaxMovimientos = maxmov;
+			FEN_Tablero = FEN;
+			ColorAGanar = Color;	
+			
+			VecesJugado=0;
+			/*
+			Validado = esValido(FEN,Color);
+			esValido(FEN,Color);*/
+			Validado=true;
+			
+			Dificultad = null;
+			if (Validado) CalculoDeDificultad(maxmov, FEN, Color);
+		}
+		
 	}
 	public void editarProblema() {
 		/*Busca el problema en el arbol, si no valido pedir otro problema y sino nada?

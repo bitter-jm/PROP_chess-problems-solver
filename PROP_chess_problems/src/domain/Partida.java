@@ -5,6 +5,12 @@ import domain.Maquina;
 import domain.Tablero;
 import domain.Problema;
 
+
+/**
+ * CLASE PARTIDA, REPRESENTA EL MOMENTO DE JUEGO DEL AJEDREZ
+ * @author Carla GarcíaC
+ *
+ */
 public class Partida {
 	
 	private Tablero tab;
@@ -22,7 +28,12 @@ public class Partida {
 	public int mov_dos = 0;
 	public String ganador;
 	
-	//CONSTRUCTORA
+	/**
+	 * Crea un objeto Partida y lo inicializa con los jugadores y las características del problema participantes en el juego
+	 * @param jugador1 del tipo Jugador representa al usuario que empieza la partida
+	 * @param jugador2 del tipo Jugador representa al contrincante de jugador1
+	 * @param prob del tipo Problema representa la situación incial de la partida
+	 */
 	public Partida(Jugador jugador1, Jugador jugador2, Problema prob) { // DONE
 		//Inicializar fecha
 		fecha = Calendar.getInstance();
@@ -57,30 +68,60 @@ public class Partida {
 	    this.jugarsiguienteTurno();
 	}
 		
-	//GETTERS
+	/**
+	 * Devuelve el dia de comienzo la partida
+	 * @return Integer indicando el número de día de la fecha de inicio
+	 */
 	public int getDia() {
 		return this.dia;
 	}
+	/**
+	 * Devuelve el mes de comienzo la partida
+	 * @return Integer indicando el número de mes de la fecha de inicio
+	 */
 	public int getMes() {
 		return this.mes;
 	}
+	/**
+	 * Devuelve el año de comienzo la partida
+	 * @return Integer indicando el año fecha de inicio
+	 */
 	public int getAño() {
 		return this.año;
 	}
+	/**
+	 * Devuelve el jugador1
+	 * @return del jugador1 participante en la partida, del tipo Jugador, o más específicamente Persona o Máquina
+	 */
 	public Jugador getJugador1() {
 		return this.j1;
 	}
+	/**
+	 * Devuelve el jugador2
+	 * @return del jugador2 participante en la partida, del tipo Jugador, o más específicamente Persona o Máquina
+	 */
 	public Jugador getJugador2() {
 		return this.j2;
 	}
+	/**
+	 * Devuelve la situación actual del juego
+	 * @return tab del tipo Tablero con el estado actual de la partida
+	 */
 	public Tablero getTablero() {
 		return this.tab;
 	}
+	/**
+	 * 	Comprueba si la partida ha finalizado o no
+	 * @return true en el caso de que la partida haya acabado correctamente y tenga asignado un ganador, false en caso contrario
+	 */
 	public boolean partidaAcabada() {
 		if (this.ganador != null) return true;
 		return false;
 	}
-	
+	/**
+	 * Se encarga de pasarle el turno al siguiente jugador, actualizar los movimientos de cada uno e incluso
+	 * realizar la siguiente jugada en caso de que el jugador sea Máquina
+	 */
 	private void jugarsiguienteTurno() { //PENDIENTE
 		System.out.print("Siguiente turno de ");
 		if (!turno) System.out.println(j1.getNombre());
@@ -115,7 +156,11 @@ public class Partida {
 			}
 		}
 	}
-	
+	/**
+	 * Realiza la jugada hecha por un jugador Persona
+	 * @param m recibe el movimiento que quiere realizar el jugador en esta jugada
+	 * @return true cuando el movimiento es válido y se ha realizado, false en caso contrario
+	 */
 	public boolean jugarPersona(Movimiento m) { //PENDIENTE
 		if (!turno && j1.esPersona()) {
 			// Mirar si es del mismo color la pieza movida 
@@ -143,7 +188,9 @@ public class Partida {
 		}
 		return false;
 	}
-	
+	/**
+	 * Computa el jugador ganador de la partida cuando ésta finaliza
+	 */
 	public void acabarPartida() {
 		String c;
     	if (!color) c = "NEGRAS";
@@ -155,13 +202,4 @@ public class Partida {
 		System.out.println("PARTIDA ACABADA. Gana: " + ganador);
 	}
 	
-	/* He puesto esta función en CtrlPartida
-	public void cancelarPartida() {
-		mov_uno = mov_dos = 0;
-		turno = false;
-		j1 = j2 = null;
-		prob = null;
-		tab = null;
-	}
-	*/
 }

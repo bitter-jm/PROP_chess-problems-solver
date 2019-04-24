@@ -22,7 +22,7 @@ public class DriverCtrlPartida {
 	public static void main(String[] args) {
 		
 		CtrlPartida ctrlP = CtrlPartida.getInstance();
-		ctrlP.empezarPartida("MAQUINA1", "MAQUINA1", "prob1");
+		ctrlP.empezarPartida("Eustaquio", "MAQUINA1", "prob1");
 		
 		while (!ctrlP.partidaFinalizada()) {
 			boolean movimientoAceptado = false;

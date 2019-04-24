@@ -17,7 +17,6 @@ public class CtrlProblema {
 			 *cargarProblema(nom);
 			 */
 		}
-		
 	}
 	
 	public void crearProblema(String nombre, Integer NumeroJugadas, String Fen) {

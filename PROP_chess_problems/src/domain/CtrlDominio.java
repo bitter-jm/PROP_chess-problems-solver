@@ -8,7 +8,7 @@ public class CtrlDominio {
 	private CtrlPartida CDpart;
 	
 	public CtrlDominio() {
-		CDprob= new CtrlProblema();
-		CDpart= new CtrlPartida();
+		CDprob = CtrlProblema.getInstance();
+		CDpart= CtrlPartida.getInstance();
 	}
 }

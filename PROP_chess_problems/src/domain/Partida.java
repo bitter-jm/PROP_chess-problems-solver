@@ -9,7 +9,6 @@ import domain.Problema;
 /**
  * CLASE PARTIDA, REPRESENTA EL MOMENTO DE JUEGO DEL AJEDREZ
  * @author Carla GarciaC
- *
  */
 public class Partida {
 	private Problema prob;
@@ -45,6 +44,10 @@ public class Partida {
 	    j2 = jugador2;
 	    this.prob = problem;
 	    
+	    max_mov = prob.getMaxMovimientos();
+	    color = prob.getColorAGanar();
+	    this.tab = new Tablero(prob.getFEN_Tablero());
+	    
 	    //Inicializar maquinas
 	    if (!j1.esPersona()) {
 	    	String colorString = "BLANCAS";
@@ -59,14 +62,10 @@ public class Partida {
 	    	maquina.setColor(colorString);
 	    }
 	    
-	    max_mov = prob.getMaxMovimientos();
-	    color = prob.getColorAGanar();
-	    this.tab = new Tablero(prob.getFEN_Tablero());
-	    
 	    System.out.println("Estado inicial tablero: ");
 	    tab.imprimirEstadoTableroConsola();
 	    
-	    this.jugarsiguienteTurno();
+	    this.jugarSiguienteTurno();
 	}
 		
 	/**
@@ -76,6 +75,7 @@ public class Partida {
 	public int getDia() {
 		return this.dia;
 	}
+	
 	/**
 	 * Devuelve el mes de comienzo la partida
 	 * @return Integer indicando el n�mero de mes de la fecha de inicio
@@ -83,6 +83,7 @@ public class Partida {
 	public int getMes() {
 		return this.mes;
 	}
+	
 	/**
 	 * Devuelve el a�o de comienzo la partida
 	 * @return Integer indicando el a�o fecha de inicio
@@ -90,6 +91,7 @@ public class Partida {
 	public int getAno() {
 		return this.ano;
 	}
+	
 	/**
 	 * Devuelve el jugador1
 	 * @return del jugador1 participante en la partida, del tipo Jugador, o m�s especificamente Persona o M�quina
@@ -97,6 +99,7 @@ public class Partida {
 	public Jugador getJugador1() {
 		return this.j1;
 	}
+	
 	/**
 	 * Devuelve el jugador2
 	 * @return del jugador2 participante en la partida, del tipo Jugador, o m�s especificamente Persona o M�quina
@@ -104,6 +107,7 @@ public class Partida {
 	public Jugador getJugador2() {
 		return this.j2;
 	}
+	
 	/**
 	 * Devuelve la situacion actual del juego
 	 * @return tab del tipo Tablero con el estado actual de la partida
@@ -111,6 +115,7 @@ public class Partida {
 	public Tablero getTablero() {
 		return this.tab;
 	}
+	
 	/**
 	 * 	Comprueba si la partida ha finalizado o no
 	 * @return true en el caso de que la partida haya acabado correctamente y tenga asignado un ganador, false en caso contrario
@@ -119,11 +124,12 @@ public class Partida {
 		if (this.ganador != null) return true;
 		return false;
 	}
+	
 	/**
 	 * Se encarga de pasarle el turno al siguiente jugador, actualizar los movimientos de cada uno e incluso
 	 * realizar la siguiente jugada en caso de que el jugador sea M�quina
 	 */
-	private void jugarsiguienteTurno() { //PENDIENTE
+	private void jugarSiguienteTurno() { //PENDIENTE
 		System.out.print("Siguiente turno de ");
 		if (!turno) System.out.println(j1.getNombre());
 		else System.out.println(j2.getNombre());
@@ -138,7 +144,7 @@ public class Partida {
 				tab.imprimirEstadoTableroConsola();
 				turno = true;
 				if (this.mov_uno >= this.max_mov) this.acabarPartida();
-				else this.jugarsiguienteTurno();
+				else this.jugarSiguienteTurno();
 			} else { // j1 es persona				
 				System.out.println("Esperando movimiento de Persona:");
 			}
@@ -151,12 +157,13 @@ public class Partida {
 				if (!valido) System.out.println("Error: Maquina (j1) ha intentado hacer un movimiento no valido.");
 				tab.imprimirEstadoTableroConsola();
 				turno = false;
-				this.jugarsiguienteTurno();
+				this.jugarSiguienteTurno();
 			} else { // j2 es persona				
 				System.out.println("Esperando movimiento de Persona:");
 			}
 		}
 	}
+	
 	/**
 	 * Realiza la jugada hecha por un jugador Persona
 	 * @param m recibe el movimiento que quiere realizar el jugador en esta jugada
@@ -170,7 +177,7 @@ public class Partida {
 				turno = true;
 				tab.imprimirEstadoTableroConsola();
 				if (this.mov_uno >= this.max_mov) this.acabarPartida();
-				else this.jugarsiguienteTurno();				
+				else this.jugarSiguienteTurno();				
 				return true;
 			} else {
 				return false;
@@ -181,7 +188,7 @@ public class Partida {
 			if (valid) {
 				turno = false;
 				tab.imprimirEstadoTableroConsola();
-				this.jugarsiguienteTurno();
+				this.jugarSiguienteTurno();
 				return true;
 			} else {
 				return false;
@@ -189,6 +196,7 @@ public class Partida {
 		}
 		return false;
 	}
+	
 	/**
 	 * Computa el jugador ganador de la partida cuando esta finaliza
 	 */

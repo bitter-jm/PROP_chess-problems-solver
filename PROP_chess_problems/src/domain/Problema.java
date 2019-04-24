@@ -9,7 +9,7 @@ public class Problema {
 	{
 		Easy, Medium, Hard;
 	}
-	private String id;
+	private String nombre;
 	private String FEN_Tablero;
 	private Dificulty dificultad;
 	private Boolean validado;
@@ -18,7 +18,7 @@ public class Problema {
 	private Boolean colorAGanar; //quien ha de ganar empieza y es jugador1
 	
 	public Problema() {
-		id = null;
+		nombre = null;
 		maxMovimientos = 0;
 		FEN_Tablero = null;
 		colorAGanar = null;	
@@ -27,9 +27,9 @@ public class Problema {
 		dificultad = null;
 	}
 	
-	public Problema (String id, Integer maxmov, String FEN, Boolean Color)
+	public Problema (String Nombre, Integer maxmov, String FEN, Boolean Color)
 	{
-		this.id = id;
+		nombre = Nombre;
 		maxMovimientos = maxmov;
 		FEN_Tablero = FEN;
 		colorAGanar = Color;	
@@ -43,7 +43,7 @@ public class Problema {
 	}
 	
 	public String getNombre() {
-		return id;
+		return nombre;
 	}
 	public String getFEN_Tablero() {
 		return FEN_Tablero;
@@ -65,8 +65,8 @@ public class Problema {
 		return colorAGanar;
 	}
 	
-	public void setNombre(String id) {
-		this.id = id;
+	public void setNombre(String Nombre) {
+		nombre = Nombre;
 	}
 	public void setFEN_Tablero(String fEN_Tablero) {
 		FEN_Tablero = fEN_Tablero;

@@ -12,7 +12,7 @@ import domain.Problema;
  *
  */
 public class Partida {
-	
+	private Problema prob;
 	private Tablero tab;
 	private Jugador j1;
 	private Jugador j2;
@@ -34,7 +34,7 @@ public class Partida {
 	 * @param jugador2 del tipo Jugador representa al contrincante de jugador1
 	 * @param prob del tipo Problema representa la situación incial de la partida
 	 */
-	public Partida(Jugador jugador1, Jugador jugador2, Problema prob) { // DONE
+	public Partida(Jugador jugador1, Jugador jugador2, Problema problem) { // DONE
 		//Inicializar fecha
 		fecha = Calendar.getInstance();
 	    dia = fecha.get(Calendar.DATE);
@@ -43,6 +43,7 @@ public class Partida {
 	    
 	    j1 = jugador1;
 	    j2 = jugador2;
+	    this.prob = problem;
 	    
 	    //Inicializar maquinas
 	    if (!j1.esPersona()) {
@@ -199,6 +200,7 @@ public class Partida {
 			ganador = j1.getNombre();
 		}
 		else ganador = j2.getNombre();
+		prob.setVecesJugado(prob.getVecesJugado()+1);
 		System.out.println("PARTIDA ACABADA. Gana: " + ganador);
 	}
 	

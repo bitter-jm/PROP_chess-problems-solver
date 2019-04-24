@@ -1,7 +1,7 @@
 package domain;
 
 import domain.CtrlPartida;
-import domain.CtrlDominioProblema;
+import domain.CtrlProblema;
 
 public class CtrlDominio {
 	private CtrlProblema CDprob; 

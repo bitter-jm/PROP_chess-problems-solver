@@ -38,15 +38,8 @@ public class Problema {
 		
 		validado = esValido(FEN,Color);
 		
-<<<<<<< HEAD
-		Dificultad = null;
-		if (Validado) CalculoDeDificultad(maxmov, FEN, Color);
-=======
-		
-		
 		dificultad = null;
 		if (validado) CalculoDeDificultad(maxmov, FEN, Color);
->>>>>>> branch 'master' of https://github.com/joan3pastor/PROP_chess-problems.git
 	}
 	
 	public String getNombre() {
@@ -77,22 +70,9 @@ public class Problema {
 	public void setFEN_Tablero(String fEN_Tablero) {
 		FEN_Tablero = fEN_Tablero;
 	}
-<<<<<<< HEAD
-	public Dificulty getDificultad() {
-		return Dificultad;
-	}
-	public Boolean getValidado() {
-		return Validado;
-	}
-	public void setValidado(String FEN, boolean Color) {
-		Validado = esValido(FEN,Color); 
-	}
-	public Integer getVecesJugado() {
-		return VecesJugado;
-	}
-=======
 
->>>>>>> branch 'master' of https://github.com/joan3pastor/PROP_chess-problems.git
+
+
 	public void setVecesJugado(Integer vecesJugado) {
 		 this.vecesJugado =vecesJugado;
 	}

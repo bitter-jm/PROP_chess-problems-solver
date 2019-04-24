@@ -4,7 +4,7 @@ package domain;
  * @author Carla GarcíaC
  *
  */
-public class Jugador {
+public abstract class Jugador {
 	
 	protected String nombre;
 	/**
@@ -24,9 +24,7 @@ public class Jugador {
 	 * Método abstracto que diferencia los tipos de jugadores, personas o máquinas
 	 * @return true del tipo Booleano si el jugador es persona, false en caso contrario
 	 */
-	public boolean esPersona() {
-		return true;
-	}
+	public abstract boolean esPersona();
 
 	
 }

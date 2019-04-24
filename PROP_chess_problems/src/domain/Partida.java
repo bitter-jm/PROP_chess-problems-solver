@@ -5,7 +5,6 @@ import domain.Maquina;
 import domain.Tablero;
 import domain.Problema;
 
-
 /**
  * CLASE PARTIDA, REPRESENTA EL MOMENTO DE JUEGO DEL AJEDREZ
  * @author Carla GarcíaC
@@ -45,6 +44,10 @@ public class Partida {
 	    j2 = jugador2;
 	    this.prob = problem;
 	    
+	    max_mov = prob.getMaxMovimientos();
+	    color = prob.getColorAGanar();
+	    this.tab = new Tablero(prob.getFEN_Tablero());
+	    
 	    //Inicializar maquinas
 	    if (!j1.esPersona()) {
 	    	String colorString = "BLANCAS";
@@ -58,10 +61,6 @@ public class Partida {
 	    	Maquina maquina = (Maquina) j2;
 	    	maquina.setColor(colorString);
 	    }
-	    
-	    max_mov = prob.getMaxMovimientos();
-	    color = prob.getColorAGanar();
-	    this.tab = new Tablero(prob.getFEN_Tablero());
 	    
 	    System.out.println("Estado inicial tablero: ");
 	    tab.imprimirEstadoTableroConsola();
@@ -104,13 +103,7 @@ public class Partida {
 	public Jugador getJugador2() {
 		return this.j2;
 	}
-	/**
-	 * Devuelve la situación actual del juego
-	 * @return tab del tipo Tablero con el estado actual de la partida
-	 */
-	public Tablero getTablero() {
-		return this.tab;
-	}
+
 	/**
 	 * 	Comprueba si la partida ha finalizado o no
 	 * @return true en el caso de que la partida haya acabado correctamente y tenga asignado un ganador, false en caso contrario

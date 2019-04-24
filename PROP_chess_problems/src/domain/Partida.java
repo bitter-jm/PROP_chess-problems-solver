@@ -8,7 +8,7 @@ import domain.Problema;
 
 /**
  * CLASE PARTIDA, REPRESENTA EL MOMENTO DE JUEGO DEL AJEDREZ
- * @author Carla GarcíaC
+ * @author Carla GarciaC
  *
  */
 public class Partida {
@@ -19,7 +19,7 @@ public class Partida {
 	private Calendar fecha;
 	private int dia;
 	private int mes;
-	private int año;
+	private int ano;
 	
 	public int max_mov;
 	public boolean color; // false -> BLANCAS, true -> NEGRAS
@@ -29,17 +29,17 @@ public class Partida {
 	public String ganador;
 	
 	/**
-	 * Crea un objeto Partida y lo inicializa con los jugadores y las características del problema participantes en el juego
+	 * Crea un objeto Partida y lo inicializa con los jugadores y las caracteristicas del problema participantes en el juego
 	 * @param jugador1 del tipo Jugador representa al usuario que empieza la partida
 	 * @param jugador2 del tipo Jugador representa al contrincante de jugador1
-	 * @param prob del tipo Problema representa la situación incial de la partida
+	 * @param prob del tipo Problema representa la situacion incial de la partida
 	 */
 	public Partida(Jugador jugador1, Jugador jugador2, Problema problem) { // DONE
 		//Inicializar fecha
 		fecha = Calendar.getInstance();
 	    dia = fecha.get(Calendar.DATE);
 	    mes = fecha.get(Calendar.MONTH);
-	    año = fecha.get(Calendar.YEAR);
+	    ano = fecha.get(Calendar.YEAR);
 	    
 	    j1 = jugador1;
 	    j2 = jugador2;
@@ -71,41 +71,41 @@ public class Partida {
 		
 	/**
 	 * Devuelve el dia de comienzo la partida
-	 * @return Integer indicando el número de día de la fecha de inicio
+	 * @return Integer indicando el nï¿½mero de dia de la fecha de inicio
 	 */
 	public int getDia() {
 		return this.dia;
 	}
 	/**
 	 * Devuelve el mes de comienzo la partida
-	 * @return Integer indicando el número de mes de la fecha de inicio
+	 * @return Integer indicando el nï¿½mero de mes de la fecha de inicio
 	 */
 	public int getMes() {
 		return this.mes;
 	}
 	/**
-	 * Devuelve el año de comienzo la partida
-	 * @return Integer indicando el año fecha de inicio
+	 * Devuelve el aï¿½o de comienzo la partida
+	 * @return Integer indicando el aï¿½o fecha de inicio
 	 */
-	public int getAño() {
-		return this.año;
+	public int getAno() {
+		return this.ano;
 	}
 	/**
 	 * Devuelve el jugador1
-	 * @return del jugador1 participante en la partida, del tipo Jugador, o más específicamente Persona o Máquina
+	 * @return del jugador1 participante en la partida, del tipo Jugador, o mï¿½s especificamente Persona o Mï¿½quina
 	 */
 	public Jugador getJugador1() {
 		return this.j1;
 	}
 	/**
 	 * Devuelve el jugador2
-	 * @return del jugador2 participante en la partida, del tipo Jugador, o más específicamente Persona o Máquina
+	 * @return del jugador2 participante en la partida, del tipo Jugador, o mï¿½s especificamente Persona o Mï¿½quina
 	 */
 	public Jugador getJugador2() {
 		return this.j2;
 	}
 	/**
-	 * Devuelve la situación actual del juego
+	 * Devuelve la situacion actual del juego
 	 * @return tab del tipo Tablero con el estado actual de la partida
 	 */
 	public Tablero getTablero() {
@@ -121,7 +121,7 @@ public class Partida {
 	}
 	/**
 	 * Se encarga de pasarle el turno al siguiente jugador, actualizar los movimientos de cada uno e incluso
-	 * realizar la siguiente jugada en caso de que el jugador sea Máquina
+	 * realizar la siguiente jugada en caso de que el jugador sea Mï¿½quina
 	 */
 	private void jugarsiguienteTurno() { //PENDIENTE
 		System.out.print("Siguiente turno de ");
@@ -160,7 +160,7 @@ public class Partida {
 	/**
 	 * Realiza la jugada hecha por un jugador Persona
 	 * @param m recibe el movimiento que quiere realizar el jugador en esta jugada
-	 * @return true cuando el movimiento es válido y se ha realizado, false en caso contrario
+	 * @return true cuando el movimiento es valido y se ha realizado, false en caso contrario
 	 */
 	public boolean jugarPersona(Movimiento m) { //PENDIENTE
 		if (!turno && j1.esPersona()) {
@@ -190,7 +190,7 @@ public class Partida {
 		return false;
 	}
 	/**
-	 * Computa el jugador ganador de la partida cuando ésta finaliza
+	 * Computa el jugador ganador de la partida cuando esta finaliza
 	 */
 	public void acabarPartida() {
 		String c;

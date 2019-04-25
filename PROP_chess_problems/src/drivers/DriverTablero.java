@@ -6,6 +6,10 @@ import domain.Movimiento;
 import java.util.List;
 import java.util.Iterator;
 
+/**
+ * Driver de la clase Tablero
+ * @author Joan Marc Pastor
+ */
 public class DriverTablero {
 
 	public static void main(String[] args) {

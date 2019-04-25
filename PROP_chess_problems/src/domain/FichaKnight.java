@@ -3,6 +3,10 @@ package domain;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Representa una ficha Knight
+ * @author Joan Marc Pastor
+ */
 public class FichaKnight extends Ficha {
 
 	/**

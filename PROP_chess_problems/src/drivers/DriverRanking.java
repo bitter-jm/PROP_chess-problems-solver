@@ -15,7 +15,7 @@ public class DriverRanking {
 		System.out.println(nom + " tendra una puntuacion de " + punt+ "\n");
 		r.anadirAlRanking(nom, punt);
 		r.printranking();
-		//añadir a alguien al ranking
+		//aï¿½adir a alguien al ranking
 		System.out.println("Escribe nombre de persona \n");
 		nom = sc.nextLine();
 		System.out.println("Escribe puntuacion\n");
@@ -23,25 +23,25 @@ public class DriverRanking {
 		r.anadirAlRanking(nom, punt);
 		r.printranking();
 		//caso en que dos con la misma puntuacion: aparece arriba el mas reciente
-		System.out.println("Se añade Pepita con 35000 puntos al ranking");
+		System.out.println("Se anade Pepita con 35000 puntos al ranking");
 		r.anadirAlRanking("Pepita", 35);
 		r.printranking();
-		System.out.println("Se añade Jose con 35000 puntos al ranking");
+		System.out.println("Se anade Jose con 35000 puntos al ranking");
 		r.anadirAlRanking("Jose", 35);
 		r.printranking();
 		//caso en que la misma persona y misma puntuacion : no se duplica en el ranking
-		System.out.println("Se añade Cris con 47234 puntos al ranking");
+		System.out.println("Se aï¿½ade Cris con 47234 puntos al ranking");
 		r.anadirAlRanking("Cris", 47);
 		r.printranking();
-		System.out.println("Se vuelve a añadir Cris con 47234 puntos al ranking");
+		System.out.println("Se vuelve a aï¿½adir Cris con 47234 puntos al ranking");
 		r.anadirAlRanking("Cris", 47);
 		r.printranking();
 		//una persona empeora su puntuacion: se queda la mejor
-		System.out.println("Se vuelve a añadir Cris con 42391 puntos al ranking");
+		System.out.println("Se vuelve a aï¿½adir Cris con 42391 puntos al ranking");
 		r.anadirAlRanking("Cris", 47);
 		r.printranking();
 		//una persona mejora su puntuacion: updetea su puntuacion a la mejor
-		System.out.println("Se vuelve a añadir Cris con 48359 puntos al ranking");
+		System.out.println("Se vuelve a aï¿½adir Cris con 48359 puntos al ranking");
 		r.anadirAlRanking("Cris", 47);
 		r.printranking();
 		//eliminar a alguien del ranking

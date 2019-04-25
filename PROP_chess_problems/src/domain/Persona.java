@@ -12,7 +12,7 @@ public class Persona extends Jugador {
 	 * Crea un objeto persona vacio
 	 */
 	public Persona() {}
-//LAS NECESITAMOS PARA ALGO? QUIZAS LA VACIA S� DESDE PARTIDA PARA DEFINIR EL TIPO DE JUGADOR Q LE PASAN PERO LA CREADORA(NOM)?
+
 	/**
 	 * Crea un objeto persona con nombre
 	 * @param nom del tipo String es el nombre de la persona creada
@@ -20,6 +20,7 @@ public class Persona extends Jugador {
 	public Persona(String nom) {
 		super.nombre = nom;
 	}
+	
 	/**
 	 * Crea un objeto persona con nombre y contrasena
 	 * @param nom del tipo String es el nombre de la persona creada
@@ -29,12 +30,26 @@ public class Persona extends Jugador {
 		super.nombre = nom;
 		this.contrasena = contra;
 	}
+	
 	/**
 	 * Modifica la contrasena de un usuario
 	 * @param contra del tipo String es la nueva contrasena de la persona
 	 */
 	public void setContrasena(String contra) {
 		this.contrasena = contra;
+	}
+	
+	/**
+	 * Obtiene la contrasena de la Persona
+	 * @return String conteniendo la contrasena
+	 */
+	public String getContrasena() {
+		return this.contrasena;
+	}
+	
+	@Override
+	public boolean esPersona() {
+		return true;
 	}
 
 }

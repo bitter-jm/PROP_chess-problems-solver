@@ -2,15 +2,19 @@ package domain;
 
 import java.util.*;
 import domain.Tablero;
+<<<<<<< HEAD
 //import domain.Ranking
+=======
+import domain.Ficha;
+import domain.Movimiento;
+
+>>>>>>> branch 'master' of https://github.com/joan3pastor/PROP_chess-problems.git
 public class Problema {
 	
-	enum Dificulty 
-	{
-		Easy, Medium, Hard;
-	}
+	enum Dificulty { Easy, Medium, Hard; }
 	private String nombre;
-	private String FEN_Tablero;
+	private Tablero tab;
+
 	private Dificulty dificultad;
 	private Boolean validado;
 	private Integer vecesJugado;
@@ -21,7 +25,7 @@ public class Problema {
 	public Problema() {
 		nombre = null;
 		maxMovimientos = 0;
-		FEN_Tablero = null;
+		tab = new Tablero();
 		colorAGanar = null;	
 		vecesJugado=0;
 		validado = false;
@@ -29,16 +33,16 @@ public class Problema {
 	// rank = new Ranking();
 	}
 	
-	public Problema (String Nombre, Integer maxmov, String FEN, Boolean Color)
+	public Problema (String nombre, Integer maxmov, String FEN, Boolean Color, Boolean valido)
 	{
-		nombre = Nombre;
+		this.nombre = nombre;
 		maxMovimientos = maxmov;
-		FEN_Tablero = FEN;
+		tab = new Tablero(FEN);
 		colorAGanar = Color;	
 		
 		this.vecesJugado=0;
 		
-		validado = esValido(FEN,Color);
+		validado = valido;
 		
 		dificultad = null;
 		if (validado) CalculoDeDificultad(maxmov, FEN, Color);
@@ -48,12 +52,11 @@ public class Problema {
 		return nombre;
 	}
 	public String getFEN_Tablero() {
-		return FEN_Tablero;
+		return tab.exportarFEN();
 	}
 	public Dificulty getDificultad() {
 		return dificultad;
 	}
-	
 	public Boolean getValidado() {
 		return validado;
 	}
@@ -67,15 +70,15 @@ public class Problema {
 		return colorAGanar;
 	}
 	
-	public void setNombre(String Nombre) {
-		nombre = Nombre;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-	public void setFEN_Tablero(String fEN_Tablero) {
-		FEN_Tablero = fEN_Tablero;
+	public void setFEN_Tablero(String FEN_Tablero) {
+		tab = new Tablero(FEN_Tablero);
 	}
 
 	public void setVecesJugado(Integer vecesJugado) {
-		 this.vecesJugado =vecesJugado;
+		 this.vecesJugado = vecesJugado;
 	}
 	public void setMaxMovimientos(Integer maxMovimientos) {
 		this.maxMovimientos = maxMovimientos;
@@ -83,19 +86,30 @@ public class Problema {
 	public void setColorAGanar(Boolean colorAGanar) {
 		this.colorAGanar = colorAGanar;
 	}
+	
+	public void anadirFicha(Ficha f, int i, int j) {
+		this.tab.anadirFicha(f, i, j);
+	}
 
+	public void retirarFicha(int i, int j) {
+		this.tab.quitarFicha(i, j);
+	}
+	
+	public void moverFicha(Movimiento mov) {
+		this.tab.registrarMovimientoSinValidar(mov);
+	}
+	
 	
 	//PARA CALCULAR LA DIFICULTAD DE UN PROBLEMA:
 	//Miramos el numero de piezas que hay en el tablero inicial 
 	//Es decir, proporcion de piezas mias con las enemigas 
 	//el valor que tienen estas y numero de jugadas que hay
 	private void CalculoDeDificultad (Integer MaxMov, String FEN, Boolean Color ) {
-		//Algoritmo que calcula la dificultad del problema
 		int Situacion = AnalizeBoard (FEN);
 		//NO HAY MOVIMIENTOS EXTRA
 		int SituacionMov=0; //3 o 4 jugadas Medio
-		if (MaxMov==1 || MaxMov==2 )SituacionMov=130;//facil
-		else if (MaxMov>4 )SituacionMov=-130; //dificil*/
+		if (MaxMov==1 || MaxMov==2 ) SituacionMov=130;//facil
+		else if (MaxMov>4 ) SituacionMov=-130; //dificil*/
 		
 		if (!Color) {//BLANCAS
 			Situacion += SituacionMov;
@@ -138,27 +152,39 @@ public class Problema {
 		return 0;
 	}
 	
-	private int evaluarTablero(Ficha[][] casillas) {
-		int value = 0;
-		int sign = 1;
+	/**
+	 * Analiza si el problema es valido
+	 * @return True si el problema es valido. False en caso contrario
+	 */
+	public boolean validarProblema() {
+		if (this.colorAGanar == null || this.validado == true || this.maxMovimientos == 0 ) return false;
+		this.CalculoDeDificultad(this.maxMovimientos, this.tab.exportarFEN(), this.colorAGanar);
+		//Buscar dos reyes:
+		boolean reyB = false;
+		boolean reyN = false;
 		for (int i = 0; i < 8; ++i) {
 			for (int j = 0; j < 8; ++j) {
-				if (casillas[i][j] != null) {					
-					if (casillas[i][j].color.equals("BLANCAS")) sign = 1;
-					else sign = -1;
-					if (casillas[i][j].ficha.equals("p")) value += 10 * sign; // PAWN
-					else if (casillas[i][j].ficha.equals("n")) value += 30 * sign; // KNIGHT
-					else if (casillas[i][j].ficha.equals("b")) value += 30 * sign; // BISHOP
-					else if (casillas[i][j].ficha.equals("r")) value += 50 * sign; // ROOK
-					else if (casillas[i][j].ficha.equals("q")) value += 90 * sign; // QUEEN
-					else if (casillas[i][j].ficha.equals("k")) value += 900 * sign; // KING
+				if (this.tab.consultarCasilla(i, j) != null) {
+					if (this.tab.consultarCasilla(i, j).getCharacter().equals("k")) {
+						if (reyN) return false; //Dos reyes negros existentes
+						reyN = true;
+					} else if (this.tab.consultarCasilla(i, j).getCharacter().equals("K")) {
+						if (reyB) return false; //Dos reyes blancos existentes
+						reyB = true;
+					}
 				}
 			}
 		}
-		return value;
+		if (!reyN || !reyB) return false; //Falta algun rey por colocar
+		//Buscar mate:
+		String color = "BLANCAS";
+		if (this.colorAGanar) color = "NEGRAS";
+		boolean valid = this.busquedaExhaustivaMate(color, true, 1);
+		this.validado = valid;
+		return valid;
 	}
-
 	
+<<<<<<< HEAD
 	
 	
 	
@@ -206,72 +232,59 @@ public class Problema {
 		//ATENTOS A LA SIGUIENTE LINEA!!!
 		if (maxMovimientos == 0) return false;
 		int result = minimax( (maxMovimientos*2)-1, tab, colorGanar);
+=======
+	/**
+	 * Funcion recursiva de fuerza bruta para buscar si se puede realizar mate en menos de movsJ1 movimientos
+	 * @param color color a empezar a analizar. false -> Blancas, true -> Negras
+	 * @param aGanar True si el jugador <em>color</em> es quien intenta hacer mate. False en caso contrario
+	 * @param movsJ1 Movimientos restantes del jugador 1 para intentar hacer mate
+	 * @return True si el jugador 1 puede hacer mate asegurado. False en caso contrario
+	 */
+	private boolean busquedaExhaustivaMate(String color, boolean aGanar, int movsJ1) {
+		String colorOpuesto = "BLANCAS";
+		if (color.equals("BLANCAS")) colorOpuesto = "NEGRAS";
+>>>>>>> branch 'master' of https://github.com/joan3pastor/PROP_chess-problems.git
 		
-		if (!colorGanar && result == 9999999 ) return true;		
-		else if (colorGanar && result == -9999999) return true;
-		System.out.println("COLOR: " + colorGanar+ "result" + result + "\n");
-		return false;		
-	}
-
-	
-	
-	private Integer minimax(Integer MaxMov, Tablero tab, boolean ColorGanar)  
-	{
-		
-		
-		if (MaxMov==0) {
-			
-			
-			if (!colorAGanar && tab.esMateColor("BLANCAS")) {
-				System.out.println("MATEBLANCAS: " + tab.esMateColor("BLANCAS") + "\n");
-				return 9999999;//caso base hemos llegado al numero maximo de movimientos	
-			}
-			else if (colorAGanar && tab.esMateColor("NEGRAS")) {
-				System.out.println("MATENEGRAS: " + tab.esMateColor("NEGRAS") + "\n");
-				return -9999999;	
-			}
-			return evaluarTablero(tab.getCasillas()); //situacion actual en puntuacion 
-			//y si es mate suma muchisimo
-		}
-		
-		else if (!ColorGanar) { //BLANCAS
-			
-			
-			List<Movimiento> movimientosPosibles = tab.posiblesMovimientos("BLANCAS");
-			int mejorMov = -9999999;
-			Iterator<Movimiento> iterator = movimientosPosibles.iterator();
+		if (aGanar) { // Jugador a ganar
+			if (movsJ1 > this.maxMovimientos) return false; //CASO BASE 1
+			boolean mate = false;
 			Movimiento m = null;
+			List<Movimiento> movimientosPosibles = tab.posiblesMovimientos(color);
+		    Iterator<Movimiento> iterator = movimientosPosibles.iterator();
 			while(iterator.hasNext()) {
 				m = (Movimiento) iterator.next();
 				tab.registrarMovimientoSinValidar(m);
-				
-				int valor= minimax( MaxMov-1, tab, true);
-				if (valor > mejorMov) {
-					mejorMov = valor;
-				}
+				mate = this.busquedaExhaustivaMate(colorOpuesto, false, movsJ1+1);
 				tab.deshacer();
+				if (mate) return true;
 			}
-			return mejorMov;
-		}
-		
-		//se tiene que haber cambiado el caminominimax;
-		else {
-			List<Movimiento> movimientosPosibles = tab.posiblesMovimientos("NEGRAS");
-			int mejorMov = 9999999;
-			Iterator<Movimiento> iterator = movimientosPosibles.iterator();
+			return false;
+			
+		} else { // Jugador a perder
+			if (tab.esMateColor(color)) return true; //CASO BASE 2
+			boolean mate = false;
 			Movimiento m = null;
+			List<Movimiento> movimientosPosibles = tab.posiblesMovimientos(color);
+		    Iterator<Movimiento> iterator = movimientosPosibles.iterator();
 			while(iterator.hasNext()) {
 				m = (Movimiento) iterator.next();
 				tab.registrarMovimientoSinValidar(m);
-				int valor= minimax( MaxMov-1, tab, false);
-				if (valor < mejorMov) {
-					mejorMov = valor;
-				}
+				mate = this.busquedaExhaustivaMate(colorOpuesto, true, movsJ1);
 				tab.deshacer();
+				if (!mate) return false;
 			}
-			return mejorMov;
+			return true;
 		}
-			
 	}
 	
+<<<<<<< HEAD
+=======
+	/**
+	 * Imprime el estado del tablero por consola
+	 */
+	public void imprimirEstadoProblemaConsola() {
+		this.tab.imprimirEstadoTableroConsola();
+	}
+	
+>>>>>>> branch 'master' of https://github.com/joan3pastor/PROP_chess-problems.git
 }

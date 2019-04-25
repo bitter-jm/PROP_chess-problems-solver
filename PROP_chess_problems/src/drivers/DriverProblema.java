@@ -9,7 +9,8 @@ public class DriverProblema {
 		//INITIALIZE PROBLEMA
 		//CREAR PROBLEMA PASANDO LOS PARAMETROS DIRECTAMENTE:
 		//mate en 2 por parte de las blancas
-		Problema prob = new Problema("Problema_1", 2, "4r3/2r5/Bp2R2b/1n6/2n2Q2/3kNbRq/2p1p1N1/2K1B3 w - - 0 1", false);
+		Problema prob = new Problema("Problema_1", 2, "4r3/2r5/Bp2R2b/1n6/2n2Q2/3kNbRq/2p1p1N1/2K1B3 w - - 0 1", false, true);
+		
 		
 		//Comprobacion de la creacion correcta de problema y de getters y setters:
 		System.out.println("Nombre Problema: " + prob.getNombre() + "\n");
@@ -54,7 +55,7 @@ public class DriverProblema {
 		
 		//CREAR PROBLEMA PASANDO LOS PARAMETROS DIRECTAMENTE:
 		//mate en 2 por parte de las blancas
-		Problema prob3 = new Problema("Problema_3", 2, "2R5/2N4K/2pn2B1/Nb6/5p2/B1k1p2Q/2pn4/3R4", false);
+		Problema prob3 = new Problema("Problema_3", 2, "2R5/2N4K/2pn2B1/Nb6/5p2/B1k1p2Q/2pn4/3R4", false, true);
 		
 		//Comprobacion de la creacion correcta de problema y de getters y setters:
 		System.out.println("Nombre Problema: " + prob3.getNombre() + "\n");
@@ -70,6 +71,16 @@ public class DriverProblema {
 		System.out.println("Es Valido " + prob3.getValidado() + "\n");
 		if(prob3.getDificultad()==null) System.out.println("Dificultad sin determinar\n");
 		else System.out.println("Dificultad " + prob3.getDificultad() + "\n");
+		
+		
+		///////////////////////////////////////////////////////////////////////////
+		
+		//VALIDAR PROBLEMAS:
+		prob = new Problema("Problema_1", 2, "1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w - - 0 1", false, false);
+		System.out.println("Valid? " + prob.validarProblema());
+		
+		prob = new Problema("Problema_1", 2, "8/8/8/8/3p4/5K2/3kNN2/2R5 w - - 0 1", false, false);
+		System.out.println("Valid? " + prob.validarProblema());
 		
 	}
 }

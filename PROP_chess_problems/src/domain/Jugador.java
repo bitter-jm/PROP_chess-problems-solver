@@ -1,14 +1,14 @@
 package domain;
 /**
  * CLASE JUGADOR
- * @author Carla GarcíaC
+ * @author Carla GarciaC
  *
  */
 public class Jugador {
 	
 	protected String nombre;
 	/**
-	 * Crea un objeto vacío de Jugador
+	 * Crea un objeto vacio de Jugador
 	 */
 	public Jugador() {
 		this.nombre = null;
@@ -21,7 +21,7 @@ public class Jugador {
 		return this.nombre;
 	}
 	/**
-	 * Método abstracto que diferencia los tipos de jugadores, personas o máquinas
+	 * Metodo sobrecargable que diferencia los tipos de jugadores, personas o mï¿½quinas
 	 * @return true del tipo Booleano si el jugador es persona, false en caso contrario
 	 */
 	public boolean esPersona() {

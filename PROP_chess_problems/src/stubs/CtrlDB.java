@@ -7,7 +7,7 @@ import domain.Problema;
 
 /**
  * Stub del controlador de datos
- * @author Joan Pastor
+ * @author Joan Marc Pastor
  *
  */
 public class CtrlDB {

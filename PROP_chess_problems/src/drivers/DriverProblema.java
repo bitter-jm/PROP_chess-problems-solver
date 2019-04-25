@@ -71,6 +71,7 @@ public class DriverProblema {
 		System.out.println("Es Valido " + prob3.getValidado() + "\n");
 		if(prob3.getDificultad()==null) System.out.println("Dificultad sin determinar\n");
 		else System.out.println("Dificultad " + prob3.getDificultad() + "\n");
+
 		
 		
 		///////////////////////////////////////////////////////////////////////////
@@ -82,5 +83,6 @@ public class DriverProblema {
 		prob = new Problema("Problema_XX", 2, "8/8/8/8/3p4/5K2/3kNN2/2R5", false, false);
 		System.out.println("Valid? " + prob.validarProblema());
 		
+
 	}
 }

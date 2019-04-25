@@ -1,14 +1,14 @@
 package domain;
 
 import domain.CtrlPartida;
-import domain.CtrlDominioProblema;
+import domain.CtrlProblema;
 
 public class CtrlDominio {
-	private CtrlDominioProblema CDprob; 
+	private CtrlProblema CDprob; 
 	private CtrlPartida CDpart;
 	
 	public CtrlDominio() {
-		CDprob= new CtrlDominioProblema();
-		CDpart= new CtrlPartida();
+		CDprob = CtrlProblema.getInstance();
+		CDpart= CtrlPartida.getInstance();
 	}
 }

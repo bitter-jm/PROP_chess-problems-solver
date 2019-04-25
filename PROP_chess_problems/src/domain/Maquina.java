@@ -2,7 +2,7 @@ package domain;
 
 /**
  * Representa una Maquina
- * @author
+ * @author Joan Marc Pastor
  */
 public class Maquina extends Jugador {
 

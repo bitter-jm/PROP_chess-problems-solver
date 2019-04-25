@@ -7,7 +7,7 @@ import domain.Jugador;
 
 /**
  * Controlador de Partidas
- * @author
+ * @author Joan Marc Pastor
  */
 public class CtrlPartida {
 	
@@ -18,7 +18,7 @@ public class CtrlPartida {
 	 * Instancia un objeto partida con los jugadores y el problema
 	 * @param j1 del tipo String representa el Jugador1
 	 * @param j2 del tipo String representa el Jugador2
-	 * @param problema del tipo String representa la situación inicial del juego
+	 * @param problema del tipo String representa la situacion inicial del juego
 	 */
 	public void empezarPartida(String j1, String j2, String problema) {
 		CtrlDB ctrlDB = CtrlDB.getInstance();
@@ -31,7 +31,7 @@ public class CtrlPartida {
 	/**
 	 * Detecta una jugada por parte de la persona y actualiza el estado de la partida
 	 * @param m del tipo Movimiento representa la jugada de la persona 
-	 * @return true si el movimiento era válido y se ha realizado con éxito, false en caso contrario
+	 * @return true si el movimiento era vï¿½lido y se ha realizado con exito, false en caso contrario
 	 */
 	public boolean personaRealizaMovimiento(Movimiento m) {
 		return this.part.jugarPersona(m);

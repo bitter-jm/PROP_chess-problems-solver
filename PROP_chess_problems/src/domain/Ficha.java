@@ -13,7 +13,7 @@ import java.lang.Character;
 
 /**
  * Representa una ficha
- * @author Joan Pastor
+ * @author Joan Marc Pastor
  */
 public class Ficha {
 	//pawn = "P", knight = "N", bishop = "B", rook = "R", queen = "Q" and king = "K" //BLANCAS

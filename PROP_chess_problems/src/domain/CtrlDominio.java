@@ -8,6 +8,7 @@ import domain.CtrlProblema;
 public class CtrlDominio {
 	private CtrlProblema CDprob; 
 	private CtrlPartida CDpart;
+	
 	/**
 	 * Crea los otros dos controladores de dominio: CtrlPartida y CtrlProblema
 	 * como clases de agregacion

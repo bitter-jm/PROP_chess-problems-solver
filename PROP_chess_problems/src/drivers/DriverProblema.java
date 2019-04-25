@@ -70,6 +70,6 @@ public class DriverProblema {
 		System.out.println("Es Valido " + prob3.getValidado() + "\n");
 		if(prob3.getDificultad()==null) System.out.println("Dificultad sin determinar\n");
 		else System.out.println("Dificultad " + prob3.getDificultad() + "\n");
-		
+			
+		}
 	}
-}

@@ -14,7 +14,7 @@ import java.lang.Character;
 /**
  * Representa una ficha
  */
-public class Ficha {
+public abstract class Ficha {
 	//pawn = "P", knight = "N", bishop = "B", rook = "R", queen = "Q" and king = "K" //BLANCAS
 	//pawn = "p", knight = "n", bishop = "b", rook = "r", queen = "q" and king = "k" //NEGRAS
 
@@ -34,7 +34,7 @@ public class Ficha {
 		else if ("r".equals(f)) return new FichaRook(color);
 		else if ("q".equals(f)) return new FichaQueen(color);
 		else if ("k".equals(f)) return new FichaKing(color);
-		return new Ficha();
+		return null;
 	}
 	
 	/**
@@ -77,8 +77,6 @@ public class Ficha {
 	 * @param casillas Matriz de Fichas indicando el estado del Tablero
 	 * @return Devuelve una List de Movimientos con todos los movimientos legales que puede realizar la Ficha
 	 */
-	public List<Movimiento> posiblesMovimientos(int i, int j, Ficha[][] casillas) {
-		return new ArrayList<Movimiento>();
-	}
+	public abstract List<Movimiento> posiblesMovimientos(int i, int j, Ficha[][] casillas);
 	
 }

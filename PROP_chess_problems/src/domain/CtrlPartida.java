@@ -48,6 +48,7 @@ public class CtrlPartida {
 	 * @return true si ha terminado correctamente, false en caso contrario
 	 */
 	public boolean partidaFinalizada() { //DONE
+		if (this.part == null) return true;
 		return this.part.partidaAcabada();
 	}
 	

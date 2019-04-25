@@ -129,9 +129,20 @@ public class Partida {
 	 * realizar la siguiente jugada en caso de que el jugador sea M�quina
 	 */
 	private void jugarSiguienteTurno() { //PENDIENTE
+		String colorS="BLANCAS";
+		String colorSOpuesto="NEGRAS";
+		if (color && !turno) {
+			colorS="NEGRAS";
+			colorSOpuesto="BLANCAS";
+		}
+		else if (!color && turno) {
+			colorS="NEGRAS";
+			colorSOpuesto="BLANCAS";
+		}
+		
 		System.out.print("Siguiente turno de ");
-		if (!turno) System.out.println(j1.getNombre());
-		else System.out.println(j2.getNombre());
+		if (!turno) System.out.println(j1.getNombre() + " ("+colorS+")");
+		else System.out.println(j2.getNombre() + " ("+colorS+")");
 		
 		if (!turno) { // j1
 			++mov_uno;
@@ -143,6 +154,7 @@ public class Partida {
 				tab.imprimirEstadoTableroConsola();
 				turno = true;
 				if (this.mov_uno >= this.max_mov) this.acabarPartida();
+				else if (this.tab.esMateColor(colorSOpuesto)) this.acabarPartida();
 				else this.jugarSiguienteTurno();
 			} else { // j1 es persona				
 				System.out.println("Esperando movimiento de Persona:");
@@ -156,7 +168,8 @@ public class Partida {
 				if (!valido) System.out.println("Error: Maquina (j1) ha intentado hacer un movimiento no valido.");
 				tab.imprimirEstadoTableroConsola();
 				turno = false;
-				this.jugarSiguienteTurno();
+				if (this.tab.esMateColor(colorSOpuesto)) this.acabarPartida();
+				else this.jugarSiguienteTurno();
 			} else { // j2 es persona				
 				System.out.println("Esperando movimiento de Persona:");
 			}
@@ -169,6 +182,9 @@ public class Partida {
 	 * @return true cuando el movimiento es valido y se ha realizado, false en caso contrario
 	 */
 	public boolean jugarPersona(Movimiento m) { //PENDIENTE
+		String colorS = "NEGRAS";
+		if (color && !turno) colorS="BLANCAS";
+		else if (!color && turno) colorS="BLANCAS";
 		if (!turno && j1.esPersona()) {
 			// Mirar si es del mismo color la pieza movida 
 			boolean valid = tab.registrarMovimientoValidando(m);
@@ -176,6 +192,7 @@ public class Partida {
 				turno = true;
 				tab.imprimirEstadoTableroConsola();
 				if (this.mov_uno >= this.max_mov) this.acabarPartida();
+				else if (this.tab.esMateColor(colorS)) this.acabarPartida();
 				else this.jugarSiguienteTurno();				
 				return true;
 			} else {
@@ -187,7 +204,8 @@ public class Partida {
 			if (valid) {
 				turno = false;
 				tab.imprimirEstadoTableroConsola();
-				this.jugarSiguienteTurno();
+				if (this.tab.esMateColor(colorS)) this.acabarPartida();
+				else this.jugarSiguienteTurno();
 				return true;
 			} else {
 				return false;
@@ -200,15 +218,20 @@ public class Partida {
 	 * Computa el jugador ganador de la partida cuando esta finaliza
 	 */
 	public void acabarPartida() {
+		String colorS = "BLANCAS";
 		String c;
     	if (!color) c = "NEGRAS";
     	else c = "BLANCAS"; 
 		if(tab.esMateColor(c)) {
 			ganador = j1.getNombre();
+			if (color) colorS = "NEGRAS";
 		}
-		else ganador = j2.getNombre();
+		else {
+			ganador = j2.getNombre();
+			if (!color) colorS = "NEGRAS";
+		}
 		prob.setVecesJugado(prob.getVecesJugado()+1);
-		System.out.println("PARTIDA ACABADA. Gana: " + ganador);
+		System.out.println("PARTIDA ACABADA. Gana: " + ganador + " ("+colorS+")" );
 	}
 	
 }

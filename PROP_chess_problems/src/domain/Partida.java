@@ -33,7 +33,7 @@ public class Partida {
 	 * @param prob del tipo Problema representa la situacion incial de la partida
 	 */
 	public Partida(Jugador jugador1, Jugador jugador2, Problema problem) { // DONE
-		//Inicializar fecha
+	
 		fecha = Calendar.getInstance();
 	    dia = fecha.get(Calendar.DATE);
 	    mes = fecha.get(Calendar.MONTH);
@@ -47,7 +47,7 @@ public class Partida {
 	    color = prob.getColorAGanar();
 	    this.tab = new Tablero(prob.getFEN_Tablero());
 	    
-	    //Inicializar maquinas
+	
 	    if (!j1.esPersona()) {
 	    	String colorString = "BLANCAS";
 	    	if (color) colorString = "NEGRAS";
@@ -66,77 +66,21 @@ public class Partida {
 	    
 	    this.jugarSiguienteTurno();
 	}
-		
-	/**
-	 * Devuelve el dia de comienzo la partida
-	 * @return Integer indicando el n�mero de dia de la fecha de inicio
-	 */
-	public int getDia() {
-		return this.dia;
-	}
-	
-	/**
-	 * Devuelve el mes de comienzo la partida
-	 * @return Integer indicando el n�mero de mes de la fecha de inicio
-	 */
-	public int getMes() {
-		return this.mes;
-	}
-	
-	/**
-	 * Devuelve el a�o de comienzo la partida
-	 * @return Integer indicando el a�o fecha de inicio
-	 */
-	public int getAno() {
-		return this.ano;
-	}
-	
-	/**
-	 * Devuelve el jugador1
-	 * @return del jugador1 participante en la partida, del tipo Jugador, o m�s especificamente Persona o M�quina
-	 */
-	public Jugador getJugador1() {
-		return this.j1;
-	}
-	
-	/**
-	 * Devuelve el jugador2
-	 * @return del jugador2 participante en la partida, del tipo Jugador, o m�s especificamente Persona o M�quina
-	 */
-	public Jugador getJugador2() {
-		return this.j2;
-	}
-
-	
-	/**
-	 * Devuelve la situacion actual del juego
-	 * @return tab del tipo Tablero con el estado actual de la partida
-	 */
-	public Tablero getTablero() {
-		return this.tab;
-	}
-	
-	/**
-	 * 	Comprueba si la partida ha finalizado o no
-	 * @return true en el caso de que la partida haya acabado correctamente y tenga asignado un ganador, false en caso contrario
-	 */
-	public boolean partidaAcabada() {
-		if (this.ganador != null) return true;
-		return false;
-	}
 	
 	/**
 	 * Se encarga de pasarle el turno al siguiente jugador, actualizar los movimientos de cada uno e incluso
 	 * realizar la siguiente jugada en caso de que el jugador sea M�quina
 	 */
-	private void jugarSiguienteTurno() { //PENDIENTE
+	public void jugarSiguienteTurno() { //PENDIENTE
 		System.out.print("Siguiente turno de ");
 		if (!turno) System.out.println(j1.getNombre());
 		else System.out.println(j2.getNombre());
 		
 		if (!turno) { // j1
 			++mov_uno;
+			System.out.println("1:" + mov_uno);
 			if (!j1.esPersona()) { // j1 es maquina
+				System.out.println("2:" + mov_uno);
 				Maquina maquina = (Maquina) j1;
 				Movimiento m = maquina.realizarMovimiento(this.tab.exportarFEN());
 				boolean valido = this.tab.registrarMovimientoValidando(m);
@@ -154,7 +98,7 @@ public class Partida {
 				Maquina maquina = (Maquina) j2;
 				Movimiento m = maquina.realizarMovimiento(this.tab.exportarFEN());
 				boolean valido = this.tab.registrarMovimientoValidando(m);
-				if (!valido) System.out.println("Error: Maquina (j1) ha intentado hacer un movimiento no valido.");
+				if (!valido) System.out.println("Error: Maquina (j2) ha intentado hacer un movimiento no valido.");
 				tab.imprimirEstadoTableroConsola();
 				turno = false;
 				this.jugarSiguienteTurno();
@@ -180,6 +124,7 @@ public class Partida {
 				else this.jugarSiguienteTurno();				
 				return true;
 			} else {
+				System.out.println("Error: Persona (j1) ha intentado hacer un movimiento no valido.");
 				return false;
 			}
 		} else if (turno && j2.esPersona()) {
@@ -191,6 +136,7 @@ public class Partida {
 				this.jugarSiguienteTurno();
 				return true;
 			} else {
+				System.out.println("Error: Persona (j1) ha intentado hacer un movimiento no valido.");
 				return false;
 			}
 		}
@@ -206,10 +152,71 @@ public class Partida {
     	else c = "BLANCAS"; 
 		if(tab.esMateColor(c)) {
 			ganador = j1.getNombre();
+			System.out.println("PARTIDA ACABADA. Gana jugador1: " + ganador);
 		}
-		else ganador = j2.getNombre();
+		else  {
+			ganador = j2.getNombre();
+			System.out.println("PARTIDA ACABADA. Gana jugador2: " + ganador);
+		}
 		prob.setVecesJugado(prob.getVecesJugado()+1);
-		System.out.println("PARTIDA ACABADA. Gana: " + ganador);
+		
+	}
+	
+	/**
+	 * 	Comprueba si la partida ha finalizado o no
+	 * @return true en el caso de que la partida haya acabado correctamente y tenga asignado un ganador, false en caso contrario
+	 */
+	public boolean partidaAcabada() {
+		if (this.ganador != null) return true;
+		return false;
+	}
+	
+	/**
+	 * Devuelve el dia de comienzo la partida
+	 * @return Integer indicando el n�mero de dia de la fecha de inicio
+	 */
+	public int getDia() {
+		return this.dia;
+	}
+	
+	/**
+	 * Devuelve el mes de comienzo la partida
+	 * @return Integer indicando el n�mero de mes de la fecha de inicio
+	 */
+	public int getMes() {
+		return this.mes;
+	}
+	
+	/**
+	 * Devuelve el ano de comienzo la partida
+	 * @return Integer indicando el ano fecha de inicio
+	 */
+	public int getAno() {
+		return this.ano;
+	}
+	
+	/**
+	 * Devuelve el jugador1
+	 * @return del jugador1 participante en la partida, del tipo Jugador, o mas especificamente Persona o Maquina
+	 */
+	public Jugador getJugador1() {
+		return this.j1;
+	}
+	
+	/**
+	 * Devuelve el jugador2
+	 * @return del jugador2 participante en la partida, del tipo Jugador, o m�s especificamente Persona o M�quina
+	 */
+	public Jugador getJugador2() {
+		return this.j2;
+	}
+
+	/**
+	 * Devuelve la situacion actual del juego
+	 * @return tab del tipo Tablero con el estado actual de la partida
+	 */
+	public Tablero getTablero() {
+		return this.tab;
 	}
 	
 }

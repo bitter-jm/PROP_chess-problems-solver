@@ -8,7 +8,6 @@ import domain.Problema;
 /**
  * Stub del controlador de datos
  * @author Joan Marc Pastor
- *
  */
 public class CtrlDB {
 	

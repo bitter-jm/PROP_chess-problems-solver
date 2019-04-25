@@ -9,7 +9,7 @@ public class DriverProblema {
 		//INITIALIZE PROBLEMA
 		//CREAR PROBLEMA PASANDO LOS PARAMETROS DIRECTAMENTE:
 		//mate en 2 por parte de las blancas
-		Problema prob = new Problema("Problema_1", 2, "4r3/2r5/Bp2R2b/1n6/2n2Q2/3kNbRq/2p1p1N1/2K1B3 w - - 0 1", false, true);
+		Problema prob = new Problema("Problema_1", 2, "4r3/2r5/Bp2R2b/1n6/2n2Q2/3kNbRq/2p1p1N1/2K1B3", false, true);
 		
 		
 		//Comprobacion de la creacion correcta de problema y de getters y setters:
@@ -76,10 +76,10 @@ public class DriverProblema {
 		///////////////////////////////////////////////////////////////////////////
 		
 		//VALIDAR PROBLEMAS:
-		prob = new Problema("Problema_1", 2, "1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B w - - 0 1", false, false);
+		prob = new Problema("Problema_X", 2, "1N1b4/6nr/R5n1/2Ppk2r/K2p2qR/8/2N1PQ2/B6B", false, false);
 		System.out.println("Valid? " + prob.validarProblema());
 		
-		prob = new Problema("Problema_1", 2, "8/8/8/8/3p4/5K2/3kNN2/2R5 w - - 0 1", false, false);
+		prob = new Problema("Problema_XX", 2, "8/8/8/8/3p4/5K2/3kNN2/2R5", false, false);
 		System.out.println("Valid? " + prob.validarProblema());
 		
 	}

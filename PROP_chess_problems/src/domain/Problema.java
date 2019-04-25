@@ -6,8 +6,9 @@ import domain.Tablero;
 public class Problema {
 	
 	enum Dificulty { Easy, Medium, Hard; }
-	private String id;
+	private String nombre;
 	private Tablero tab;
+
 	private Dificulty dificultad;
 	private Boolean validado;
 	private Integer vecesJugado;
@@ -15,7 +16,7 @@ public class Problema {
 	private Boolean colorAGanar; //quien ha de ganar empieza y es jugador1
 	
 	public Problema() {
-		id = null;
+		nombre = null;
 		maxMovimientos = 0;
 		tab = new Tablero();
 		colorAGanar = null;	
@@ -24,9 +25,9 @@ public class Problema {
 		dificultad = null;
 	}
 	
-	public Problema (String id, Integer maxmov, String FEN, Boolean Color, Boolean valido)
+	public Problema (String nombre, Integer maxmov, String FEN, Boolean Color, Boolean valido)
 	{
-		this.id = id;
+		this.nombre = nombre;
 		maxMovimientos = maxmov;
 		tab = new Tablero(FEN);
 		colorAGanar = Color;	
@@ -40,7 +41,7 @@ public class Problema {
 	}
 	
 	public String getNombre() {
-		return id;
+		return nombre;
 	}
 	public String getFEN_Tablero() {
 		return tab.exportarFEN();
@@ -61,8 +62,8 @@ public class Problema {
 		return colorAGanar;
 	}
 	
-	public void setNombre(String id) {
-		this.id = id;
+	public void setNombre(String Nombre) {
+		nombre = Nombre;
 	}
 	public void setFEN_Tablero(String FEN_Tablero) {
 		tab = new Tablero(FEN_Tablero);

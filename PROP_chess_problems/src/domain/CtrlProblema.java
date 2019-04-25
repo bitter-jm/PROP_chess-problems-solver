@@ -2,21 +2,20 @@ package domain;
 
 import stubs.CtrlDB;
 
+/**
+ * Controlador de Problemas
+ * @author Joan Marc Pastor
+ */
 public class CtrlProblema {
 
 	private static CtrlProblema single_instance = null;
 	private Problema prob;
+	private CtrlDB DB = CtrlDB.getInstance();
 	
-	public void cargarProblema(String nombre) {
-		CtrlDB DB = CtrlDB.getInstance();
-		this.prob = DB.getProblema(nombre);
-		if (this.prob == null) {
-			System.out.println("Introduce el nombre de problema nuevo");
-			/*Scanner sc = 
-			 * nom= scan.getline();
-			 *cargarProblema(nom);
-			 */
-		}
+	public boolean cargarProblema(String nombre) { //DONE
+		this.prob = this.DB.getProblema(nombre);
+		if (this.prob == null) return false;
+		return true;
 	}
 	
 	public void crearProblema(String nombre, Integer NumeroJugadas, String Fen) {
@@ -27,9 +26,7 @@ public class CtrlProblema {
 		
 		
 	}
-	public void validarProblema(String nombre) {
-		CtrlDB DB = CtrlDB.getInstance();
-		this.prob = DB.getProblema(nombre);
+	public void validarProblema() {
 		if (this.prob == null) {
 			System.out.println("Introduce el nombre de problema nuevo");
 			/*Scanner sc = 
@@ -40,7 +37,6 @@ public class CtrlProblema {
 		String fen =prob.getFEN_Tablero();
 		boolean colorGanar = prob.getColorAGanar();
 		this.prob.esValido(fen, colorGanar);
-	
 	}
 	
 	
@@ -55,8 +51,7 @@ public class CtrlProblema {
 	}
 	public boolean eliminarProblema() {
 		if (this.prob.getVecesJugado() > 0) return false;
-		CtrlDB DB = CtrlDB.getInstance();
-		DB.deleteProblema(this.prob);
+		this.DB.deleteProblema(this.prob);
 		return true;
 	}
 	

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 /**
  * Representa una ficha Rook
- * @author Joan Marc Pastor
  */
 public class FichaRook extends Ficha {
 

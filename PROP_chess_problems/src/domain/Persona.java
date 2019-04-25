@@ -1,8 +1,6 @@
 package domain;
 /**
  * CLASE HEREDADA DE JUGADOR, REPRESENTA UNA PERSONA
- * @author Carla Garcia
- *
  */
 public class Persona extends Jugador {
 	
@@ -12,7 +10,7 @@ public class Persona extends Jugador {
 	 * Crea un objeto persona vacio
 	 */
 	public Persona() {}
-	
+
 	/**
 	 * Crea un objeto persona con nombre
 	 * @param nom del tipo String es el nombre de la persona creada
@@ -45,6 +43,11 @@ public class Persona extends Jugador {
 	 */
 	public String getContrasena() {
 		return this.contrasena;
+	}
+	
+	@Override
+	public boolean esPersona() {
+		return true;
 	}
 
 }

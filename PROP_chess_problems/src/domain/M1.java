@@ -8,7 +8,6 @@ import java.util.Iterator;
 
 /** 
  * Representa la Maquina 1
- * @author Joan Marc Pastor
  */
 public class M1 extends Maquina {
 	

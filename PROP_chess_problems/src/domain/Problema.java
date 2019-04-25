@@ -5,6 +5,9 @@ import domain.Tablero;
 import domain.Ficha;
 import domain.Movimiento;
 
+/**
+ * Clase Problema
+ */
 public class Problema {
 	
 	enum Dificulty { Easy, Medium, Hard; }
@@ -16,6 +19,7 @@ public class Problema {
 	private Integer vecesJugado;
 	private Integer maxMovimientos;
 	private Boolean colorAGanar; //quien ha de ganar empieza y es jugador1
+	
 	
 	public Problema() {
 		nombre = null;
@@ -153,24 +157,6 @@ public class Problema {
 	public boolean validarProblema() {
 		if (this.colorAGanar == null || this.validado == true || this.maxMovimientos == 0 ) return false;
 		this.CalculoDeDificultad(this.maxMovimientos, this.tab.exportarFEN(), this.colorAGanar);
-		//Buscar dos reyes:
-		boolean reyB = false;
-		boolean reyN = false;
-		for (int i = 0; i < 8; ++i) {
-			for (int j = 0; j < 8; ++j) {
-				if (this.tab.consultarCasilla(i, j) != null) {
-					if (this.tab.consultarCasilla(i, j).getCharacter().equals("k")) {
-						if (reyN) return false; //Dos reyes negros existentes
-						reyN = true;
-					} else if (this.tab.consultarCasilla(i, j).getCharacter().equals("K")) {
-						if (reyB) return false; //Dos reyes blancos existentes
-						reyB = true;
-					}
-				}
-			}
-		}
-		if (!reyN || !reyB) return false; //Falta algun rey por colocar
-		//Buscar mate:
 		String color = "BLANCAS";
 		if (this.colorAGanar) color = "NEGRAS";
 		boolean valid = this.busquedaExhaustivaMate(color, true, 1);
@@ -229,3 +215,4 @@ public class Problema {
 	}
 	
 }
+

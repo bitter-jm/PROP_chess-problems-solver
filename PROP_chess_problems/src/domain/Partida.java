@@ -5,10 +5,8 @@ import domain.Maquina;
 import domain.Tablero;
 import domain.Problema;
 
-
 /**
  * CLASE PARTIDA, REPRESENTA EL MOMENTO DE JUEGO DEL AJEDREZ
- * @author Carla Garcia
  */
 public class Partida {
 	private Problema prob;
@@ -107,6 +105,7 @@ public class Partida {
 	public Jugador getJugador2() {
 		return this.j2;
 	}
+
 	
 	/**
 	 * Devuelve la situacion actual del juego

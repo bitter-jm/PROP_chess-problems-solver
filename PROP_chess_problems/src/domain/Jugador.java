@@ -1,10 +1,8 @@
 package domain;
 /**
  * CLASE JUGADOR
- * @author Carla GarciaC
- *
  */
-public class Jugador {
+public abstract class Jugador {
 	
 	protected String nombre;
 	/**
@@ -24,9 +22,7 @@ public class Jugador {
 	 * Metodo sobrecargable que diferencia los tipos de jugadores, personas o m�quinas
 	 * @return true del tipo Booleano si el jugador es persona, false en caso contrario
 	 */
-	public boolean esPersona() {
-		return true;
-	}
+	public abstract boolean esPersona();
 
 	
 }

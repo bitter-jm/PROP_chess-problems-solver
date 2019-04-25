@@ -10,7 +10,6 @@ import java.util.Iterator;
 
 /** 
  * Representa un tablero de ajedrez
- * @author Joan Marc Pastor
  */
 public class Tablero {
 	//pawn = "P", knight = "N", bishop = "B", rook = "R", queen = "Q" and king = "K" //BLANCAS

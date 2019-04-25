@@ -2,16 +2,16 @@ package domain;
 
 /**
  * Representa una Maquina
+
  * @author Carla GarciaC
+
  */
-public class Maquina extends Jugador {
+public abstract class Maquina extends Jugador {
 
 	protected String color, colorOpuesto;
 	protected int maxDepth = 4;
 	
-	public Maquina() {
-		super.nombre = "MAQUINA";
-	}
+	public Maquina() {}
 	@Override
 	public boolean esPersona() {
 		return false;
@@ -22,9 +22,7 @@ public class Maquina extends Jugador {
 	 * @param fen String con el estado del tablero en formato FEN
 	 * @return Devuelve el Movimiento mas optimo 
 	 */
-	public Movimiento realizarMovimiento(String fen) {
-		return new Movimiento(1,1,1,1, Ficha.newFicha("p"));
-	}
+	public abstract Movimiento realizarMovimiento(String fen);
 	
 	/**
 	 * Especifica en que lado va a jugar la maquina

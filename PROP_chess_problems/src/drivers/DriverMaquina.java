@@ -1,7 +1,10 @@
 package drivers;
 
 import java.util.Scanner;
+import domain.Jugador;
 import domain.Maquina;
+import domain.M1;
+
 /**
  *
  * @author Carla GarcíaC
@@ -20,7 +23,7 @@ public class DriverMaquina {
 		int a = sc.nextInt();
 		while(a!=3) {
 			if (a==1) {
-				Maquina m = new Maquina();
+				M1 m = new M1();
 				System.out.println("Introduce el color con el que juega(BLANCAS|NEGRAS):");
 				String color = sc.next();
 				m.setColor(color);
@@ -29,7 +32,7 @@ public class DriverMaquina {
 				
 			}
 			if (a == 2) {
-				Maquina m = new Maquina();
+				M1 m = new M1();
 				System.out.println("Profundidad actual: " + m.getDepth());
 				System.out.println("Introduce la nueva profundidad:");
 				int depth = sc.nextInt();

@@ -7,6 +7,7 @@ import domain.Problema;
 
 /**
  * CLASE PARTIDA, REPRESENTA EL MOMENTO DE JUEGO DEL AJEDREZ
+
  * @author Carla GarciaC
  */
 public class Partida {
@@ -244,5 +245,4 @@ public class Partida {
 	public Tablero getTablero() {
 		return this.tab;
 	}
-	
 }

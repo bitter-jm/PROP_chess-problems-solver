@@ -7,7 +7,10 @@ import domain.Jugador;
 
 /**
  * Controlador de Partidas
+<<<<<<< HEAD
  * @author Carla GarciaC
+=======
+>>>>>>> branch 'master' of https://github.com/joan3pastor/PROP_chess-problems.git
  */
 public class CtrlPartida {
 	
@@ -49,6 +52,7 @@ public class CtrlPartida {
 	 * @return true si ha terminado correctamente, false en caso contrario
 	 */
 	public boolean partidaFinalizada() { //DONE
+		if (this.part == null) return true;
 		return this.part.partidaAcabada();
 	}
 	

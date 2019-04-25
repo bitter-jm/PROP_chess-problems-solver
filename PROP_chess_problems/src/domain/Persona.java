@@ -1,8 +1,6 @@
 package domain;
 /**
  * CLASE HEREDADA DE JUGADOR, REPRESENTA UNA PERSONA
- * @author Carla Garcia
- *
  */
 public class Persona extends Jugador {
 	

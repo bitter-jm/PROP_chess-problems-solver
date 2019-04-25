@@ -8,7 +8,6 @@ import java.util.Iterator;
 
 /** 
  * Representa la Maquina 2 (No implementada aun)
- * @author -
  */
 public class M2 extends Maquina {
 	

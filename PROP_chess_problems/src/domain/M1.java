@@ -8,7 +8,6 @@ import java.util.Iterator;
 
 /** 
  * Representa la Maquina 1
- * @author Joan Marc Pastor
  */
 public class M1 extends Maquina {
 	
@@ -29,7 +28,7 @@ public class M1 extends Maquina {
 		Tablero t = new Tablero(fen);
 	    List<Movimiento> movimientosPosibles = t.posiblesMovimientos(this.color);
 	    int mejorValor = -10000;
-	    Movimiento mejorMovimiento = new Movimiento(0,0,0,0,new Ficha());
+	    Movimiento mejorMovimiento = null;
 	    Iterator<Movimiento> iterator = movimientosPosibles.iterator();
 		Movimiento m = null;
 		while(iterator.hasNext()) {

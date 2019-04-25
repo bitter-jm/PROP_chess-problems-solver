@@ -10,9 +10,7 @@ import domain.Persona;
 import domain.Movimiento;
 import domain.Ficha;
 /**
- * 
- * @author Carla GarcíaC
- *
+ *Driver de la clase Partida
  */
 public class DriverPartida {
 
@@ -20,6 +18,7 @@ public class DriverPartida {
 	private static Scanner sc;
 
 	public static void main(String[] args) {
+
 
 		sc = new Scanner(System.in);
 		System.out.println("DRIVER DE PARTIDA");
@@ -81,5 +80,6 @@ public class DriverPartida {
 			System.out.println("Jugador2: " + part.getJugador1().getNombre());
 			System.out.println("Problema: " + prob.getNombre());
 		}
+
 	}
 }

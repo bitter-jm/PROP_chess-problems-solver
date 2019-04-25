@@ -8,6 +8,7 @@ import domain.M1;
 import domain.Maquina;
 import domain.Persona;
 import domain.Movimiento;
+import domain.Ficha;
 /**
  * 
  * @author Carla GarcíaC
@@ -58,15 +59,21 @@ public class DriverPartida {
 		}
 		System.out.println("Comienza el juego");
 		part = new Partida(j1, j2, prob);
-		/*while(part != null) {
+		while(part.mov_uno < part.max_mov) {
+			System.out.println("Introcude las coordenadas iniciales y finales de la ficha a mover");
 			int i, j, ii, jj;
 			i = sc.nextInt();
 			j = sc.nextInt();
 			ii = sc.nextInt();
 			jj = sc.nextInt();
-			Movimiento mov = new Movimiento(i, j, ii, jj, null);
+			String f, color;
+			System.out.println("Introcude el tipo de ficha(letra en minusculas) y el color(BLANCAS|NEGRAS) de la ficha a mover");
+			f = sc.next();
+			color = sc.next();
+			Ficha ficha =Ficha.newFicha(f,color);
+			Movimiento mov = new Movimiento(i, j, ii, jj, ficha);
 			part.jugarPersona(mov);			
-		}*/
+		}
 		if (part.partidaAcabada()) {
 			System.out.println("Numero de veces jugado : " + prob.getVecesJugado());
 			System.out.println("Fecha de creación de partida " + part.getDia() +"/"+ part.getMes()+"/"+ part.getAno());

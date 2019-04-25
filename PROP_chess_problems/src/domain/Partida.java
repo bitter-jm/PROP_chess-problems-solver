@@ -7,7 +7,7 @@ import domain.Problema;
 
 /**
  * CLASE PARTIDA, REPRESENTA EL MOMENTO DE JUEGO DEL AJEDREZ
- * @author Carla Garcia
+ * @author Carla GarciaC
  */
 public class Partida {
 	private Problema prob;
@@ -36,7 +36,7 @@ public class Partida {
 	
 		fecha = Calendar.getInstance();
 	    dia = fecha.get(Calendar.DATE);
-	    mes = fecha.get(Calendar.MONTH);
+	    mes = fecha.get(Calendar.MONTH) + 1;
 	    ano = fecha.get(Calendar.YEAR);
 	    
 	    j1 = jugador1;
@@ -69,25 +69,38 @@ public class Partida {
 	
 	/**
 	 * Se encarga de pasarle el turno al siguiente jugador, actualizar los movimientos de cada uno e incluso
-	 * realizar la siguiente jugada en caso de que el jugador sea M�quina
+	 * realizar la siguiente jugada en caso de que el jugador sea Maquina
 	 */
 	public void jugarSiguienteTurno() { //PENDIENTE
+		String colorS="BLANCAS";
+		String colorSOpuesto="NEGRAS";
+		if (color && !turno) {
+			colorS="NEGRAS";
+			colorSOpuesto="BLANCAS";
+		}
+		else if (!color && turno) {
+			colorS="NEGRAS";
+			colorSOpuesto="BLANCAS";
+		}
+		
 		System.out.print("Siguiente turno de ");
-		if (!turno) System.out.println(j1.getNombre());
-		else System.out.println(j2.getNombre());
+		if (!turno) System.out.println(j1.getNombre() + " ("+colorS+")");
+		else System.out.println(j2.getNombre() + " ("+colorS+")");
 		
 		if (!turno) { // j1
 			++mov_uno;
-			System.out.println("1:" + mov_uno);
 			if (!j1.esPersona()) { // j1 es maquina
-				System.out.println("2:" + mov_uno);
 				Maquina maquina = (Maquina) j1;
 				Movimiento m = maquina.realizarMovimiento(this.tab.exportarFEN());
 				boolean valido = this.tab.registrarMovimientoValidando(m);
 				if (!valido) System.out.println("Error: Maquina (j1) ha intentado hacer un movimiento no valido.");
-				tab.imprimirEstadoTableroConsola();
-				turno = true;
+				else {
+					tab.imprimirEstadoTableroConsola();
+					turno = true;
+				}
+				
 				if (this.mov_uno >= this.max_mov) this.acabarPartida();
+				else if (this.tab.esMateColor(colorSOpuesto)) this.acabarPartida();
 				else this.jugarSiguienteTurno();
 			} else { // j1 es persona				
 				System.out.println("Esperando movimiento de Persona:");
@@ -99,11 +112,16 @@ public class Partida {
 				Movimiento m = maquina.realizarMovimiento(this.tab.exportarFEN());
 				boolean valido = this.tab.registrarMovimientoValidando(m);
 				if (!valido) System.out.println("Error: Maquina (j2) ha intentado hacer un movimiento no valido.");
-				tab.imprimirEstadoTableroConsola();
-				turno = false;
-				this.jugarSiguienteTurno();
+				else {
+					tab.imprimirEstadoTableroConsola();
+					turno = false;
+				}
+				
+				if (this.tab.esMateColor(colorSOpuesto)) this.acabarPartida();
+				else this.jugarSiguienteTurno();
 			} else { // j2 es persona				
 				System.out.println("Esperando movimiento de Persona:");
+	
 			}
 		}
 	}
@@ -114,6 +132,9 @@ public class Partida {
 	 * @return true cuando el movimiento es valido y se ha realizado, false en caso contrario
 	 */
 	public boolean jugarPersona(Movimiento m) { //PENDIENTE
+		String colorS = "NEGRAS";
+		if (color && !turno) colorS="BLANCAS";
+		else if (!color && turno) colorS="BLANCAS";
 		if (!turno && j1.esPersona()) {
 			// Mirar si es del mismo color la pieza movida 
 			boolean valid = tab.registrarMovimientoValidando(m);
@@ -121,10 +142,10 @@ public class Partida {
 				turno = true;
 				tab.imprimirEstadoTableroConsola();
 				if (this.mov_uno >= this.max_mov) this.acabarPartida();
+				else if (this.tab.esMateColor(colorS)) this.acabarPartida();
 				else this.jugarSiguienteTurno();				
 				return true;
 			} else {
-				System.out.println("Error: Persona (j1) ha intentado hacer un movimiento no valido.");
 				return false;
 			}
 		} else if (turno && j2.esPersona()) {
@@ -133,10 +154,10 @@ public class Partida {
 			if (valid) {
 				turno = false;
 				tab.imprimirEstadoTableroConsola();
-				this.jugarSiguienteTurno();
+				if (this.tab.esMateColor(colorS)) this.acabarPartida();
+				else this.jugarSiguienteTurno();
 				return true;
 			} else {
-				System.out.println("Error: Persona (j1) ha intentado hacer un movimiento no valido.");
 				return false;
 			}
 		}
@@ -147,16 +168,21 @@ public class Partida {
 	 * Computa el jugador ganador de la partida cuando esta finaliza
 	 */
 	public void acabarPartida() {
+		
+		
+		String colorS = "BLANCAS";
 		String c;
     	if (!color) c = "NEGRAS";
     	else c = "BLANCAS"; 
 		if(tab.esMateColor(c)) {
 			ganador = j1.getNombre();
-			System.out.println("PARTIDA ACABADA. Gana jugador1: " + ganador);
+			if (color) colorS = "NEGRAS";
+			System.out.println("PARTIDA ACABADA. Gana Jugador1: " + ganador + " ("+colorS+")" );
 		}
-		else  {
+		else {
 			ganador = j2.getNombre();
-			System.out.println("PARTIDA ACABADA. Gana jugador2: " + ganador);
+			if (!color) colorS = "NEGRAS";
+			System.out.println("PARTIDA ACABADA. Gana Jugador2: " + ganador + " ("+colorS+")" );
 		}
 		prob.setVecesJugado(prob.getVecesJugado()+1);
 		

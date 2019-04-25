@@ -2,7 +2,7 @@ package domain;
 
 /**
  * Representa una Maquina
- * @author Joan Marc Pastor
+ * @author Carla GarciaC
  */
 public class Maquina extends Jugador {
 
@@ -44,4 +44,11 @@ public class Maquina extends Jugador {
 		this.maxDepth = depth;
 	}
 
+	/**
+	 * Devuelve la profundidad a la que se evalua el tablero
+	 * 
+	 */
+	public int getDepth() {
+		return this.maxDepth;
+	}
 }

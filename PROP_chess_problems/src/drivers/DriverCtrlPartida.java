@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 /**
  * Driver de la clase CtrlPartida
- * @author Joan Marc Pastor
  */
 public class DriverCtrlPartida {
 	

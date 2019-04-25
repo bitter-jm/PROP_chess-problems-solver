@@ -6,7 +6,6 @@ import domain.Tablero;
 
 /**
  * Driver de la maquina M1
- * @author Joan Marc Pastor
  */
 public class DriverM1 {
 

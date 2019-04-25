@@ -1,8 +1,6 @@
 package stubs;
 /**
- * 
- * @author Carla GarcíaC
- *
+ * Stub de la clase Problema
  */
 public class Problema {
 	public String nombre;

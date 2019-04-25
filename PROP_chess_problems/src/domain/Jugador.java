@@ -1,8 +1,6 @@
 package domain;
 /**
  * CLASE JUGADOR
- * @author Carla GarciaC
- *
  */
 public abstract class Jugador {
 	

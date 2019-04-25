@@ -4,7 +4,6 @@ import domain.Ficha;
 
 /** 
  * Representa un movimiento de una instancia Ficha en unas coordenadas a otras
- * @author Joan Marc Pastor
  */
 public class Movimiento {
 	

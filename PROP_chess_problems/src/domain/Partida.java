@@ -7,7 +7,6 @@ import domain.Problema;
 
 /**
  * CLASE PARTIDA, REPRESENTA EL MOMENTO DE JUEGO DEL AJEDREZ
- * @author Carla Garcia
  */
 public class Partida {
 	private Problema prob;

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 /**
  * Representa una ficha Pawn
- * @author Joan Marc Pastor
  */
 public class FichaPawn extends Ficha {
 	

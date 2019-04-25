@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 /**
  * Representa una ficha King
- * @author Joan Marc Pastor
  */
 public class FichaKing extends Ficha {
 

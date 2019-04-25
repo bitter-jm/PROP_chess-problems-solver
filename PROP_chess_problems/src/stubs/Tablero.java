@@ -1,8 +1,6 @@
 package stubs;
 /**
- * 
- * @author Carla GarcíaC
- *
+ * Stub de la clase Tablero
  */
 public class Tablero {
 

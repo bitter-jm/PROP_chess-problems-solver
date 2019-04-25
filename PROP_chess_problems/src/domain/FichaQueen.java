@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 /**
  * Representa una ficha Queen
- * @author Joan Marc Pastor
  */
 public class FichaQueen extends Ficha {
 

@@ -1,8 +1,7 @@
 package stubs;
+
 /**
- * 
- * @author Carla GarcíaC
- *
+ *Stub de la clase Jugador
  */
 public class Jugador {
 	public String nombre;

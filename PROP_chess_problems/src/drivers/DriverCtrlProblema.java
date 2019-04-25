@@ -2,11 +2,11 @@ package drivers;
 
 import domain.CtrlProblema;
 import domain.Ficha;
-
 /**
  * Driver de la clase CtrlProblema
- * @author Joan Marc Pastor
+ *
  */
+
 public class DriverCtrlProblema {
 	
 	public static void main(String[] args) {

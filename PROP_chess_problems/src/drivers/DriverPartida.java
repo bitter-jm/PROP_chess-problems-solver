@@ -9,9 +9,7 @@ import java.util.*;
 
 
 /**
- * 
- * @author Carla GarcíaC
- *
+ *Driver de la clase Partida
  */
 public class DriverPartida {
 
@@ -41,8 +39,6 @@ public class DriverPartida {
 		System.out.println("Ha terminado la partida : " + part.partidaAcabada());
 
 		//Partida part = new Partida("a", "b", "prob1");
-
-
 	}
 
 }

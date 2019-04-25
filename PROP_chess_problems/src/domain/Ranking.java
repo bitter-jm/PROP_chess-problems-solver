@@ -2,7 +2,9 @@ package domain;
 import java.util.*;
 import domain.LineaRanking;
 
-
+/**
+ * Clase Ranking
+ */
 public class Ranking {
 	private Vector< LineaRanking > ranking;
 	

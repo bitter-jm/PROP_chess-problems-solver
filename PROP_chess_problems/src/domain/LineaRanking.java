@@ -1,5 +1,7 @@
 package domain;
-
+/**
+ * Clase Linea Ranking
+ */
 public class LineaRanking {
 	String name;
 	int puntuacion;

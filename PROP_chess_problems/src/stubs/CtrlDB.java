@@ -1,5 +1,5 @@
 package stubs;
-
+import domain.Problema;
 import domain.Jugador;
 import domain.M1;
 import domain.Persona;
@@ -26,7 +26,9 @@ public class CtrlDB {
 	public void deleteProblema(Problema p) {
 		//Elimina p
 	}
-	
+	public Problema createProblema(String nombre, int numjugadas, String fen, boolean ganar) {
+		return new Problema (nombre, numjugadas, fen, ganar);
+	}
 	public boolean existsProblema(String nombre) {
 		return false;
 	}

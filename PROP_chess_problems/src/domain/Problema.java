@@ -2,7 +2,7 @@ package domain;
 
 import java.util.*;
 import domain.Tablero;
-
+//import domain.Ranking
 public class Problema {
 	
 	enum Dificulty 
@@ -16,6 +16,7 @@ public class Problema {
 	private Integer vecesJugado;
 	private Integer maxMovimientos;
 	private Boolean colorAGanar; //quien ha de ganar empieza y es jugador1
+//  private Ranking rank;
 	
 	public Problema() {
 		nombre = null;
@@ -25,6 +26,7 @@ public class Problema {
 		vecesJugado=0;
 		validado = false;
 		dificultad = null;
+	// rank = new Ranking();
 	}
 	
 	public Problema (String Nombre, Integer maxmov, String FEN, Boolean Color)
@@ -201,6 +203,8 @@ public class Problema {
 	
 	public boolean esValido (String FEN, boolean colorGanar) {
 		Tablero tab = new Tablero(FEN);
+		//ATENTOS A LA SIGUIENTE LINEA!!!
+		if (maxMovimientos == 0) return false;
 		int result = minimax( (maxMovimientos*2)-1, tab, colorGanar);
 		
 		if (!colorGanar && result == 9999999 ) return true;		
@@ -270,201 +274,4 @@ public class Problema {
 			
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-///CARLA
-	
-/*	
-	private boolean esValido (String FEN, boolean colorGanar) {
-		Tablero tab = new Tablero(FEN);
-		int max= (MaxMovimientos*2)-1;
-		int result = minimax(max, tab, colorGanar);
-		if (!this.ColorAGanar && result == 9999999 ) return true;
-		System.out.println("Blancas " + this.ColorAGanar + "\n");
-		else if (this.ColorAGanar && result== -9999999) return true;
-		System.out.println("Negras " + this.ColorAGanar + "\n");
-		return false;		
-	}
-		
-	
-
-	private Integer minimax(Integer MaxMov, Tablero tab, boolean ColorGanar)  
-	{
-		if (MaxMov==0) {
-			if (!ColorAGanar && tab.esMateColor("BLANCAS"))return 9999999;//caso base hemos llegado al numero maximo de movimientos
-			else if (ColorAGanar && tab.esMateColor("NEGRAS")) return -9999999;
-			return evaluarTablero(tab.getCasillas()); //situacion actual en puntuacion 
-			//y si es mate suma muchisimo
-		}
-		
-		else if (!ColorGanar) { //BLANCAS
-			
-			
-			List<Movimiento> movimientosPosibles = tab.posiblesMovimientos("BLANCAS");
-			int mejorMov = -9999999;
-			Iterator<Movimiento> iterator = movimientosPosibles.iterator();
-		
-			Movimiento m = null;
-			while(iterator.hasNext()) {
-				m = (Movimiento) iterator.next();
-				tab.registrarMovimientoSinValidar(m);
-				
-				int valor= minimax( MaxMov-1, tab, true);
-				if (valor > mejorMov) {
-					mejorMov = valor;
-				}
-				tab.deshacer();
-			}
-			return mejorMov;
-		}
-		
-		//se tiene que haber cambiado el caminominimax;
-		else {
-			List<Movimiento> movimientosPosibles = tab.posiblesMovimientos("NEGRAS");
-			int mejorMov = 9999999;
-			Iterator<Movimiento> iterator = movimientosPosibles.iterator();
-			Movimiento m = null;
-			while(iterator.hasNext()) {
-				m = (Movimiento) iterator.next();
-				tab.registrarMovimientoSinValidar(m);
-				int valor= minimax( MaxMov-1, tab, false);
-				if (valor > mejorMov) {
-					mejorMov = valor;
-
-				}
-				tab.deshacer();
-			}
-			return mejorMov;
-		}
-			
-	}
-	
-	*/
-	
-	
-	
-//////////////
-	
-	//funciones del ranking
-	
-
-	/* 
-	 private boolean esValido (String FEN, boolean colorGanar) {
-		Tablero tab = new Tablero(FEN);
-		List<Movimiento> CaminoMinimax.empty();
-		int result = minimax( MaxMovimientos, tab, colorGanar, CaminoMinimax);
-		if (result>=0) {
-			for (int i=0; i<CaminoMinimax.size(); ++i) {
-				tab.registrarMovimientoValidando(CaminoMinimax.get(i));
-			}
-			if (colorGanar) return tab.esMateColor("BLANCAS");
-			return tab.esMateColor("NEGRAS");
-		}		
-	}
-		
-	private Integer minimax(Integer MaxMov, Tablero tab, boolean ColorGanar, List<Movimiento> caminoMinimax)  
-	{
-		if (MaxMov==0) {
-			if ()
-			if (!ColorGanar && tab.esMateColor("BLANCAS"))return 9999999;//caso base hemos llegado al numero maximo de movimientos
-			else if (ColorGanar && tab.esMateColor("NEGRAS")) return -9999999;
-			return evaluarTablero(Tab); //situacion actual en puntuacion 
-			//y si es mate suma muchisimo
-		}
-		
-		if (!ColorGanar) { //BLANCAS
-			List<Movimiento> movimientosPosibles = tab.posiblesMovimientos(ColorGanar);
-			int mejorMov = -99999;
-			for (int i=0;i< movimientosPosibles.length; ++i) {
-				tab.registrarMovimientoSinValidar(m);
-				int valor= minimax( MaxMov-1, tab, !ColorGanar);
-				if (valor > mejorMov) {
-					mejorMov = valor;
-					CaminoMiniMax.pop();
-					CaminoMiniMax.push(m);
-				}
-				tab.deshacer();
-			}
-		}
-		//se tiene que haber cambiado el caminominimax;
-		else {
-			List<Movimiento> movimientosPosibles = tab.posiblesMovimientos(ColorGanar);
-			int mejorMov = 99999;
-			for (int i=0;i< movimientosPosibles.length; ++i) {
-				tab.registrarMovimientoSinValidar(m);
-				int valor= minimax( MaxMov-1, tab, !ColorGanar);
-				if (valor > mejorMov) {
-					mejorMov = valor;
-					CaminoMiniMax.pop();
-					CaminoMiniMax.push(m);
-				}
-				tab.deshacer();
-			}
-			
-		}
-		return mejorMov;	
-	}
-	 
-	*/ 
 }

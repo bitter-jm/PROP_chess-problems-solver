@@ -1,6 +1,8 @@
 package domain;
 
 import stubs.CtrlDB;
+import domain.Ficha;
+import domain.Movimiento;
 
 /**
  * Controlador de Problemas
@@ -18,41 +20,74 @@ public class CtrlProblema {
 		return true;
 	}
 	
-	public void crearProblema(String nombre, Integer NumeroJugadas, String Fen) {
-		//CtrlDB DB = CtrlDB.c
-		//ESCRIBO UN CREATE PROBLEMA EN EL STRUB DE BD?
-				/*Si no valido pedir nuevos DE JUGADAS QUE NO SEA ZERO DE COLOR BLANCAS O NEGRAS 
-				 * SUDA DE MIRAR EL FEN*/
-		
-		
-	}
-	public void validarProblema() {
-		if (this.prob == null) {
-			System.out.println("Introduce el nombre de problema nuevo");
-			/*Scanner sc = 
-			 *nom= scan.getline();
-			 *cargarProblema(nom);
-			 */
+	public void guardarProblema() { //DONE
+		if (this.prob != null) {			
+			DB.saveProblema(this.prob);
 		}
-		String fen =prob.getFEN_Tablero();
-		boolean colorGanar = prob.getColorAGanar();
-		this.prob.esValido(fen, colorGanar);
 	}
 	
-	
-	public void editarProblema(String nombre) {
-		//la implementamos?
-		//CtrlDB DB = CtrlDB.c
-		//ESCRIBO UN CREATE PROBLEMA EN EL STRUB DE BD?
-				/*Si no valido pedir nuevos DE JUGADAS QUE NO SEA ZERO DE COLOR BLANCAS O NEGRAS 
-				 * SUDA DE MIRAR EL FEN*/
-		
-		
-	}
-	public boolean eliminarProblema() {
+	public boolean eliminarProblema() { //DONE
 		if (this.prob.getVecesJugado() > 0) return false;
 		this.DB.deleteProblema(this.prob);
+		this.prob = null;
 		return true;
+	}
+	
+	public void crearProblema() { //DONE
+		this.prob = new Problema();	
+	}
+	
+	public boolean validarProblema() { //DONE
+		if (this.prob == null) return false;
+		return this.prob.validarProblema();
+	}
+	
+	public void anadirFicha(Ficha f, int i, int j) { //DONE
+		if (this.prob != null) {
+			this.prob.anadirFicha(f, i, j);
+		}
+	}
+	
+	public void retirarFicha(int i, int j) { //DONE
+		if (this.prob != null) {
+			this.prob.retirarFicha(i, j);
+		}
+	}
+	
+	public void moverFicha(Movimiento mov) { //DONE
+		if (this.prob != null) {			
+			this.prob.moverFicha(mov);
+		}
+	}
+	
+	public boolean setMaxMovimientos(int maxMovimientos) { //DONE
+		if (this.prob == null || maxMovimientos <= 0) return false;
+		this.prob.setMaxMovimientos(maxMovimientos);
+		return true;
+	}
+	
+	public boolean setColorAGanar(boolean color) { //DONE
+		if (this.prob == null) return false;
+		this.prob.setColorAGanar(color);;
+		return true;
+	}
+	
+	public boolean setNombre(String nombre) { //DONE
+		if (this.prob != null && DB.existsProblema(nombre)) return false;
+		this.prob.setNombre(nombre);
+		return true;		
+	}
+	
+	public void setFEN(String fen) { //DONE
+		if (this.prob != null) {
+			this.prob.setFEN_Tablero(fen);
+		}
+	}
+	
+	public void imprimirEstadoProblemaConsola() {
+		if (this.prob != null) {
+			this.prob.imprimirEstadoProblemaConsola();
+		}
 	}
 	
 	/**
@@ -62,7 +97,7 @@ public class CtrlProblema {
 	public static CtrlProblema getInstance() { 
         if (single_instance == null) 
             single_instance = new CtrlProblema(); 
-        return single_instance; 
+        return single_instance;
     }
 	
 }

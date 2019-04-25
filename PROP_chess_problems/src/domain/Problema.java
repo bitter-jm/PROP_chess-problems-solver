@@ -2,6 +2,8 @@ package domain;
 
 import java.util.*;
 import domain.Tablero;
+import domain.Ficha;
+import domain.Movimiento;
 
 public class Problema {
 	
@@ -62,8 +64,8 @@ public class Problema {
 		return colorAGanar;
 	}
 	
-	public void setNombre(String Nombre) {
-		nombre = Nombre;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	public void setFEN_Tablero(String FEN_Tablero) {
 		tab = new Tablero(FEN_Tablero);
@@ -78,7 +80,18 @@ public class Problema {
 	public void setColorAGanar(Boolean colorAGanar) {
 		this.colorAGanar = colorAGanar;
 	}
+	
+	public void anadirFicha(Ficha f, int i, int j) {
+		this.tab.anadirFicha(f, i, j);
+	}
 
+	public void retirarFicha(int i, int j) {
+		this.tab.quitarFicha(i, j);
+	}
+	
+	public void moverFicha(Movimiento mov) {
+		this.tab.registrarMovimientoSinValidar(mov);
+	}
 	
 	
 	//PARA CALCULAR LA DIFICULTAD DE UN PROBLEMA:
@@ -133,7 +146,12 @@ public class Problema {
 		return 0;
 	}
 	
+	/**
+	 * Analiza si el problema es valido
+	 * @return True si el problema es valido. False en caso contrario
+	 */
 	public boolean validarProblema() {
+		if (this.colorAGanar == null || this.validado == true || this.maxMovimientos == 0 ) return false;
 		this.CalculoDeDificultad(this.maxMovimientos, this.tab.exportarFEN(), this.colorAGanar);
 		String color = "BLANCAS";
 		if (this.colorAGanar) color = "NEGRAS";
@@ -142,6 +160,13 @@ public class Problema {
 		return valid;
 	}
 	
+	/**
+	 * Funcion recursiva de fuerza bruta para buscar si se puede realizar mate en menos de movsJ1 movimientos
+	 * @param color color a empezar a analizar. false -> Blancas, true -> Negras
+	 * @param aGanar True si el jugador <em>color</em> es quien intenta hacer mate. False en caso contrario
+	 * @param movsJ1 Movimientos restantes del jugador 1 para intentar hacer mate
+	 * @return True si el jugador 1 puede hacer mate asegurado. False en caso contrario
+	 */
 	private boolean busquedaExhaustivaMate(String color, boolean aGanar, int movsJ1) {
 		String colorOpuesto = "BLANCAS";
 		if (color.equals("BLANCAS")) colorOpuesto = "NEGRAS";
@@ -176,6 +201,13 @@ public class Problema {
 			}
 			return true;
 		}
+	}
+	
+	/**
+	 * Imprime el estado del tablero por consola
+	 */
+	public void imprimirEstadoProblemaConsola() {
+		this.tab.imprimirEstadoTableroConsola();
 	}
 	
 }

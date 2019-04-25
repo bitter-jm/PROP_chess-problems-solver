@@ -5,13 +5,18 @@ import domain.M1;
 import domain.Persona;
 import domain.Problema;
 
+/**
+ * Stub del controlador de datos
+ * @author Joan Pastor
+ *
+ */
 public class CtrlDB {
 	
 	private static CtrlDB single_instance = null;
 
 	public Jugador getJugador(String nombre) {
 		if (nombre.equals("MAQUINA1")) return new M1();
-		return new Persona(nombre, "abcd");
+		return new Persona(nombre, "1234");
 	}
 	
 	public Problema getProblema(String nombre) {
@@ -21,10 +26,12 @@ public class CtrlDB {
 	
 	public void saveProblema(Problema p) {
 		// Save or update p
+		System.out.println("Problem has been saved successfully");
 	}
 	
 	public void deleteProblema(Problema p) {
 		//Elimina p
+		System.out.println("Problem has been deleted successfully");
 	}
 	
 	public boolean existsProblema(String nombre) {

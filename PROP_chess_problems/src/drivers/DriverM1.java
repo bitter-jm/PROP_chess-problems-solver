@@ -4,6 +4,10 @@ import domain.M1;
 import domain.Movimiento;
 import domain.Tablero;
 
+/**
+ * Driver de la maquina M1
+ * @author Joan Marc Pastor
+ */
 public class DriverM1 {
 
 	public static void main(String[] args) {

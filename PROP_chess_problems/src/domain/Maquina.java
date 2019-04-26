@@ -8,6 +8,7 @@ public abstract class Maquina extends Jugador {
 	protected String color, colorOpuesto;
 	protected int maxDepth = 4;
 	
+	public Maquina() {}
 	@Override
 	public boolean esPersona() {
 		return false;
@@ -38,4 +39,11 @@ public abstract class Maquina extends Jugador {
 		this.maxDepth = depth;
 	}
 
+	/**
+	 * Devuelve la profundidad a la que se evalua el tablero
+	 * 
+	 */
+	public int getDepth() {
+		return this.maxDepth;
+	}
 }

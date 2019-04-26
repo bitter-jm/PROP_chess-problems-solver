@@ -5,6 +5,8 @@ import domain.Ficha;
 import domain.CtrlPartida;
 import java.util.*;
 
+import java.util.Scanner;
+
 public class DriverCtrlPartida {
 	
 	private static Movimiento leerMovimientoDeConsola(Scanner sc) {

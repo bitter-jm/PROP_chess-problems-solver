@@ -1,9 +1,7 @@
 package drivers;
 import java.util.Scanner;
 
-/**
- * Driver de la clase Ranking
- */
+import domain.Ranking;
 public class DriverRanking {
 
 	public static void main(String[] args) {

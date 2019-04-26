@@ -1,6 +1,7 @@
 package domain;
+
 /**
- * CLASE JUGADOR
+ * Representa un Jugador
  */
 public abstract class Jugador {
 	
@@ -22,7 +23,7 @@ public abstract class Jugador {
 	}
 	
 	/**
-	 * Metodo sobrecargable que diferencia los tipos de jugadores, personas o m�quinas
+	 * Metodo sobrecargable que diferencia los tipos de jugadores, personas o maquinas
 	 * @return true del tipo Booleano si el jugador es persona, false en caso contrario
 	 */
 	public abstract boolean esPersona();

@@ -5,9 +5,6 @@ import domain.Tablero;
 import domain.Ficha;
 import domain.Movimiento;
 
-/**
- * Clase Problema
- */
 public class Problema {
 	
 	enum Dificulty { Easy, Medium, Hard; }
@@ -19,7 +16,6 @@ public class Problema {
 	private Integer vecesJugado;
 	private Integer maxMovimientos;
 	private Boolean colorAGanar; //quien ha de ganar empieza y es jugador1
-	
 	
 	public Problema() {
 		nombre = null;
@@ -233,4 +229,3 @@ public class Problema {
 	}
 	
 }
-

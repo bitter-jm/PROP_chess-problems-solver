@@ -30,7 +30,7 @@ public class CtrlPartida {
 	/**
 	 * Detecta una jugada por parte de la persona y actualiza el estado de la partida
 	 * @param m del tipo Movimiento representa la jugada de la persona 
-	 * @return true si el movimiento era v�lido y se ha realizado con exito, false en caso contrario
+	 * @return true si el movimiento era valido y se ha realizado con exito, false en caso contrario
 	 */
 	public boolean personaRealizaMovimiento(Movimiento m) {
 		return this.part.jugarPersona(m);

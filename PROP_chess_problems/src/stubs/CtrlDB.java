@@ -9,7 +9,6 @@ import domain.Persona;
 
 /**
  * Stub del controlador de datos
- * @author Joan Marc Pastor
  */
 public class CtrlDB {
 	

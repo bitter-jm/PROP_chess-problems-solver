@@ -1,6 +1,6 @@
 package domain;
 /**
- * CLASE HEREDADA DE JUGADOR, REPRESENTA UNA PERSONA
+ * Clase heredada de Jugador, representa una Persona
  */
 public class Persona extends Jugador {
 	

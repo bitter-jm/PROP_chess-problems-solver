@@ -1,8 +1,10 @@
 package drivers;
 
+import java.util.Scanner;
+
 import domain.M1;
-import domain.Movimiento;
 import domain.Tablero;
+import domain.Movimiento;
 
 /**
  * Driver de la maquina M1
@@ -11,6 +13,85 @@ public class DriverM1 {
 
 	public static void main(String[] args) {
 		
+		
+		M1 m1 = new M1();
+
+		Scanner sc = new Scanner(System.in);
+		boolean exit = false;
+		
+		while (!exit) {			
+			System.out.println("Introduce un numero segun la funcion a probar:");
+			System.out.println(" -1- Realizar movimiento");
+			System.out.println(" -2- EXIT");
+			System.out.println("");
+			
+			int instr = sc.nextInt();
+			
+			switch (instr) {
+			case 1:
+				System.out.println("Especifica el estado del tablero segun anotacion FEN (sin espacios):");
+				String fen = sc.next();
+				Tablero t = new Tablero(fen);
+				t.imprimirEstadoTableroConsola();
+				System.out.println("Indica en que equipo juega M1 (B/N):");
+				String c = sc.next();
+				if (c.equals("B")) m1.setColor("BLANCAS");
+				else m1.setColor("NEGRAS");
+				System.out.println("Indica hasta que profundidad quieres analizar (recomendado 4):");
+				m1.setDepth(sc.nextInt());
+				Movimiento m = m1.realizarMovimiento(fen);
+				System.out.println("M1 va a mover: " + m.ficha.getCharacter() + " - ("+m.inicioI+","+m.inicioJ+") --> ("+m.finalI+","+m.finalJ+")");
+				break;
+			case 2:
+				exit = true;
+				break;
+			default:
+				System.out.println("Numero no valido");
+			}
+			System.out.println("");
+		}
+		
+		sc.close();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		/**
 		//Problemas Jaque en 2: http://www.ajedrezdeataque.com/17%20Aprendizaje/2/Bloque1/Bloque1.htm
 
 		//INICIALIZAR MAQUINAS
@@ -47,6 +128,6 @@ public class DriverM1 {
 		System.out.println("Es mate? " + t.esMateColor("NEGRAS") + "\n");
 		
 		System.out.println("Prueba terminada.");
-		
+		*/
 	}
 }

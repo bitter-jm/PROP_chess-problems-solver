@@ -42,9 +42,6 @@ public class CtrlDB {
 		//Elimina p
 		System.out.println("Problem has been deleted successfully");
 	}
-	public Problema createProblema(String nombre, int numjugadas, String fen, boolean ganar) {
-		return new Problema (nombre, numjugadas, fen, ganar, false);
-	}
 	public boolean existsProblema(String nombre) {
 		return false;
 	}

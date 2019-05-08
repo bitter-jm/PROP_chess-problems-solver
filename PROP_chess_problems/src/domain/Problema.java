@@ -5,6 +5,9 @@ import domain.Tablero;
 import domain.Ficha;
 import domain.Movimiento;
 
+/**
+ * Clase Problema
+ */
 public class Problema {
 	
 	enum Dificulty { Easy, Medium, Hard; }
@@ -17,6 +20,9 @@ public class Problema {
 	private Integer maxMovimientos;
 	private Boolean colorAGanar; //quien ha de ganar empieza y es jugador1
 	
+	/**
+	 * Creadora vacia de problema
+	 */
 	public Problema() {
 		nombre = null;
 		maxMovimientos = 0;
@@ -26,8 +32,16 @@ public class Problema {
 		validado = false;
 		dificultad = null;
 	}
-	
-	public Problema (String nombre, Integer maxmov, String FEN, Boolean Color, Boolean valido)
+
+	/**
+	 *Creadora de problema inicializada
+	 * @param nombre inicializa el atributo nombre
+	 * @param maxmov inicializa el atributo maxMovimientos
+	 * @param FEN inicializa el atributo tab
+	 * @param Color inicializa el atributo colorAGanar
+	 * @param valid inicializa el atributo validado
+	 */
+	public Problema (String nombre, Integer maxmov, String FEN, Boolean Color,Boolean valid)
 	{
 		this.nombre = nombre;
 		maxMovimientos = maxmov;
@@ -36,7 +50,7 @@ public class Problema {
 		
 		this.vecesJugado=0;
 		
-		validado = valido;
+		validado = valid;
 		
 		dificultad = null;
 		if (validado) CalculoDeDificultad(maxmov, FEN, Color);
@@ -45,21 +59,27 @@ public class Problema {
 	public String getNombre() {
 		return nombre;
 	}
+	
 	public String getFEN_Tablero() {
 		return tab.exportarFEN();
 	}
+
 	public Dificulty getDificultad() {
 		return dificultad;
 	}
+
 	public Boolean getValidado() {
 		return validado;
 	}
+
 	public Integer getVecesJugado() {
 		return vecesJugado;
 	}
+
 	public Integer getMaxMovimientos() {
 		return maxMovimientos;
 	}
+
 	public Boolean getColorAGanar() {
 		return colorAGanar;
 	}
@@ -77,6 +97,7 @@ public class Problema {
 	public void setMaxMovimientos(Integer maxMovimientos) {
 		this.maxMovimientos = maxMovimientos;
 	}
+
 	public void setColorAGanar(Boolean colorAGanar) {
 		this.colorAGanar = colorAGanar;
 	}
@@ -98,12 +119,20 @@ public class Problema {
 	//Miramos el numero de piezas que hay en el tablero inicial 
 	//Es decir, proporcion de piezas mias con las enemigas 
 	//el valor que tienen estas y numero de jugadas que hay
+	
+	/**
+	 * metodo privado que calcula la dificultad de una partida segun el numero de movimientos que tenga
+	 * quien empieza i la situacion inicial del tablero
+	 * @param MaxMov indica el numero de movimientos que tiene
+	 * @param FEN indica la situacion inicial del tablero
+	 * @param Color indica el color que ha de ganar
+	 */
+	
 	private void CalculoDeDificultad (Integer MaxMov, String FEN, Boolean Color ) {
 		int Situacion = AnalizeBoard (FEN);
-		//NO HAY MOVIMIENTOS EXTRA
 		int SituacionMov=0; //3 o 4 jugadas Medio
 		if (MaxMov==1 || MaxMov==2 ) SituacionMov=130;//facil
-		else if (MaxMov>4 ) SituacionMov=-130; //dificil*/
+		else if (MaxMov>3 ) SituacionMov=-130; //dificil*/
 		
 		if (!Color) {//BLANCAS
 			Situacion += SituacionMov;
@@ -119,7 +148,11 @@ public class Problema {
 		}
 		
 	}
-	
+	/**
+	 * metodo privado que analiza el valor de un tablero inicializado
+	 * @param fEN es el string que inicializa el tablero
+	 * @return
+	 */
 	private Integer AnalizeBoard(String fEN) {
 		int count=0;		
 		for (int i=0; i<fEN.length(); ++i) {
@@ -129,7 +162,11 @@ public class Problema {
 		}
 		return count;
 	}
-
+/**
+ *  metodo privado que devuelve el valor de cada figura
+ * @param letra indica que figura es
+ * @return
+ */
 	private int FigureEvaluation(char letra) {
 		if (letra=='P') return 10;
 		if (letra=='p') return -10;
@@ -153,23 +190,23 @@ public class Problema {
 	public boolean validarProblema() {
 		if (this.colorAGanar == null || this.validado == true || this.maxMovimientos == 0 ) return false;
 		this.CalculoDeDificultad(this.maxMovimientos, this.tab.exportarFEN(), this.colorAGanar);
-		//Buscar dos reyes:
-		boolean reyB = false;
-		boolean reyN = false;
-		for (int i = 0; i < 8; ++i) {
-			for (int j = 0; j < 8; ++j) {
-				if (this.tab.consultarCasilla(i, j) != null) {
-					if (this.tab.consultarCasilla(i, j).getCharacter().equals("k")) {
-						if (reyN) return false; //Dos reyes negros existentes
-						reyN = true;
-					} else if (this.tab.consultarCasilla(i, j).getCharacter().equals("K")) {
-						if (reyB) return false; //Dos reyes blancos existentes
-						reyB = true;
-					}
-				}
-			}
-		}
-		if (!reyN || !reyB) return false; //Falta algun rey por colocar
+		//Buscar dos reyes:		
+		boolean reyB = false;		
+		boolean reyN = false;		
+		for (int i = 0; i < 8; ++i) {		
+			for (int j = 0; j < 8; ++j) {		
+				if (this.tab.consultarCasilla(i, j) != null) {		
+					if (this.tab.consultarCasilla(i, j).getCharacter().equals("k")) {		
+						if (reyN) return false; //Dos reyes negros existentes		
+						reyN = true;		
+					} else if (this.tab.consultarCasilla(i, j).getCharacter().equals("K")) {		
+						if (reyB) return false; //Dos reyes blancos existentes		
+						reyB = true;		
+					}		
+				}		
+			}		
+		}		
+		if (!reyN || !reyB) return false; //Falta algun rey por colocar		
 		//Buscar mate:
 		String color = "BLANCAS";
 		if (this.colorAGanar) color = "NEGRAS";
@@ -229,3 +266,4 @@ public class Problema {
 	}
 	
 }
+

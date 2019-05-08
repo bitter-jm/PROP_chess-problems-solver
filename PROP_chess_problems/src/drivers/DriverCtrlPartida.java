@@ -30,7 +30,7 @@ public class DriverCtrlPartida {
 			if (Ctrlp.partidaFinalizada()) System.out.println(" -1- Empezar Partida");
 			if (!Ctrlp.partidaFinalizada()) System.out.println(" -2- Realizar Movimiento (Persona)");
 			if (!Ctrlp.partidaFinalizada()) System.out.println(" -3- Cancelar Partida");
-			System.out.println(" -4- Consultar si partida Finalizada");
+			System.out.println(" -4- Consultar si Partida Finalizada");
 			System.out.println(" -5- EXIT");
 			System.out.println("");
 			

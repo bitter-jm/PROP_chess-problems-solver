@@ -23,7 +23,7 @@ public class CtrlPartida {
 		CtrlDB ctrlDB = CtrlDB.getInstance();
 		Jugador j1o = ctrlDB.getJugador(j1);
 		Jugador j2o = ctrlDB.getJugador(j2);
-		Problema p = ctrlDB.getProblema("problema1");
+		Problema p = ctrlDB.getProblema(problema);
 		this.part = new Partida(j1o, j2o, p);
 	}
 	

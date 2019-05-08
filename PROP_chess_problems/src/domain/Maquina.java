@@ -8,7 +8,10 @@ public abstract class Maquina extends Jugador {
 	protected String color, colorOpuesto;
 	protected int maxDepth = 4;
 	
-	public Maquina() {}
+	public Maquina() {
+		super.nombre ="MAQUINA";
+	}
+	
 	@Override
 	public boolean esPersona() {
 		return false;

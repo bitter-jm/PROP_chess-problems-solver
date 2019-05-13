@@ -1,9 +1,11 @@
 package domain;
+
 import java.util.Calendar;
 import domain.Jugador;
 import domain.Maquina;
 import domain.Tablero;
 import domain.Problema;
+import domain.CtrlPartida;
 
 /**
  * Clase partida. Representa el momento del juego
@@ -24,6 +26,7 @@ public class Partida {
 	public int mov_uno = 0;
 	public int mov_dos = 0;
 	public String ganador;
+	private CtrlPartida ctrlP = CtrlPartida.getInstance();
 	
 	/**
 	 * Crea un objeto Partida y lo inicializa con los jugadores y las caracteristicas del problema participantes en el juego
@@ -62,6 +65,9 @@ public class Partida {
 	    
 	    System.out.println("Estado inicial tablero: ");
 	    tab.imprimirEstadoTableroConsola();
+	    String c = "NECRAS";
+	    if (this.color) c = "BLANCAS";
+	    ctrlP.tableroModificado(this.tab.exportarFEN(), this.j1.getNombre(), c);
 	    
 	    this.jugarSiguienteTurno();
 	}
@@ -94,8 +100,9 @@ public class Partida {
 				boolean valido = this.tab.registrarMovimientoValidando(m);
 				if (!valido) System.out.println("Error: Maquina (j1) ha intentado hacer un movimiento no valido.");
 				else {
-					tab.imprimirEstadoTableroConsola();
 					turno = true;
+					tab.imprimirEstadoTableroConsola(); 	    
+				    ctrlP.tableroModificado(this.tab.exportarFEN(), this.j2.getNombre(), colorS);	
 				}
 				
 				if (this.mov_uno >= this.max_mov) this.acabarPartida();
@@ -112,8 +119,9 @@ public class Partida {
 				boolean valido = this.tab.registrarMovimientoValidando(m);
 				if (!valido) System.out.println("Error: Maquina (j2) ha intentado hacer un movimiento no valido.");
 				else {
-					tab.imprimirEstadoTableroConsola();
 					turno = false;
+					tab.imprimirEstadoTableroConsola();
+					ctrlP.tableroModificado(this.tab.exportarFEN(), this.j1.getNombre(), colorS);
 				}
 				
 				if (this.tab.esMateColor(colorSOpuesto)) this.acabarPartida();
@@ -130,16 +138,24 @@ public class Partida {
 	 * @param m recibe el movimiento que quiere realizar el jugador en esta jugada
 	 * @return true cuando el movimiento es valido y se ha realizado, false en caso contrario
 	 */
-	public boolean jugarPersona(Movimiento m) { //PENDIENTE
+	public boolean jugarPersona(Movimiento m) {
 		String colorS = "NEGRAS";
-		if (color && !turno) colorS="BLANCAS";
-		else if (!color && turno) colorS="BLANCAS";
+		String colorOpuesto = "BLANCAS";
+		if (color && !turno) {
+			colorS="BLANCAS";
+			colorOpuesto = "NEGEAS";
+		}
+		else if (!color && turno) {
+			colorS="BLANCAS";
+			colorOpuesto = "NEGEAS";
+		}
 		if (!turno && j1.esPersona()) {
 			// Mirar si es del mismo color la pieza movida 
 			boolean valid = tab.registrarMovimientoValidando(m);
 			if (valid) {
 				turno = true;
-				tab.imprimirEstadoTableroConsola();
+				tab.imprimirEstadoTableroConsola(); 
+				ctrlP.tableroModificado(this.tab.exportarFEN(), this.j2.getNombre(), colorOpuesto);
 				if (this.mov_uno >= this.max_mov) this.acabarPartida();
 				else if (this.tab.esMateColor(colorS)) this.acabarPartida();
 				else this.jugarSiguienteTurno();				
@@ -152,7 +168,8 @@ public class Partida {
 			boolean valid = tab.registrarMovimientoValidando(m);
 			if (valid) {
 				turno = false;
-				tab.imprimirEstadoTableroConsola();
+				tab.imprimirEstadoTableroConsola(); 
+				ctrlP.tableroModificado(this.tab.exportarFEN(), this.j1.getNombre(), colorOpuesto);
 				if (this.tab.esMateColor(colorS)) this.acabarPartida();
 				else this.jugarSiguienteTurno();
 				return true;
@@ -166,7 +183,7 @@ public class Partida {
 	/**
 	 * Computa el jugador ganador de la partida cuando esta finaliza
 	 */
-	public void acabarPartida() {	
+	public void acabarPartida() {	// TODO: Anadir ranking
 		String colorS = "BLANCAS";
 		String c;
     	if (!color) c = "NEGRAS";
@@ -174,14 +191,15 @@ public class Partida {
 		if(tab.esMateColor(c)) {
 			ganador = j1.getNombre();
 			if (color) colorS = "NEGRAS";
+			ctrlP.partidaFinaliza(this.j1.getNombre(), colorS, 1, this.prob.getNombre());
 			System.out.println("PARTIDA ACABADA. Gana Jugador1: " + ganador + " ("+colorS+")" );
 		}
 		else {
 			ganador = j2.getNombre();
 			if (!color) colorS = "NEGRAS";
+			ctrlP.partidaFinaliza(this.j2.getNombre(), colorS, 1, this.prob.getNombre());
 			System.out.println("PARTIDA ACABADA. Gana Jugador2: " + ganador + " ("+colorS+")" );
 		}
-		prob.setVecesJugado(prob.getVecesJugado()+1);	
 	}
 	
 	/**

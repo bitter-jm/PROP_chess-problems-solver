@@ -43,7 +43,8 @@ public class CtrlDBProblema {
 				// Parsing to JSON
 				if (content.isEmpty()) {
 					this.problemas = new JSONArray();
-					// TODO: Añadir los problemas de DEFAULT
+					// Insertar problemas DEFAULT
+					this.createProblema("Problema1\n2\n8/8/8/8/3p4/5K2/3kNN2/2R5\nfalse\ntrue\n0\nDEFAULT");
 					this.guardarFichero();
 				}
 				else {
@@ -54,7 +55,8 @@ public class CtrlDBProblema {
 			} else { // FICHERO NO EXISTE
 				this.fichero.createNewFile();
 		        this.problemas = new JSONArray();
-		        // TODO: Añadir los problemas de DEFAULT
+		        // Insertar problemas DEFAULT
+		        this.createProblema("Problema1\n2\n8/8/8/8/3p4/5K2/3kNN2/2R5\nfalse\ntrue\n0\nDEFAULT");
 		        this.guardarFichero();
 			}
 			
@@ -149,6 +151,22 @@ public class CtrlDBProblema {
 			}
 		}
 		return probs;
+	}
+	
+	public void incrementarVecesJugado(String nombreProblema) {
+		for (int i = 0; i < this.problemas.size(); ++i) {
+			JSONObject problema = (JSONObject) this.problemas.get(i);
+			if (problema.get("nombre").equals(nombreProblema)) {
+				// Increase & save
+				Long valor;
+				if (problema.get("vecesJugado") instanceof Long) valor = (Long) problema.get("vecesJugado");
+				else valor = new Long((int) problema.get("vecesJugado"));
+				valor++;
+				problema.remove("vecesJugado");
+				problema.put("vecesJugado", valor);
+				this.guardarFichero();
+			}
+		}
 	}
 	
 }

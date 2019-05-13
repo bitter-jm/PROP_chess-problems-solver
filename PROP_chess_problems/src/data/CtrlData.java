@@ -65,6 +65,10 @@ public class CtrlData {
 		return dbPr.getProblema(nombreProblema);
 	}
 	
+	public void incrementarVecesJugado(String nombreProblema) {
+		dbPr.incrementarVecesJugado(nombreProblema);
+	}
+	
    // TODO Rankings
 	
 }

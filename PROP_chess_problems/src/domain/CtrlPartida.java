@@ -52,6 +52,20 @@ public class CtrlPartida {
 		return this.part.partidaAcabada();
 	}
 	
+	public void tableroModificado(String FEN, String turnoDe, String colorDeQuienHaMovido) { //TODO
+		// Informa a presentación del cambio de estado en el tablero de partida
+		String colorSiguienteTurno = "BLANCAS";
+		if (colorDeQuienHaMovido.equals("BLANCAS")) colorSiguienteTurno = "NEGEAS";
+		System.out.println("Informar estado tablero a presentacion... Siguiente turno de: " + turnoDe + " ("+colorSiguienteTurno+")");
+	}
+	
+	public void partidaFinaliza(String nombreGanador, String colorGanador, int puntuacion, String nombreProblema) { // TODO
+		// Informa a presentación sobre la finalización y ganadores
+		// Incrementa vecesJugado del problema
+		// Crea linea nueva en Ranking del problema
+		System.out.println("Informar a presentacion de partida acabada. Gana: "+nombreGanador+" ("+colorGanador+")");
+	}
+	
 	/**
 	 * Obtiene la instacia del singleton CtrlPartida
 	 * @return Objeto CtrlPartida
@@ -61,5 +75,6 @@ public class CtrlPartida {
             single_instance = new CtrlPartida(); 
         return single_instance; 
     }
+
 	
 }

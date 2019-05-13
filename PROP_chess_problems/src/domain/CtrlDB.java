@@ -76,4 +76,8 @@ public class CtrlDB {
 		return ctrlData.existsProblema(p.getNombre());
 	}
 	
+	public void incrementarVecesJugado(String nombreProblema) {
+		ctrlData.incrementarVecesJugado(nombreProblema);
+	}
+	
 }

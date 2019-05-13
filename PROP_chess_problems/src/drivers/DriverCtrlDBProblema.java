@@ -8,7 +8,7 @@ public class DriverCtrlDBProblema {
 	public static void main(String[] args) {
 
 		CtrlDBProblema dbP = CtrlDBProblema.getInstance();
-		//dbP.createProblema("P1\n2\nfenDelProblema...\nfalse\ntrue\n0\nEvaristo");
+		//dbP.createProblema("P1\n2\n8/8/8/8/3p4/5K2/3kNN2/2R5\nfalse\ntrue\n0\nEvaristo");
 		System.out.println(dbP.existsProblema("P1"));
 		System.out.println(dbP.existsProblema("P2"));
 		System.out.println(dbP.getProblema("P1"));
@@ -17,6 +17,9 @@ public class DriverCtrlDBProblema {
 		List<String> problemasJ = dbP.getProblemasJugables();
 		System.out.println("# de problemas jugables: " + problemasJ.size());
 		//dbP.deleteProblema("P1");
+		dbP.incrementarVecesJugado("P1");
+		System.out.println(dbP.getProblema("P1"));
+		
 	}
 
 }

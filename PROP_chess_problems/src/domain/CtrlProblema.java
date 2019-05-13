@@ -157,6 +157,13 @@ public class CtrlProblema {
 		}
 	}
 	
+	public String getFEN() { 
+		if (this.prob != null) {
+			return this.prob.getFEN_Tablero();
+		}
+		return null;
+	}
+	
 	/**
 	 * Imprime el estado del tablero del problema por consola (Para debugar)
 	 */
@@ -165,6 +172,8 @@ public class CtrlProblema {
 			this.prob.imprimirEstadoProblemaConsola();
 		}
 	}
+	
+	//TODO: public String getFEN() {}
 	
 	/**
 	 * Obtiene la instacia del singleton CtrlProblema

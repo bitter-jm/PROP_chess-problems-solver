@@ -42,7 +42,7 @@ public class DriverProblema {
 						+ "false para blancas.\n" + "true para negras.\n");
 				boolean color = sc.nextBoolean();
 				
-				Problema prob = new Problema(nom,numero,fen,color,false);
+				Problema prob = new Problema(nom,numero,fen,color,false, 0);
 				System.out.println("El problema ha sido creado\n");
 				System.out.println("El nombre del problema es : " +prob.getNombre()+"\n");
 				System.out.println("El numero de jugadas del problema es :" + prob.getMaxMovimientos()+"\n");
@@ -65,7 +65,7 @@ public class DriverProblema {
 						+ "false para blancas.\n" + "true para negras.\n");
 				boolean color = sc.nextBoolean();
 				
-				Problema prob = new Problema(nom,numero,fen,color,false);
+				Problema prob = new Problema(nom,numero,fen,color,false, 0);
 				System.out.println("El problema es valido: " +prob.validarProblema()+"\n");
 			
 			}
@@ -84,7 +84,7 @@ public class DriverProblema {
 						+ "false para blancas.\n" + "true para negras.\n");
 				boolean color = sc.nextBoolean();
 				
-				Problema prob = new Problema(nom,numero,fen,color,false);
+				Problema prob = new Problema(nom,numero,fen,color,false, 0);
 				
 				prob.validarProblema();
 				System.out.println("La dificultad es " +prob.getDificultad()+"\n");				
@@ -103,7 +103,7 @@ public class DriverProblema {
 				System.out.println("Introduce de que color es el primer jugador: "
 						+ "false para blancas.\n" + "true para negras.\n");
 				boolean color = sc.nextBoolean();				
-				Problema prob = new Problema(nom,numero,fen,color,false);
+				Problema prob = new Problema(nom,numero,fen,color,false, 0);
 				
 				System.out.println("Imprimimos el tablero\n");
 				prob.imprimirEstadoProblemaConsola();
@@ -122,7 +122,7 @@ public class DriverProblema {
 				System.out.println("Introduce de que color es el primer jugador: "
 						+ "false para blancas.\n" + "true para negras.\n");
 				boolean color = sc.nextBoolean();				
-				Problema prob = new Problema(nom,numero,fen,color,false);
+				Problema prob = new Problema(nom,numero,fen,color,false, 0);
 				prob.imprimirEstadoProblemaConsola();
 				
 				System.out.println("Que color de ficha quieres anadir:\n BLANCAS o NEGRAS ");
@@ -153,7 +153,7 @@ public class DriverProblema {
 				System.out.println("Introduce de que color es el primer jugador: "
 						+ "false para blancas.\n" + "true para negras.\n");
 				boolean color = sc.nextBoolean();				
-				Problema prob = new Problema(nom,numero,fen,color,false);
+				Problema prob = new Problema(nom,numero,fen,color,false, 0);
 				prob.imprimirEstadoProblemaConsola();
 				
 				System.out.println("Introduce las coordenadas de la ficha a eliminar.\n");

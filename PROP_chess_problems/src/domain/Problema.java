@@ -41,14 +41,14 @@ public class Problema {
 	 * @param Color inicializa el atributo colorAGanar
 	 * @param valid inicializa el atributo validado
 	 */
-	public Problema (String nombre, Integer maxmov, String FEN, Boolean Color,Boolean valid)
+	public Problema (String nombre, Integer maxmov, String FEN, Boolean Color,Boolean valid, Integer vecesJugado)
 	{
 		this.nombre = nombre;
 		maxMovimientos = maxmov;
 		tab = new Tablero(FEN);
 		colorAGanar = Color;	
 		
-		this.vecesJugado=0;
+		this.vecesJugado = vecesJugado;
 		
 		validado = valid;
 		

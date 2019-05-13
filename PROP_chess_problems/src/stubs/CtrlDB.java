@@ -11,6 +11,7 @@ import domain.Persona;
  * Stub del controlador de datos
  */
 public class CtrlDB {
+	// STUB STUB STUB STUB STUB STUB STUB STUB STUB STUB STUB STUB STUB STUB STUB
 	
 	private static CtrlDB single_instance = null;
 
@@ -30,7 +31,7 @@ public class CtrlDB {
 		if (colorS.equals("N")) color = true;
 		System.out.print("Cuantos movimientos tiene para hacer mate?: ");
 		int maxMovs = sc.nextInt();
-		return new Problema(nombre, maxMovs, fen, color, true);
+		return new Problema(nombre, maxMovs, fen, color, true, 0);
 	}
 	
 	public void saveProblema(Problema p) {

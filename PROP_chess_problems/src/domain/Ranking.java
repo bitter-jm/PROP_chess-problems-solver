@@ -8,13 +8,13 @@ import java.util.Vector;
  */
 public class Ranking {
 	
-	private Vector<LineaRanking>ranking=new Vector<LineaRanking>(2,2);
+	private Vector<LineaRanking> ranking = new Vector<LineaRanking>(2,2);
 
 	//no se me cambia el tamano del vector
 	
 	public Ranking() {}
 /**
- * Esta funcion a�ade al ranking el username y su puntuacion si ha sacado una de las 
+ * Esta funcion anade al ranking el username y su puntuacion si ha sacado una de las 
  * 50 mejores puntuaciones de ese problema. 
  * Si el username ya existia se actualiza su valor y sitio en el ranking.
  * Si tiene una puntuacion anterior mas elevada mantiene la 
@@ -42,6 +42,7 @@ public class Ranking {
 			}
 		}
 	}
+	
 	/**
 	 * Ordena el ranking para que este de mayor a menor puntuacion
 	 * @param ranking es el vector atributo de la clase que se ha de ordenar
@@ -57,6 +58,7 @@ public class Ranking {
 			}
 		}
 	}
+	
 	/**
 	 * Eliminamos del ranking el Nombre (username) y su puntuacion.
 	 * @param username Nombre que queremos quitar del ranking
@@ -83,6 +85,7 @@ public class Ranking {
 		}
 		return -1;
 	}
+	
 	/**
 	 * Imprime por la consola el ranking
 	 */
@@ -91,6 +94,7 @@ public class Ranking {
 			System.out.println(i+1 + " - " + ranking.get(i).getName() +" with " + ranking.get(i).getPoints() + " Points.\n");
 		}
 	}
+	
 /**
  * Funcion que segun los resultados de los parametros obtenidos de la partida 
  * otorgara una puntuacion

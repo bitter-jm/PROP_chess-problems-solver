@@ -115,15 +115,23 @@ public class M2 extends Maquina {
 		int sign = 1;
 		for (int i = 0; i < 8; ++i) {
 			for (int j = 0; j < 8; ++j) {
-				if (casillas[i][j] != null) {					
-					if (casillas[i][j].color.equals("BLANCAS")) sign = 1;
-					else sign = -1;
-					if (casillas[i][j].ficha.equals("p")) value += 10 * sign + PSPawn[i][j] * sign; // PAWN
-					else if (casillas[i][j].ficha.equals("n")) value += 30 * sign + PSKnight[i][j]; // KNIGHT
-					else if (casillas[i][j].ficha.equals("b")) value += 30 * sign + PSBishop[i][j] * sign; // BISHOP
-					else if (casillas[i][j].ficha.equals("r")) value += 50 * sign + PSPawn[i][j] * sign; // ROOK
-					else if (casillas[i][j].ficha.equals("q")) value += 90 * sign + PSQueen[i][j]; // QUEEN
-					else if (casillas[i][j].ficha.equals("k")) value += 900 * sign + PSKing[i][j] * sign; // KING
+				if (casillas[i][j] != null) {		
+					int iPS = i;
+					int jPS = j;
+					if (casillas[i][j].color.equals("BLANCAS")) {
+						sign = 1;
+					}
+					else {
+						sign = -1;
+						iPS = 7-i;
+						jPS = 7-j;
+					}
+					if (casillas[i][j].ficha.equals("p")) value += 10 * sign + PSPawn[iPS][jPS] * sign; // PAWN
+					else if (casillas[i][j].ficha.equals("n")) value += 30 * sign + PSKnight[iPS][jPS]; // KNIGHT
+					else if (casillas[i][j].ficha.equals("b")) value += 30 * sign + PSBishop[iPS][jPS] * sign; // BISHOP
+					else if (casillas[i][j].ficha.equals("r")) value += 50 * sign + PSPawn[iPS][jPS] * sign; // ROOK
+					else if (casillas[i][j].ficha.equals("q")) value += 90 * sign + PSQueen[iPS][jPS]; // QUEEN
+					else if (casillas[i][j].ficha.equals("k")) value += 900 * sign + PSKing[iPS][jPS] * sign; // KING
 				}
 			}
 		}

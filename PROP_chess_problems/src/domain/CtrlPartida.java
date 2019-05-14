@@ -1,6 +1,6 @@
 package domain;
 
-import stubs.CtrlDB;
+import domain.CtrlDB;
 import domain.Movimiento;
 import domain.Partida;
 import domain.Jugador;

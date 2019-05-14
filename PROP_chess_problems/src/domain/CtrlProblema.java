@@ -1,6 +1,6 @@
 package domain;
 
-import stubs.CtrlDB;
+import domain.CtrlDB;
 import domain.Ficha;
 import domain.Movimiento;
 
@@ -143,7 +143,7 @@ public class CtrlProblema {
 		if (this.prob != null && DB.existsProblema(nombre)) return false;
 		if (this.prob.getValidado()) return false;
 		this.prob.setNombre(nombre);
-		return true;		
+		return true;
 	}
 	
 	/**

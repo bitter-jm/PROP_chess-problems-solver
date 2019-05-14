@@ -36,13 +36,13 @@ public class CtrlData {
 		return dbPe.checkLogIn(nombre, contrasena);
 	}
 	
-	public boolean saveProblema(String p) { // CtrlProblema
-		String[] probData = p.split("\n");
-		if (dbPr.existsProblema(probData[0])) {
+	public void saveProblema(String p) { // CtrlProblema
+		String nombre = p.split("\n")[0];
+		if (!dbPr.existsProblema(nombre)) {
 			dbPr.createProblema(p);
-			return true;
+		} else {
+			dbPr.updateProblema(p);
 		}
-		return false;
 	}
 	
 	public void deleteProblema(String nombreProblema) { // CtrlProblema

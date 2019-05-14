@@ -3,6 +3,7 @@ package domain;
 import domain.Problema;
 import domain.Jugador;
 import domain.M1;
+import domain.M2;
 import domain.Persona;
 
 import data.CtrlData;
@@ -58,13 +59,20 @@ public class CtrlDB {
 	
 	public void saveProblema(Problema p) {
 		CtrlPersona ctrlPe = CtrlPersona.getInstance();
+		String autor;
+		try {
+			autor = ctrlPe.getNombrePersona();
+		} catch(Exception e) {
+			autor = "NO REGISTRADO";
+			System.out.println("AVISO: Guardando problema pero usuario no registrado. Guardando como guest");
+		}
 		String data = p.getNombre()+"\n"+
 				p.getMaxMovimientos()+"\n"+
 				p.getFEN_Tablero()+"\n"+
 				p.getColorAGanar()+"\n"+
 				p.getValidado()+"\n"+
 				p.getVecesJugado()+"\n"+
-				ctrlPe.getNombrePersona();
+				autor;
 		ctrlData.saveProblema(data);
 	}
 	
@@ -74,6 +82,10 @@ public class CtrlDB {
 	
 	public boolean existsProblema(Problema p) {
 		return ctrlData.existsProblema(p.getNombre());
+	}
+	
+	public boolean existsProblema(String p) {
+		return ctrlData.existsProblema(p);
 	}
 	
 	public void incrementarVecesJugado(String nombreProblema) {

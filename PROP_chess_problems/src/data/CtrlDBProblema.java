@@ -101,6 +101,17 @@ public class CtrlDBProblema {
 		this.guardarFichero();
 	}
 	
+	public void updateProblema(String p) {
+		String nombre = p.split("\n")[0];
+		for (int i = 0; i < this.problemas.size(); ++i) {
+			JSONObject problema = (JSONObject) this.problemas.get(i);
+			if (problema.get("nombre").equals(nombre)) {
+				this.problemas.remove(problema);
+				this.createProblema(p);
+			}
+		}
+	}
+	
 	public boolean existsProblema(String nombre) {
 		for (int i = 0; i < this.problemas.size(); ++i) {
 			JSONObject problema = (JSONObject) this.problemas.get(i);

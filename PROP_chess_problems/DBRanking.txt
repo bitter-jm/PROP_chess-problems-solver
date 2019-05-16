@@ -1,0 +1,36 @@
+[
+    {
+        "nombreProblema": "P1",
+        "list": [
+            {
+                "nombre": "Eustaquio",
+                "puntuacion": 400
+            },
+            {
+                "nombre": "Evaristo",
+                "puntuacion": 200
+            },
+            {
+                "nombre": "Eulogio",
+                "puntuacion": 600
+            }
+        ]
+    },
+    {
+        "nombreProblema": "P2",
+        "list": [
+            {
+                "nombre": "Eustaquio2",
+                "puntuacion": 400
+            },
+            {
+                "nombre": "Evaristo2",
+                "puntuacion": 200
+            },
+            {
+                "nombre": "Eulogio2",
+                "puntuacion": 600
+            }
+        ]
+    }
+]

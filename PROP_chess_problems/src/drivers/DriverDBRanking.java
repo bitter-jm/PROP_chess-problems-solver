@@ -7,6 +7,9 @@ public class DriverDBRanking {
 
 		DBRanking dbR = DBRanking.getInstance();
 		
+		System.out.println(dbR.getRankingProblema("P2"));
+		
+		
 		
 	}
 

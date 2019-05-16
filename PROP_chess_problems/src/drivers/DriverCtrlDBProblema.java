@@ -1,13 +1,13 @@
 package drivers;
 
 import java.util.List;
-import data.CtrlDBProblema;
+import data.DBProblema;
 
 public class DriverCtrlDBProblema {
 
 	public static void main(String[] args) {
 
-		CtrlDBProblema dbP = CtrlDBProblema.getInstance();
+		DBProblema dbP = DBProblema.getInstance();
 		//dbP.createProblema("P1\n2\n8/8/8/8/3p4/5K2/3kNN2/2R5\nfalse\ntrue\n0\nEvaristo");
 		System.out.println(dbP.existsProblema("P1"));
 		System.out.println(dbP.existsProblema("P2"));

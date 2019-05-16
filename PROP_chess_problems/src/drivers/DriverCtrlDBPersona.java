@@ -1,12 +1,12 @@
 package drivers;
 
-import data.CtrlDBPersona;
+import data.DBPersona;
 
 public class DriverCtrlDBPersona {
 
 	public static void main(String[] args) {
 		
-		CtrlDBPersona dbP = CtrlDBPersona.getInstance();
+		DBPersona dbP = DBPersona.getInstance();
 		//dbP.createPersona("Evaristo", "1234");
 		//dbP.createPersona("Eulogio", "4321");
 		//dbP.createPersona("Eustaquio", "1221");

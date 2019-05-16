@@ -9,9 +9,9 @@ import java.util.ArrayList;
 public class CtrlData {
 	// DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA DATA 
 	
-	private CtrlDBPersona dbPe = CtrlDBPersona.getInstance();
-	private CtrlDBProblema dbPr = CtrlDBProblema.getInstance();
-	private CtrlDBRanking dbR = CtrlDBRanking.getInstance();
+	private DBPersona dbPe = DBPersona.getInstance();
+	private DBProblema dbPr = DBProblema.getInstance();
+	private DBRanking dbR = DBRanking.getInstance();
 	private static CtrlData single_instance = null;
 
 	public static CtrlData getInstance() { 

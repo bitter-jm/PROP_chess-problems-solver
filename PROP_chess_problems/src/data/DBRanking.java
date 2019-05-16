@@ -6,20 +6,20 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
 
-public class CtrlDBRanking {
+public class DBRanking {
 
 	private File fichero;
 	JSONArray personas;
 	JSONParser parser = new JSONParser();
-	private static CtrlDBRanking single_instance = null;
+	private static DBRanking single_instance = null;
 
-	public static CtrlDBRanking getInstance() {  // DONE
+	public static DBRanking getInstance() {  // DONE
 		if (single_instance == null) 
-			single_instance = new CtrlDBRanking(); 
+			single_instance = new DBRanking(); 
 		return single_instance; 
 	}
 	
-	public CtrlDBRanking() { // DONE
+	public DBRanking() { // DONE
 		this.cargarFichero();
 		System.out.println("Actual content: " + this.personas.toJSONString());
 	}

@@ -6,20 +6,20 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
 
-public class CtrlDBPersona {
+public class DBPersona {
 
 	private File fichero;
 	JSONArray personas;
 	JSONParser parser = new JSONParser();
-	private static CtrlDBPersona single_instance = null;
+	private static DBPersona single_instance = null;
 
-	public static CtrlDBPersona getInstance() {  // DONE
+	public static DBPersona getInstance() {  // DONE
 		if (single_instance == null) 
-			single_instance = new CtrlDBPersona(); 
+			single_instance = new DBPersona(); 
 		return single_instance; 
 	}
 	
-	public CtrlDBPersona() { // DONE
+	public DBPersona() { // DONE
 		this.cargarFichero();
 		System.out.println("Actual content: " + this.personas.toJSONString());
 	}

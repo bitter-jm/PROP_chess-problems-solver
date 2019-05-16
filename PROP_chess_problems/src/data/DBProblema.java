@@ -8,20 +8,20 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
 
-public class CtrlDBProblema {
+public class DBProblema {
 
 	private File fichero;
 	JSONArray problemas;
 	JSONParser parser = new JSONParser();
-	private static CtrlDBProblema single_instance = null;
+	private static DBProblema single_instance = null;
 
-	public static CtrlDBProblema getInstance() {  // DONE
+	public static DBProblema getInstance() {  // DONE
 		if (single_instance == null) 
-			single_instance = new CtrlDBProblema(); 
+			single_instance = new DBProblema(); 
 		return single_instance; 
 	}
 	
-	public CtrlDBProblema() { // DONE
+	public DBProblema() { // DONE
 		this.cargarFichero();
 		System.out.println("Actual content: " + this.problemas.toJSONString());
 	}

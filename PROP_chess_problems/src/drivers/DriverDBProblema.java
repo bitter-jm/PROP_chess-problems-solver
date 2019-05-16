@@ -3,7 +3,7 @@ package drivers;
 import java.util.List;
 import data.DBProblema;
 
-public class DriverCtrlDBProblema {
+public class DriverDBProblema {
 
 	public static void main(String[] args) {
 

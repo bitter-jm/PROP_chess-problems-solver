@@ -2,7 +2,7 @@ package drivers;
 
 import data.DBPersona;
 
-public class DriverCtrlDBPersona {
+public class DriverDBPersona {
 
 	public static void main(String[] args) {
 		

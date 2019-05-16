@@ -6,6 +6,7 @@ import domain.Maquina;
 import domain.Tablero;
 import domain.Problema;
 import domain.CtrlPartida;
+import domain.Cronometro;
 
 /**
  * Clase partida. Representa el momento del juego
@@ -19,6 +20,7 @@ public class Partida {
 	private int dia;
 	private int mes;
 	private int ano;
+	private Cronometro crono;
 	
 	public int max_mov;
 	public boolean color; // false -> BLANCAS, true -> NEGRAS
@@ -34,12 +36,14 @@ public class Partida {
 	 * @param jugador2 del tipo Jugador representa al contrincante de jugador1
 	 * @param prob del tipo Problema representa la situacion incial de la partida
 	 */
-	public Partida(Jugador jugador1, Jugador jugador2, Problema problem) { // DONE
+	public Partida(Jugador jugador1, Jugador jugador2, Problema problem) { 
 	
 		fecha = Calendar.getInstance();
 	    dia = fecha.get(Calendar.DATE);
 	    mes = fecha.get(Calendar.MONTH) + 1;
 	    ano = fecha.get(Calendar.YEAR);
+	    
+	    this.crono = new Cronometro();
 	    
 	    j1 = jugador1;
 	    j2 = jugador2;
@@ -76,7 +80,7 @@ public class Partida {
 	 * Se encarga de pasarle el turno al siguiente jugador, actualizar los movimientos de cada uno e incluso
 	 * realizar la siguiente jugada en caso de que el jugador sea Maquina
 	 */
-	public void jugarSiguienteTurno() { //PENDIENTE
+	public void jugarSiguienteTurno() { 
 		String colorS="BLANCAS";
 		String colorSOpuesto="NEGRAS";
 		if (color && !turno) {
@@ -108,7 +112,8 @@ public class Partida {
 				if (this.mov_uno >= this.max_mov) this.acabarPartida();
 				else if (this.tab.esMateColor(colorSOpuesto)) this.acabarPartida();
 				else this.jugarSiguienteTurno();
-			} else { // j1 es persona				
+			} else { // j1 es persona			
+				this.crono.start(); // TODO Added
 				System.out.println("Esperando movimiento de Persona:");
 			}
 		} else { // j2
@@ -150,6 +155,7 @@ public class Partida {
 			colorOpuesto = "NEGEAS";
 		}
 		if (!turno && j1.esPersona()) {
+			this.crono.pause();// TODO: Pausar cronometro
 			// Mirar si es del mismo color la pieza movida 
 			boolean valid = tab.registrarMovimientoValidando(m);
 			if (valid) {
@@ -183,23 +189,32 @@ public class Partida {
 	/**
 	 * Computa el jugador ganador de la partida cuando esta finaliza
 	 */
-	public void acabarPartida() {	// TODO: Anadir ranking
+	public void acabarPartida() {
+		int timeJ1 = -1; 
 		String colorS = "BLANCAS";
 		String c;
     	if (!color) c = "NEGRAS";
     	else c = "BLANCAS"; 
 		if(tab.esMateColor(c)) {
+			if (j1.esPersona()) timeJ1 = this.calcularPuntuacion(this.crono.getTime());
+			else timeJ1 = -1;
+			// TODO: Calcular puntuacion ranking
 			ganador = j1.getNombre();
 			if (color) colorS = "NEGRAS";
-			ctrlP.partidaFinaliza(this.j1.getNombre(), colorS, 1, this.prob.getNombre());
+			ctrlP.partidaFinaliza(this.j1.getNombre(), colorS, timeJ1, this.prob.getNombre());
 			System.out.println("PARTIDA ACABADA. Gana Jugador1: " + ganador + " ("+colorS+")" );
 		}
 		else {
 			ganador = j2.getNombre();
 			if (!color) colorS = "NEGRAS";
-			ctrlP.partidaFinaliza(this.j2.getNombre(), colorS, 1, this.prob.getNombre());
+			ctrlP.partidaFinaliza(this.j2.getNombre(), colorS, timeJ1, this.prob.getNombre());
 			System.out.println("PARTIDA ACABADA. Gana Jugador2: " + ganador + " ("+colorS+")" );
 		}
+	}
+	
+	private int calcularPuntuacion(int time) {
+		if (time >= 1800) return 1; // Ha tardado mas de media hora
+		return 1800 - time;		
 	}
 	
 	/**

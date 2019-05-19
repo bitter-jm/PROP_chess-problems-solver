@@ -1,6 +1,7 @@
 package domain;
 
 import domain.CtrlDB;
+import domain.CtrlRanking;
 import domain.Movimiento;
 import domain.Partida;
 import domain.Jugador;
@@ -12,6 +13,8 @@ public class CtrlPartida {
 	
 	private static CtrlPartida single_instance = null;
 	private Partida part;
+	CtrlDB ctrlDB = CtrlDB.getInstance();
+	CtrlRanking ctrlR = CtrlRanking.getInstance();
 	
 	/**
 	 * Instancia un objeto partida con los jugadores y el problema
@@ -20,7 +23,6 @@ public class CtrlPartida {
 	 * @param problema del tipo String representa la situacion inicial del juego
 	 */
 	public void empezarPartida(String j1, String j2, String problema) {
-		CtrlDB ctrlDB = CtrlDB.getInstance();
 		Jugador j1o = ctrlDB.getJugador(j1);
 		Jugador j2o = ctrlDB.getJugador(j2);
 		Problema p = ctrlDB.getProblema(problema);
@@ -53,15 +55,17 @@ public class CtrlPartida {
 	}
 	
 	public void tableroModificado(String FEN, String turnoDe, String colorDeQuienHaMovido) { //TODO
-		// Informa a presentacion del cambio de estado en el tablero de partida
+		// TODO: Informa a presentacion del cambio de estado en el tablero de partida
 		String colorSiguienteTurno = "BLANCAS";
 		if (colorDeQuienHaMovido.equals("BLANCAS")) colorSiguienteTurno = "NEGEAS";
 		System.out.println("Informar estado tablero a presentacion... Siguiente turno de: " + turnoDe + " ("+colorSiguienteTurno+")");
 	}
 	
 	public void partidaFinaliza(String nombreGanador, String colorGanador, int puntuacion, String nombreProblema) { // TODO
-		// Informa a presentacion sobre la finalizacion y ganadores
-		// Crea linea nueva en Ranking del problema
+		// TODO: Informa a presentacion sobre la finalizacion y ganadores
+		if (puntuacion > 0) { // mirar que sea persona contra maquina tmb
+			ctrlR.addToRanking(nombreGanador, nombreProblema, puntuacion);
+		}
 		CtrlDB ctrlDB = CtrlDB.getInstance();
 		ctrlDB.incrementarVecesJugado(nombreProblema);
 		System.out.println("Informar a presentacion de partida acabada. Gana: "+nombreGanador+" ("+colorGanador+") con un score de: " + puntuacion);

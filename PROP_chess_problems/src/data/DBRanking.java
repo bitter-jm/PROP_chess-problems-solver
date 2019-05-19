@@ -72,19 +72,44 @@ public class DBRanking {
 		}
 	}
 	
-	public void existsRanking(String nombreProblema) {
-		
+	public boolean existsRanking(String nombreProblema) { // DONE
+		for (int i = 0; i < this.rankings.size(); ++i) {
+			JSONObject ranking = (JSONObject) this.rankings.get(i);
+			if (ranking.get("nombreProblema").equals(nombreProblema)) {
+				return true;
+			}		
+		}
+		return false;
 	}
 	
-	public void createRanking(String dataRanking) {
-		
+	public void createRanking(String dataRanking, String nombreProblema) {
+		String[] rankingData = dataRanking.split("\n");
+		JSONObject ranking = new JSONObject();
+		JSONArray list = new JSONArray();
+		ranking.put("nombreProblema", nombreProblema);
+		for (String line : rankingData) {
+			String[] info = line.split("\\?");
+			JSONObject listElem = new JSONObject();
+			listElem.put("nombre", info[0]);
+			listElem.put("puntuacion", info[1]);
+			list.add(listElem);
+		}
+		ranking.put("list", list);
+		this.rankings.add(ranking);
+		this.guardarFichero();
 	}
 	
-	public void updateRanking(String dataRanking) {
-		
+	public void updateRanking(String dataRanking, String nombreProblema) {
+		for (int i = 0; i < this.rankings.size(); ++i) {
+			JSONObject problema = (JSONObject) this.rankings.get(i);
+			if (problema.get("nombreProblema").equals(nombreProblema)) {
+				this.rankings.remove(problema);
+				this.createRanking(dataRanking, nombreProblema);
+			}
+		}
 	}
 	
-	public String getRankingProblema(String nombreProblema) {
+	public String getRankingProblema(String nombreProblema) { // DONE
 		String out = "";
 		for (int i = 0; i < this.rankings.size(); ++i) {
 			JSONObject ranking = (JSONObject) this.rankings.get(i);
@@ -101,3 +126,8 @@ public class DBRanking {
 	}
 	
 }
+
+/*
+STRING RESPONSE FORMAT:
+usuario1?putuacion1\nusuario2?putuacion2\n
+*/

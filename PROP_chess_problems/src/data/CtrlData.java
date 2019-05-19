@@ -20,7 +20,7 @@ public class CtrlData {
 		return single_instance; 
 	}
 	
-	public boolean createPersona(String nombre, String contrasena) { // CtrlLogin
+	public boolean createPersona(String nombre, String contrasena) {
 		if (!dbPe.existsPersona(nombre)) {
 			dbPe.createPersona(nombre, contrasena);
 			return true;
@@ -28,7 +28,7 @@ public class CtrlData {
 		return false;
 	}
 
-	public boolean existsNombrePersona(String nombre) { // CtrlLogin
+	public boolean existsNombrePersona(String nombre) {
 		return dbPe.existsPersona(nombre);
 	}
 	
@@ -36,7 +36,7 @@ public class CtrlData {
 		return dbPe.checkLogIn(nombre, contrasena);
 	}
 	
-	public void saveProblema(String p) { // CtrlProblema
+	public void saveProblema(String p) { 
 		String nombre = p.split("\n")[0];
 		if (!dbPr.existsProblema(nombre)) {
 			dbPr.createProblema(p);
@@ -45,19 +45,19 @@ public class CtrlData {
 		}
 	}
 	
-	public void deleteProblema(String nombreProblema) { // CtrlProblema
+	public void deleteProblema(String nombreProblema) { 
 		dbPr.deleteProblema(nombreProblema);
 	}
 	
-	public boolean existsProblema(String nombre) { // CtrlProblema
+	public boolean existsProblema(String nombre) { 
 		return dbPr.existsProblema(nombre);
 	}
 	
-	public List<String> getProblemasJugables() { // CtrlPresentation
+	public List<String> getProblemasJugables() { 
 		return dbPr.getProblemasJugables();
 	}
 	
-	public List<String> getMisProblemas(String nombrePersona) { // CtrlPresentation 
+	public List<String> getMisProblemas(String nombrePersona) {
 		return dbPr.getMisProblemas(nombrePersona);
 	}
 	
@@ -69,6 +69,17 @@ public class CtrlData {
 		dbPr.incrementarVecesJugado(nombreProblema);
 	}
 	
-   // TODO Rankings
+	public String getRanking(String nombreProblema) {
+		return dbR.getRankingProblema(nombreProblema);
+	}
+	
+	public void saveRanking(String dataRanking, String nombreProblema) {
+		if (dbR.existsRanking(nombreProblema)) dbR.updateRanking(dataRanking, nombreProblema);
+		else dbR.createRanking(dataRanking, nombreProblema);
+	}
+	
+	public boolean existsRanking(String nombreProblema) {
+		return dbR.existsRanking(nombreProblema);
+	}	
 	
 }

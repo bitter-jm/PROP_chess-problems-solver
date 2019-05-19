@@ -2,12 +2,15 @@ package domain;
 
 import domain.Problema;
 import domain.Jugador;
+import domain.Ranking;
 import domain.M1;
 import domain.M2;
 import domain.Persona;
 
 import data.CtrlData;
 import domain.CtrlPersona;
+
+import java.util.List;
 
 /**
  * Controlador con la funcinoalidad de crear objetos de la capa de dominio a partir de la capa de datos
@@ -64,7 +67,7 @@ public class CtrlDB {
 			autor = ctrlPe.getNombrePersona();
 		} catch(Exception e) {
 			autor = "NO REGISTRADO";
-			System.out.println("AVISO: Guardando problema pero usuario no registrado. Guardando como guest");
+			System.out.println("AVISO: Guardando problema pero usuario no registrado. Guardando como NO REGISTRADO");
 		}
 		String data = p.getNombre()+"\n"+
 				p.getMaxMovimientos()+"\n"+
@@ -92,4 +95,29 @@ public class CtrlDB {
 		ctrlData.incrementarVecesJugado(nombreProblema);
 	}
 	
+	public Ranking getRankingProblema(String nombreProblema) {
+		Ranking r = new Ranking(nombreProblema);
+		String dataRanking = ctrlData.getRanking(nombreProblema);
+		if (dataRanking == null || dataRanking.isEmpty()) return r;
+		String[] lines = dataRanking.split("\n");
+		for (String line : lines) {
+			String[] info = line.split("\\?");
+			r.anadirAlRanking(info[0], Integer.parseInt(info[1]));
+		}
+		return r;
+	}
+	
+	public void saveRankingProblema(Ranking r) {
+		List<String> lineas = r.getAllRanking();
+		String out = "";
+		boolean primero = true;
+		for (String linea : lineas) {
+			if (primero) primero = false;
+			else out += "\n";
+			out += linea;
+		}
+		ctrlData.saveRanking(out, r.getNombreProblema());
+	}
+	
 }
+

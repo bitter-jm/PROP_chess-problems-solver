@@ -196,7 +196,7 @@ public class Partida {
     	if (!color) c = "NEGRAS";
     	else c = "BLANCAS"; 
 		if(tab.esMateColor(c)) {
-			if (j1.esPersona()) timeJ1 = this.calcularPuntuacion(this.crono.getTime());
+			if (j1.esPersona() && !j2.esPersona()) timeJ1 = this.calcularPuntuacion(this.crono.getTime());
 			else timeJ1 = -1;
 			// TODO: Calcular puntuacion ranking
 			ganador = j1.getNombre();

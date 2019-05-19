@@ -61,8 +61,9 @@ public class CtrlPartida {
 	
 	public void partidaFinaliza(String nombreGanador, String colorGanador, int puntuacion, String nombreProblema) { // TODO
 		// Informa a presentacion sobre la finalizacion y ganadores
-		// Incrementa vecesJugado del problema
 		// Crea linea nueva en Ranking del problema
+		CtrlDB ctrlDB = CtrlDB.getInstance();
+		ctrlDB.incrementarVecesJugado(nombreProblema);
 		System.out.println("Informar a presentacion de partida acabada. Gana: "+nombreGanador+" ("+colorGanador+") con un score de: " + puntuacion);
 	}
 	

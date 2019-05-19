@@ -1,7 +1,6 @@
 package domain;
 import java.util.*;
 import domain.LineaRanking;
-import java.util.Vector;
 
 /**
  * Clase Ranking no terminada de implementar
@@ -9,10 +8,20 @@ import java.util.Vector;
 public class Ranking {
 	
 	private Vector<LineaRanking> ranking = new Vector<LineaRanking>(2,2);
+	private String nombreProblema = "";
 
 	//no se me cambia el tamano del vector
 	
 	public Ranking() {}
+	
+	public Ranking(String nombreProblema) {
+		this.nombreProblema = nombreProblema;
+	}
+	
+	public String getNombreProblema() {
+		return this.nombreProblema;
+	}
+	
 /**
  * Esta funcion anade al ranking el username y su puntuacion si ha sacado una de las 
  * 50 mejores puntuaciones de ese problema. 
@@ -41,6 +50,14 @@ public class Ranking {
 				this.ordenar(this.ranking);
 			}
 		}
+	}
+	
+	public List<String> getAllRanking() {
+		List<String> r = new ArrayList<String>();
+		for (LineaRanking linea : this.ranking) {
+			r.add(linea.getName()+"?"+linea.getPoints());
+		}
+		return r;
 	}
 	
 	/**
@@ -94,18 +111,5 @@ public class Ranking {
 			System.out.println(i+1 + " - " + ranking.get(i).getName() +" with " + ranking.get(i).getPoints() + " Points.\n");
 		}
 	}
-	
-/**
- * Funcion que segun los resultados de los parametros obtenidos de la partida 
- * otorgara una puntuacion
- * @return devuelve un int que sera la puntuacion
- */
-	private int getpuntuacion () { //segun que parametros calculo la puntuacion?
-		//ahora esta en random
-		int max= 50000;
-		Random random = new Random();
-		return random.nextInt(max);
 		
-	}
-	
 }

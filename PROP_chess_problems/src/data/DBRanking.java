@@ -19,7 +19,7 @@ public class DBRanking {
 		return single_instance; 
 	}
 	
-	public DBRanking() { // DONE
+	private DBRanking() { // DONE
 		this.cargarFichero();
 		System.out.println("Actual content: " + this.rankings.toJSONString());
 	}

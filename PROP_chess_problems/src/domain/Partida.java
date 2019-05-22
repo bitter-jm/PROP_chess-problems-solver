@@ -273,4 +273,8 @@ public class Partida {
 	public Tablero getTablero() {
 		return this.tab;
 	}
+	
+	public String getCurrentFEN() {
+		return this.tab.exportarFEN();
+	}
 }

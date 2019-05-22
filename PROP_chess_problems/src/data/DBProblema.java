@@ -21,7 +21,7 @@ public class DBProblema {
 		return single_instance; 
 	}
 	
-	public DBProblema() { // DONE
+	private DBProblema() { // DONE
 		this.cargarFichero();
 		System.out.println("Actual content: " + this.problemas.toJSONString());
 	}
@@ -44,7 +44,7 @@ public class DBProblema {
 				if (content.isEmpty()) {
 					this.problemas = new JSONArray();
 					// Insertar problemas DEFAULT
-					this.createProblema("Problema1\n2\n8/8/8/8/3p4/5K2/3kNN2/2R5\nfalse\ntrue\n0\nDEFAULT");
+					this.createProblema("Problema1\n2\n8/8/8/8/3p4/5K2/3kNN2/2R5\nfalse\ntrue\n0\nDEFAULT\nEASY");
 					this.guardarFichero();
 				}
 				else {
@@ -56,7 +56,7 @@ public class DBProblema {
 				this.fichero.createNewFile();
 		        this.problemas = new JSONArray();
 		        // Insertar problemas DEFAULT
-		        this.createProblema("Problema1\n2\n8/8/8/8/3p4/5K2/3kNN2/2R5\nfalse\ntrue\n0\nDEFAULT");
+		        this.createProblema("Problema1\n2\n8/8/8/8/3p4/5K2/3kNN2/2R5\nfalse\ntrue\n0\nDEFAULT\nEASY");
 		        this.guardarFichero();
 			}
 			
@@ -90,6 +90,7 @@ public class DBProblema {
 		if (probData[4].equals("true")) valid = true;
 		Integer vecesJugado = Integer.valueOf(probData[5]);
 		String autor = probData[6];
+		String dificultad = probData[7];
 		problema.put("nombre", nombre);
 		problema.put("maxmov", maxmov);
 		problema.put("FEN", FEN);
@@ -97,6 +98,7 @@ public class DBProblema {
 		problema.put("valid", valid);
 		problema.put("vecesJugado", vecesJugado);
 		problema.put("autor", autor);
+		problema.put("dificultad", dificultad);
 		this.problemas.add(problema);
 		this.guardarFichero();
 	}
@@ -125,7 +127,7 @@ public class DBProblema {
 			JSONObject problema = (JSONObject) this.problemas.get(i);
 			if (problema.get("nombre").equals(nombre)) {
 				String prob = problema.get("nombre")+"\n"+problema.get("maxmov")+"\n"+problema.get("FEN")+"\n"+problema.get("color")+
-						"\n"+problema.get("valid")+"\n"+problema.get("vecesJugado")+"\n"+problema.get("autor");
+						"\n"+problema.get("valid")+"\n"+problema.get("vecesJugado")+"\n"+problema.get("autor")+"\n"+problema.get("dificultad");
 				return prob;
 			}
 		}

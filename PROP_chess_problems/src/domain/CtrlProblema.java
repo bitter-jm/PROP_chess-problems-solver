@@ -110,6 +110,14 @@ public class CtrlProblema {
 			this.prob.moverFicha(mov);
 		}
 	}
+
+	public void moverFicha(String pieza, int iInicio, int jInicio, int iFinal, int jFinal) { //DONE
+		if (this.prob != null) {	
+			if (this.prob.getValidado()) return;
+			this.prob.moverFicha(new Movimiento(iInicio, jInicio, iFinal, jFinal, Ficha.newFicha(pieza)));
+		}
+	}
+
 	
 	/**
 	 * Especifica los movimientos maximos permitidos para intentar hacer mate

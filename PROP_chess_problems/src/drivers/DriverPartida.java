@@ -34,7 +34,7 @@ public class DriverPartida {
 		Boolean b;
 		if (c == 0) b = false;
 		else b = true;
-		Problema prob = new Problema(nomp, nmaxp, fen, b, true, 0);
+		Problema prob = new Problema(nomp, nmaxp, fen, b, true, 0, null);
 		System.out.println("Selecciona el tipo de jugador1. Introduce '0' para Persona o '1' para Maquina");
 		int x = sc.nextInt();
 		Jugador j1, j2;

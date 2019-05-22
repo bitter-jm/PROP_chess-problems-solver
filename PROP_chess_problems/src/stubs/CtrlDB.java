@@ -31,7 +31,7 @@ public class CtrlDB {
 		if (colorS.equals("N")) color = true;
 		System.out.print("Cuantos movimientos tiene para hacer mate?: ");
 		int maxMovs = sc.nextInt();
-		return new Problema(nombre, maxMovs, fen, color, true, 0);
+		return new Problema(nombre, maxMovs, fen, color, true, 0, "NULL");
 	}
 	
 	public void saveProblema(Problema p) {

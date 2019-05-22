@@ -41,7 +41,7 @@ public class Problema {
 	 * @param Color inicializa el atributo colorAGanar
 	 * @param valid inicializa el atributo validado
 	 */
-	public Problema (String nombre, Integer maxmov, String FEN, Boolean Color,Boolean valid, Integer vecesJugado)
+	public Problema (String nombre, Integer maxmov, String FEN, Boolean Color,Boolean valid, Integer vecesJugado, String dif)
 	{
 		this.nombre = nombre;
 		maxMovimientos = maxmov;
@@ -53,7 +53,13 @@ public class Problema {
 		validado = valid;
 		
 		dificultad = null;
-		if (validado) CalculoDeDificultad(maxmov, FEN, Color);
+		if (dif != null) {
+			if (dif.equals("EASY")) dificultad = Dificulty.Easy;
+			if (dif.equals("MEDIUM")) dificultad = Dificulty.Medium;
+			if (dif.equals("HARD")) dificultad = Dificulty.Hard;
+		}
+		
+		if (validado && dificultad == null) CalculoDeDificultad(maxmov, FEN, Color);
 	}
 	
 	public String getNombre() {
@@ -66,6 +72,13 @@ public class Problema {
 
 	public Dificulty getDificultad() {
 		return dificultad;
+	}
+	
+	public String getDificultadString() {
+		if (this.dificultad == null) return null;
+		if (this.dificultad.equals(Dificulty.Easy)) return "EASY";
+		if (this.dificultad.equals(Dificulty.Medium)) return "MEDIUM";
+		return "HARD";
 	}
 
 	public Boolean getValidado() {

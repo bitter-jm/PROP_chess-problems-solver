@@ -5,6 +5,7 @@ import domain.CtrlRanking;
 import domain.Movimiento;
 import domain.Partida;
 import domain.Jugador;
+import domain.Tablero;
 
 /**
  * Controlador de Partidas
@@ -29,6 +30,11 @@ public class CtrlPartida {
 		this.part = new Partida(j1o, j2o, p);
 	}
 	
+	public boolean consultarValidezMovimiento(String pieza, int iInicio, int jInicio, int iFinal, int jFinal) {
+		Tablero t = new Tablero(this.part.getCurrentFEN());
+		return t.registrarMovimientoValidando(new Movimiento(iInicio, jInicio, iFinal, jFinal, Ficha.newFicha(pieza)));
+	}
+	
 	/**
 	 * Detecta una jugada por parte de la persona y actualiza el estado de la partida
 	 * @param m del tipo Movimiento representa la jugada de la persona 
@@ -36,6 +42,10 @@ public class CtrlPartida {
 	 */
 	public boolean personaRealizaMovimiento(Movimiento m) {
 		return this.part.jugarPersona(m);
+	}
+	
+	public boolean personaRealizaMovimiento(String pieza, int iInicio, int jInicio, int iFinal, int jFinal) {
+		return this.part.jugarPersona(new Movimiento(iInicio, jInicio, iFinal, jFinal, Ficha.newFicha(pieza)));
 	}
 	
 	/**
@@ -80,5 +90,6 @@ public class CtrlPartida {
             single_instance = new CtrlPartida(); 
         return single_instance; 
     }
+	
 	
 }

@@ -19,7 +19,7 @@ public class DBPersona {
 		return single_instance; 
 	}
 	
-	public DBPersona() { // DONE
+	private DBPersona() { // DONE
 		this.cargarFichero();
 		System.out.println("Actual content: " + this.personas.toJSONString());
 	}

@@ -57,7 +57,9 @@ public class CtrlDB {
 		boolean valid = false;
 		if (probData[4].equals("true")) valid = true;
 		Integer vecesJugado = Integer.valueOf(probData[5]);
-		return new Problema(nombre, maxmov, FEN, color, valid, vecesJugado);
+		String dificultad = null;
+		if (!probData[7].equals("NULL")) dificultad = probData[7];
+		return new Problema(nombre, maxmov, FEN, color, valid, vecesJugado, dificultad);
 	}
 	
 	public void saveProblema(Problema p) {
@@ -69,13 +71,18 @@ public class CtrlDB {
 			autor = "NO REGISTRADO";
 			System.out.println("AVISO: Guardando problema pero usuario no registrado. Guardando como NO REGISTRADO");
 		}
+		
+		String dificultad = "NULL";
+		if (p.getDificultadString() != null) dificultad = p.getDificultadString();
+		
 		String data = p.getNombre()+"\n"+
 				p.getMaxMovimientos()+"\n"+
 				p.getFEN_Tablero()+"\n"+
 				p.getColorAGanar()+"\n"+
 				p.getValidado()+"\n"+
 				p.getVecesJugado()+"\n"+
-				autor;
+				autor+"\n"+
+				dificultad;
 		ctrlData.saveProblema(data);
 	}
 	

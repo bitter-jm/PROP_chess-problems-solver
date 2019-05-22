@@ -20,6 +20,8 @@ public class CtrlData {
 		return single_instance; 
 	}
 	
+	private CtrlData() {}
+	
 	public boolean createPersona(String nombre, String contrasena) {
 		if (!dbPe.existsPersona(nombre)) {
 			dbPe.createPersona(nombre, contrasena);

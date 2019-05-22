@@ -27,7 +27,7 @@ public class CtrlPartida {
 		Jugador j1o = ctrlDB.getJugador(j1);
 		Jugador j2o = ctrlDB.getJugador(j2);
 		Problema p = ctrlDB.getProblema(problema);
-		this.part = new Partida(j1o, j2o, p);
+		this.part = new Partida(j1o, j2o, p, true, false);
 	}
 	
 	public boolean consultarValidezMovimiento(String pieza, int iInicio, int jInicio, int iFinal, int jFinal) {

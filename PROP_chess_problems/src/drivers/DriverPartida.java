@@ -57,7 +57,7 @@ public class DriverPartida {
 			j2 = new M1();
 		}
 		System.out.println("Comienza el juego");
-		part = new Partida(j1, j2, prob);
+		part = new Partida(j1, j2, prob, false, false);
 		while(part.mov_uno < part.max_mov) {
 			System.out.println("Introcude las coordenadas iniciales y finales de la ficha a mover");
 			int i, j, ii, jj;

@@ -23,12 +23,16 @@ public class Partida {
 	private Cronometro crono;
 	
 	public int max_mov;
-	public boolean color; // false -> BLANCAS, true -> NEGRAS
-	public boolean turno = false; // false -> j1, true -> j2
+	private boolean color; // false -> BLANCAS, true -> NEGRAS
+	private boolean turno = false; // false -> j1, true -> j2
 	public int mov_uno = 0;
 	public int mov_dos = 0;
 	public String ganador;
 	private CtrlPartida ctrlP = CtrlPartida.getInstance();
+	private CtrlEvaluador ctrlE = CtrlEvaluador.getInstance();
+	private boolean actualizarCtrlParita;
+	private boolean actualizarCtrlEvaluador;
+	
 	
 	/**
 	 * Crea un objeto Partida y lo inicializa con los jugadores y las caracteristicas del problema participantes en el juego
@@ -36,12 +40,15 @@ public class Partida {
 	 * @param jugador2 del tipo Jugador representa al contrincante de jugador1
 	 * @param prob del tipo Problema representa la situacion incial de la partida
 	 */
-	public Partida(Jugador jugador1, Jugador jugador2, Problema problem) { 
+	public Partida(Jugador jugador1, Jugador jugador2, Problema problem, boolean actualizarCtrlPartida, boolean actualizarCtrlEvaluador) { 
 	
 		fecha = Calendar.getInstance();
 	    dia = fecha.get(Calendar.DATE);
 	    mes = fecha.get(Calendar.MONTH) + 1;
 	    ano = fecha.get(Calendar.YEAR);
+	    
+	    this.actualizarCtrlParita = actualizarCtrlPartida;
+	    this.actualizarCtrlEvaluador = actualizarCtrlEvaluador;
 	    
 	    this.crono = new Cronometro();
 	    
@@ -71,7 +78,7 @@ public class Partida {
 	    tab.imprimirEstadoTableroConsola();
 	    String c = "NECRAS";
 	    if (this.color) c = "BLANCAS";
-	    ctrlP.tableroModificado(this.tab.exportarFEN(), this.j1.getNombre(), c);
+	    if (this.actualizarCtrlParita) ctrlP.tableroModificado(this.tab.exportarFEN(), this.j1.getNombre(), c);
 	    
 	    this.jugarSiguienteTurno();
 	}
@@ -106,7 +113,7 @@ public class Partida {
 				else {
 					turno = true;
 					tab.imprimirEstadoTableroConsola(); 	    
-				    ctrlP.tableroModificado(this.tab.exportarFEN(), this.j2.getNombre(), colorS);	
+					if (this.actualizarCtrlParita) ctrlP.tableroModificado(this.tab.exportarFEN(), this.j2.getNombre(), colorS);	
 				}
 				
 				if (this.mov_uno >= this.max_mov) this.acabarPartida();
@@ -126,7 +133,7 @@ public class Partida {
 				else {
 					turno = false;
 					tab.imprimirEstadoTableroConsola();
-					ctrlP.tableroModificado(this.tab.exportarFEN(), this.j1.getNombre(), colorS);
+					if (this.actualizarCtrlParita) ctrlP.tableroModificado(this.tab.exportarFEN(), this.j1.getNombre(), colorS);
 				}
 				
 				if (this.tab.esMateColor(colorSOpuesto)) this.acabarPartida();
@@ -161,7 +168,7 @@ public class Partida {
 			if (valid) {
 				turno = true;
 				tab.imprimirEstadoTableroConsola(); 
-				ctrlP.tableroModificado(this.tab.exportarFEN(), this.j2.getNombre(), colorOpuesto);
+				if (this.actualizarCtrlParita) ctrlP.tableroModificado(this.tab.exportarFEN(), this.j2.getNombre(), colorOpuesto);
 				if (this.mov_uno >= this.max_mov) this.acabarPartida();
 				else if (this.tab.esMateColor(colorS)) this.acabarPartida();
 				else this.jugarSiguienteTurno();				
@@ -175,7 +182,7 @@ public class Partida {
 			if (valid) {
 				turno = false;
 				tab.imprimirEstadoTableroConsola(); 
-				ctrlP.tableroModificado(this.tab.exportarFEN(), this.j1.getNombre(), colorOpuesto);
+				if (this.actualizarCtrlParita) ctrlP.tableroModificado(this.tab.exportarFEN(), this.j1.getNombre(), colorOpuesto);
 				if (this.tab.esMateColor(colorS)) this.acabarPartida();
 				else this.jugarSiguienteTurno();
 				return true;
@@ -201,13 +208,15 @@ public class Partida {
 			// TODO: Calcular puntuacion ranking
 			ganador = j1.getNombre();
 			if (color) colorS = "NEGRAS";
-			ctrlP.partidaFinaliza(this.j1.getNombre(), colorS, timeJ1, this.prob.getNombre());
+			if (this.actualizarCtrlParita) ctrlP.partidaFinaliza(this.j1.getNombre(), colorS, timeJ1, this.prob.getNombre());
+			if (this.actualizarCtrlEvaluador) ctrlE.setGanador("Jugador 1");
 			System.out.println("PARTIDA ACABADA. Gana Jugador1: " + ganador + " ("+colorS+")" );
 		}
 		else {
 			ganador = j2.getNombre();
 			if (!color) colorS = "NEGRAS";
-			ctrlP.partidaFinaliza(this.j2.getNombre(), colorS, timeJ1, this.prob.getNombre());
+			if (this.actualizarCtrlParita) ctrlP.partidaFinaliza(this.j2.getNombre(), colorS, timeJ1, this.prob.getNombre());
+			if (this.actualizarCtrlEvaluador) ctrlE.setGanador("Jugador 2");
 			System.out.println("PARTIDA ACABADA. Gana Jugador2: " + ganador + " ("+colorS+")" );
 		}
 	}

@@ -30,6 +30,15 @@ public class CtrlPartida {
 		this.part = new Partida(j1o, j2o, p, true, false);
 	}
 	
+	/**
+	 * Informa si un movimiento en el estado actual de la partida es valido
+	 * @param pieza String con pieza a mover (Formato FEN)
+	 * @param iInicio coordenada i de inicio 
+	 * @param jInicio coordenada j de inicio 
+	 * @param iFinal coordenada i final
+	 * @param jFinal coordenada j final
+	 * @return True si es un momvimiento valido. False en caso contrario.
+	 */
 	public boolean consultarValidezMovimiento(String pieza, int iInicio, int jInicio, int iFinal, int jFinal) {
 		Tablero t = new Tablero(this.part.getCurrentFEN());
 		return t.registrarMovimientoValidando(new Movimiento(iInicio, jInicio, iFinal, jFinal, Ficha.newFicha(pieza)));
@@ -44,6 +53,15 @@ public class CtrlPartida {
 		return this.part.jugarPersona(m);
 	}
 	
+	/**
+	 * Realizar movimiento en la partida para un jugador de tipo Persona
+	 * @param pieza String con pieza a mover (Formato FEN)
+	 * @param iInicio coordenada i de inicio 
+	 * @param jInicio coordenada j de inicio 
+	 * @param iFinal coordenada i final
+	 * @param jFinal coordenada j final
+	 * @return True si es un momvimiento valido y se ha movido. False en caso contrario.
+	 */
 	public boolean personaRealizaMovimiento(String pieza, int iInicio, int jInicio, int iFinal, int jFinal) {
 		return this.part.jugarPersona(new Movimiento(iInicio, jInicio, iFinal, jFinal, Ficha.newFicha(pieza)));
 	}
@@ -64,6 +82,12 @@ public class CtrlPartida {
 		return this.part.partidaAcabada();
 	}
 	
+	/**
+	 * Informa a presentacion que se ha cambiado el estado del tablero
+	 * @param FEN String FEN con el estado del tablero
+	 * @param turnoDe String indicando de quien es el siguiente turno
+	 * @param colorDeQuienHaMovido String indicando quien ha movido por ultima vez
+	 */
 	public void tableroModificado(String FEN, String turnoDe, String colorDeQuienHaMovido) { //TODO
 		// TODO: Informa a presentacion del cambio de estado en el tablero de partida
 		String colorSiguienteTurno = "BLANCAS";
@@ -71,6 +95,13 @@ public class CtrlPartida {
 		System.out.println("Informar estado tablero a presentacion... Siguiente turno de: " + turnoDe + " ("+colorSiguienteTurno+")");
 	}
 	
+	/**
+	 * Crea una entrada en el ranking del problema si la puntuaion es mayor a 0, incrementa las veces jugadas y avisa a presentacion de su finalizacion
+	 * @param nombreGanador String con el nombre del ganador
+	 * @param colorGanador String con el color del ganador
+	 * @param puntuacion Integer con la puntuacion obtenida
+	 * @param nombreProblema String con el nombre del problema
+	 */
 	public void partidaFinaliza(String nombreGanador, String colorGanador, int puntuacion, String nombreProblema) { // TODO
 		// TODO: Informa a presentacion sobre la finalizacion y ganadores
 		if (puntuacion > 0) { // mirar que sea persona contra maquina tmb

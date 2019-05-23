@@ -14,6 +14,12 @@ public class CtrlRanking {
         return single_instance; 
     }
 	
+	/**
+	 * Anade una linea al ranking de unn problema
+	 * @param nombrePersona String con nombre de la persona
+	 * @param nombreProblema String con el nombre del problema jugado
+	 * @param puntuacion Integer con la puntuacion de la persona
+	 */
 	public void addToRanking(String nombrePersona, String nombreProblema, int puntuacion) {
 		Ranking r = db.getRankingProblema(nombreProblema);
 		r.anadirAlRanking(nombrePersona, puntuacion);

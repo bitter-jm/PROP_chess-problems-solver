@@ -19,7 +19,13 @@ public class CtrlEvaluador {
 	
 	private CtrlEvaluador() {}
 	
-	// maquina1 y maquina2 pueden ser "MAQUINA1" o "MAQUINA2"
+	/**
+	 * Evalua una lista de problemas proporcionados entre dos Maquinas
+	 * @param problemas List<String> de nombres de problemas a evaluar
+	 * @param maquina1 String con el nombre de la primera maquina. Posibles valores: "MAQUINA1" o "MAQUINA2"
+	 * @param maquina2 String con el nombre de la segunda maquina. Posibles valores: "MAQUINA1" o "MAQUINA2"
+	 * @return List<String> con el ganador de cada problema
+	 */
 	public List<String> evaluarProblemas(List<String> problemas, String maquina1, String maquina2) {
 		Jugador m1 = ctrlDB.getJugador(maquina1);
 		Jugador m2 = ctrlDB.getJugador(maquina2);
@@ -28,11 +34,14 @@ public class CtrlEvaluador {
 			Problema p = ctrlDB.getProblema(problema);
 			Partida partida = new Partida(m1, m2, p, false, true);
 			ganadores.add(this.ganador);
-			
 		}
 		return ganadores;
 	}
 	
+	/**
+	 * Asigna ganador al problema que se esta evaluando actualmente (No llamar desde presentacion!)
+	 * @param ganador String con el ganador. ("Jugador 1" o "Jugador 2")
+	 */
 	public void setGanador(String ganador) {
 		this.ganador = ganador;
 	}

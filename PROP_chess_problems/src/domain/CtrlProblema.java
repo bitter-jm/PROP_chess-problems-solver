@@ -51,11 +51,19 @@ public class CtrlProblema {
 		this.prob = new Problema();	
 	}
 	
+	/**
+	 * Consulta si hay un problema cargado
+	 * @return Ture si hay un problema cargado. False en caso contrario.
+	 */
 	public boolean hayProblemaCargado() {
 		if (this.prob == null) return false;
 		else return true;
 	}
 	
+	/**
+	 * Consulta si el problema cargado esta validado
+	 * @return True si esta validado. False en caso contrario.
+	 */
 	public boolean estaValidado() {
 		if (this.prob != null) {
 			return this.prob.getValidado();
@@ -111,6 +119,14 @@ public class CtrlProblema {
 		}
 	}
 
+	/**
+	 * Mueve una ficha en el problema cargado
+	 * @param pieza String con nombre de pieza (en formato FEN)
+	 * @param iInicio coordena i de inicio
+	 * @param jInicio coordena j de inicio
+	 * @param iFinal coordena i final
+	 * @param jFinal coordena j final
+	 */
 	public void moverFicha(String pieza, int iInicio, int jInicio, int iFinal, int jFinal) { //DONE
 		if (this.prob != null) {	
 			if (this.prob.getValidado()) return;
@@ -165,6 +181,10 @@ public class CtrlProblema {
 		}
 	}
 	
+	/**
+	 * Obtiene el FEN del problema cargado
+	 * @return String con FEN del problema cargado
+	 */
 	public String getFEN() { 
 		if (this.prob != null) {
 			return this.prob.getFEN_Tablero();

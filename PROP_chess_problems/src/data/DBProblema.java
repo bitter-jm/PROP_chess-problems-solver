@@ -26,6 +26,9 @@ public class DBProblema {
 		System.out.println("Actual content: " + this.problemas.toJSONString());
 	}
 	
+	/**
+	 * Carga el fichero DBProblema.txt al estado interno del objeto en formato JSON
+	 */
 	private void cargarFichero() { // DONE
 		try {
 			this.fichero = new File("DBProblemas.txt");
@@ -67,6 +70,9 @@ public class DBProblema {
 		
 	}
 	
+	/**
+	 * Guarda el estado interno del objeto en formato JSON al fichero DBProblema.txt
+	 */
 	private void guardarFichero() { // DONE
 		try {			
 			String fileContent = this.problemas.toJSONString();
@@ -78,6 +84,11 @@ public class DBProblema {
 		}
 	}
 	
+	/**
+	 * Guarda la informacion de un nuevo problema
+	 * @param data String con la informacion del problema en formato:
+	 * nombreproblema + "\n" + maxmov + "\n" + FEN + "\n" + colorAGanar + "\n" + valido + "\n" + veces jugado + "\n" + autor + "\n" + dificultad
+	 */
 	public void createProblema(String data) {
 		String[] probData = data.split("\n");
 		JSONObject problema = new JSONObject();
@@ -103,6 +114,11 @@ public class DBProblema {
 		this.guardarFichero();
 	}
 	
+	/**
+	 * Guarda la nueva informacion para un problema ya existente
+	 * @param p String con la informacion del nuevo problema con el siguiente formato:
+	 * nombreproblema + "\n" + maxmov + "\n" + FEN + "\n" + colorAGanar + "\n" + valido + "\n" + veces jugado + "\n" + autor + "\n" + dificultad
+	 */
 	public void updateProblema(String p) {
 		String nombre = p.split("\n")[0];
 		for (int i = 0; i < this.problemas.size(); ++i) {
@@ -114,6 +130,11 @@ public class DBProblema {
 		}
 	}
 	
+	/**
+	 * Consulta si la informacion para un problema existe en la base de datos
+	 * @param nombre Stringo con el nombre del problema
+	 * @return True si el problema existe. False en caso contrario.
+	 */
 	public boolean existsProblema(String nombre) {
 		for (int i = 0; i < this.problemas.size(); ++i) {
 			JSONObject problema = (JSONObject) this.problemas.get(i);
@@ -122,6 +143,12 @@ public class DBProblema {
 		return false;
 	}
 	
+	/**
+	 * Obtiene la informacion de un problema conreto
+	 * @param nombre String del nombre del problema a obtener
+	 * @return String con la informacion del problema en formato:
+	 * nombreproblema + "\n" + maxmov + "\n" + FEN + "\n" + colorAGanar + "\n" + valido + "\n" + veces jugado + "\n" + autor + "\n" + dificultad
+	 */
 	public String getProblema(String nombre) {
 		for (int i = 0; i < this.problemas.size(); ++i) {
 			JSONObject problema = (JSONObject) this.problemas.get(i);
@@ -134,6 +161,10 @@ public class DBProblema {
 		return null;
 	}
 	
+	/**
+	 * Elimina la informacion de un problema de la base de datos
+	 * @param nombre String con el nombre del problema a eliminar
+	 */
 	public void deleteProblema(String nombre) {
 		for (int i = 0; i < this.problemas.size(); ++i) {
 			JSONObject problema = (JSONObject) this.problemas.get(i);
@@ -144,6 +175,12 @@ public class DBProblema {
 		}
 	}
 	
+	/**
+	 * Obtiene la informacion de los problemas que pertenezcan la persona especificada
+	 * @param nombrePersona String con el nombre de la persona
+	 * @return List<String> donde cada elemento contiene la informacion de un problema en el siguiente formato:
+	 * nombreproblema + "\n" + maxmov + "\n" + FEN + "\n" + colorAGanar + "\n" + valido + "\n" + veces jugado + "\n" + autor + "\n" + dificultad
+	 */
 	public List<String> getMisProblemas(String nombrePersona) {
 		List<String> probs = new ArrayList<String>();
 		for (int i = 0; i < this.problemas.size(); ++i) {
@@ -155,6 +192,11 @@ public class DBProblema {
 		return probs;
 	}
 	
+	/**
+	 * Obtiene la informacion de los problemas jugables de todo el sistema
+	 * @return List<Srting> en donde cada elemento contiene la informacion de un problema en el siguiente formato:
+	 * nombreproblema + "\n" + maxmov + "\n" + FEN + "\n" + colorAGanar + "\n" + valido + "\n" + veces jugado + "\n" + autor + "\n" + dificultad
+	 */
 	public List<String> getProblemasJugables() {
 		List<String> probs = new ArrayList<String>();
 		for (int i = 0; i < this.problemas.size(); ++i) {
@@ -166,6 +208,10 @@ public class DBProblema {
 		return probs;
 	}
 	
+	/**
+	 * Modifica la informamcion de un problema de la base de datos para incrementar en uno las veces jugadas
+	 * @param nombreProblema String del nombre del problema a incrementar
+	 */
 	public void incrementarVecesJugado(String nombreProblema) {
 		for (int i = 0; i < this.problemas.size(); ++i) {
 			JSONObject problema = (JSONObject) this.problemas.get(i);

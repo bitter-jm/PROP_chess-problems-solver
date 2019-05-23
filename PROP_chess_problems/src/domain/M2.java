@@ -167,7 +167,7 @@ public class M2 extends Maquina {
 	            }
 			}
 			return mejorValor;
-		} else {
+		} else { // if min
 			List<Movimiento> movimientosPosibles = t.posiblesMovimientos(this.colorOpuesto);
 			int mejorValor = 9999;
 			Iterator<Movimiento> iterator = movimientosPosibles.iterator();

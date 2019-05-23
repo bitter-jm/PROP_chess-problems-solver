@@ -24,6 +24,9 @@ public class DBPersona {
 		System.out.println("Actual content: " + this.personas.toJSONString());
 	}
 	
+	/**
+	 * Carga el fichero DBPersonas.txt al estado interno del objeto en formato JSON
+	 */
 	private void cargarFichero() { // DONE
 		try {
 			this.fichero = new File("DBPersonas.txt");
@@ -61,6 +64,9 @@ public class DBPersona {
 		
 	}
 	
+	/**
+	 * Guarda el estado interno del objeto en formato JSON al fichero DBPersonas.txt
+	 */
 	private void guardarFichero() { // DONE
 		try {			
 			String fileContent = this.personas.toJSONString();
@@ -72,6 +78,11 @@ public class DBPersona {
 		}
 	}
 	
+	/**
+	 * Guarda una persona nueva en la base de datos y guarda el estado
+	 * @param nombre String con el nombre de la persona
+	 * @param contrasena String con la contrasena de la persona
+	 */
 	public void createPersona(String nombre, String contrasena) {
 		JSONObject persona = new JSONObject();
 		persona.put("nombre", nombre);
@@ -80,6 +91,11 @@ public class DBPersona {
 		this.guardarFichero();
 	}
 	
+	/**
+	 * Consulta si el la base de datos existe cierta persona
+	 * @param nombre String del nombre de la persona a consultar
+	 * @return Ture en caso de que la persona exista. False en caso contrario.
+	 */
 	public boolean existsPersona(String nombre) { // DONE
 		for (int i = 0; i < this.personas.size(); ++i) {
 			JSONObject persona = (JSONObject) this.personas.get(i);
@@ -88,6 +104,12 @@ public class DBPersona {
 		return false;
 	}
 	
+	/**
+	 * Consulta si un par usuario y contrasena son correctos
+	 * @param nombre String indicando el nombre de la persona
+	 * @param contrasena String indicando la contrasena de la persona
+	 * @return
+	 */
 	public boolean checkLogIn(String nombre, String contrasena) { // DONE
 		for (int i = 0; i < this.personas.size(); ++i) {
 			JSONObject persona = (JSONObject) this.personas.get(i);

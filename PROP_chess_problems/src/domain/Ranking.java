@@ -18,6 +18,10 @@ public class Ranking {
 		this.nombreProblema = nombreProblema;
 	}
 	
+	/**
+	 * Obtiene el nombre del problema con el que esta relacionado
+	 * @return String nombre de problema
+	 */
 	public String getNombreProblema() {
 		return this.nombreProblema;
 	}

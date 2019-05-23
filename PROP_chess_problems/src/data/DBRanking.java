@@ -24,6 +24,9 @@ public class DBRanking {
 		System.out.println("Actual content: " + this.rankings.toJSONString());
 	}
 	
+	/**
+	 * Carga el fichero DBRanking.txt al estado interno del objeto en formato JSON
+	 */
 	private void cargarFichero() { // DONE
 		try {
 			this.fichero = new File("DBRanking.txt");
@@ -61,6 +64,9 @@ public class DBRanking {
 		
 	}
 	
+	/**
+	 * Guarda el estado interno del objeto en formato JSON al fichero DBRanking.txt
+	 */
 	private void guardarFichero() { // DONE
 		try {			
 			String fileContent = this.rankings.toJSONString();
@@ -72,6 +78,11 @@ public class DBRanking {
 		}
 	}
 	
+	/**
+	 * Consulta si existe cierto ranking en la base de datos
+	 * @param nombreProblema String con el nombre del problema
+	 * @return Truen en caso de que exista. False en caso contrario.
+	 */
 	public boolean existsRanking(String nombreProblema) { // DONE
 		for (int i = 0; i < this.rankings.size(); ++i) {
 			JSONObject ranking = (JSONObject) this.rankings.get(i);
@@ -82,6 +93,12 @@ public class DBRanking {
 		return false;
 	}
 	
+	/**
+	 * Guarda la informacion de un nuevo ranking en la base de datos
+	 * @param dataRanking String con la informacion del ranking con el siguiente formato:
+	 * nombrePersona1 + "?" + puntuacionPersona1 + "\n" + ...
+	 * @param nombreProblema String indicando el nombre del problema que implementa
+	 */
 	public void createRanking(String dataRanking, String nombreProblema) {
 		String[] rankingData = dataRanking.split("\n");
 		JSONObject ranking = new JSONObject();
@@ -99,6 +116,12 @@ public class DBRanking {
 		this.guardarFichero();
 	}
 	
+	/**
+	 * Actualiza la informacion de un ranking existente
+	 * @param dataRanking String con la nueva informacion del ranking en formato:
+	 * nombrePersona1 + "?" + puntuacionPersona1 + "\n" + ...
+	 * @param nombreProblema String indicando el nombre de problema que implementa
+	 */
 	public void updateRanking(String dataRanking, String nombreProblema) {
 		for (int i = 0; i < this.rankings.size(); ++i) {
 			JSONObject problema = (JSONObject) this.rankings.get(i);
@@ -109,6 +132,12 @@ public class DBRanking {
 		}
 	}
 	
+	/**
+	 * Obtiene la informacion de un ranking para determinado problema
+	 * @param nombreProblema String indicando el nombre del problema
+	 * @return String con la informacion del ranking en el siguiente formato:
+	 * nombrePersona1 + "?" + puntuacionPersona1 + "\n" + ...
+	 */
 	public String getRankingProblema(String nombreProblema) { // DONE
 		String out = "";
 		for (int i = 0; i < this.rankings.size(); ++i) {

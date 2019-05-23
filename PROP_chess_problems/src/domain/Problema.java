@@ -229,7 +229,7 @@ public class Problema {
 	}
 	
 	/**
-	 * Funcion recursiva de fuerza bruta para buscar si se puede realizar mate en menos de movsJ1 movimientos
+	 * Funcion recursiva de fuerza bruta (minimax) para buscar si se puede realizar mate en movsJ1 movimientos o menos
 	 * @param color color a empezar a analizar. false -> Blancas, true -> Negras
 	 * @param aGanar True si el jugador <em>color</em> es quien intenta hacer mate. False en caso contrario
 	 * @param movsJ1 Movimientos restantes del jugador 1 para intentar hacer mate

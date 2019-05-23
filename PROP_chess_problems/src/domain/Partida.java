@@ -61,13 +61,13 @@ public class Partida {
 	    this.tab = new Tablero(prob.getFEN_Tablero());
 	    
 	
-	    if (!j1.esPersona()) {
+	    if (!(j1 instanceof Persona)) {
 	    	String colorString = "BLANCAS";
 	    	if (color) colorString = "NEGRAS";
 	    	Maquina maquina = (Maquina) j1;
 	    	maquina.setColor(colorString);
 	    }
-	    if (!j2.esPersona()) {
+	    if (!(j2 instanceof Persona)) {
 	    	String colorString = "NEGRAS";
 	    	if (color) colorString = "BLANCAS";
 	    	Maquina maquina = (Maquina) j2;
@@ -105,7 +105,7 @@ public class Partida {
 		
 		if (!turno) { // j1
 			++mov_uno;
-			if (!j1.esPersona()) { // j1 es maquina
+			if (!(j1 instanceof Persona)) { // j1 es maquina
 				Maquina maquina = (Maquina) j1;
 				Movimiento m = maquina.realizarMovimiento(this.tab.exportarFEN());
 				boolean valido = this.tab.registrarMovimientoValidando(m);
@@ -125,7 +125,7 @@ public class Partida {
 			}
 		} else { // j2
 			++mov_dos;
-			if (!j2.esPersona()) { // j2 es maquina
+			if (!(j2 instanceof Persona)) { // j2 es maquina
 				Maquina maquina = (Maquina) j2;
 				Movimiento m = maquina.realizarMovimiento(this.tab.exportarFEN());
 				boolean valido = this.tab.registrarMovimientoValidando(m);
@@ -161,7 +161,7 @@ public class Partida {
 			colorS="BLANCAS";
 			colorOpuesto = "NEGEAS";
 		}
-		if (!turno && j1.esPersona()) {
+		if (!turno && j1 instanceof Persona) {
 			this.crono.pause();// TODO: Pausar cronometro
 			// Mirar si es del mismo color la pieza movida 
 			boolean valid = tab.registrarMovimientoValidando(m);
@@ -176,7 +176,7 @@ public class Partida {
 			} else {
 				return false;
 			}
-		} else if (turno && j2.esPersona()) {
+		} else if (turno && j2 instanceof Persona) {
 			// Mirar si es del mismo color la pieza movida 
 			boolean valid = tab.registrarMovimientoValidando(m);
 			if (valid) {
@@ -203,7 +203,7 @@ public class Partida {
     	if (!color) c = "NEGRAS";
     	else c = "BLANCAS"; 
 		if(tab.esMateColor(c)) {
-			if (j1.esPersona() && !j2.esPersona()) timeJ1 = this.calcularPuntuacion(this.crono.getTime());
+			if (j1 instanceof Persona && (!(j2 instanceof Persona))) timeJ1 = this.calcularPuntuacion(this.crono.getTime());
 			else timeJ1 = -1;
 			// TODO: Calcular puntuacion ranking
 			ganador = j1.getNombre();

@@ -12,15 +12,14 @@ import domain.CtrlProblema;
 import presentacion.Controller;
 import presentacion.LogIn2;
 public class CtrlPresentacion implements ActionListener {
+	private static  CtrlPresentacion single_instance = null;
 	private CtrlPersona CDpers; 
-	private Controller CtrlR;
 	private Men2 menu;
 	private LogIn2 l;
 	public CtrlPresentacion () {
-		
-		//CtrlR = Controller.getInstance();
 		CDpers = CtrlPersona.getInstance();
 		l = new LogIn2();
+		l.f.show(true);
 		l.conectaControlador(this);
 	}
 	
@@ -35,12 +34,20 @@ public class CtrlPresentacion implements ActionListener {
 				menu.MenuGrande();
 				l.f.show(false);
 			}
+		}
+		if (comando == "SIGNIN") {
 			
 		}
 	}
+	public static CtrlPresentacion getInstance() { 
+        if (single_instance == null) 
+            single_instance = new CtrlPresentacion(); 
+        return single_instance;
+    }
 
 	public static void main(String[] args) {
-		CtrlPresentacion c = new CtrlPresentacion();
+		//CtrlPresentacion c = new CtrlPresentacion();
+		CtrlPresentacion CtrlP = CtrlPresentacion.getInstance();
 	}
 	
 }

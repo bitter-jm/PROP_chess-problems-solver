@@ -15,6 +15,7 @@ public class Controller implements ActionListener, MouseListener {
 	public  RankMen m;
 	public Ranking r;
 	public String prob;
+	private Men2 menu;
 	//CONTROLLER
 
 	public Controller() {
@@ -24,7 +25,7 @@ public class Controller implements ActionListener, MouseListener {
             v.add( "Problema " + i + "   Mate en " + (i+1)*2 + " de las blancas" );
         }
         
-		//this.m = new RankMen();
+		this.m = new RankMen();
 		//m.setListData( v );
 		//m.setTable(JTable);
 		m.conectaControlador(this);
@@ -53,15 +54,19 @@ public class Controller implements ActionListener, MouseListener {
 		String comando = arg0.getActionCommand();
 		
 		if(comando =="HOME") {
-			//Preparar la  llamada al CTRL D d
-			//mandar la info y el procedimiento que toque
+			
+			menu = new Men2();
+			menu.MenuGrande();
+			m.f.show(false);
 			r.show(false);
+			
 		}
 		if (comando == "RANKING") {
 			
 			if (prob != null) {
 				this.r = new Ranking(prob);
 				r.prob=prob;
+				
 				//
 				m.f.show(false);
 				r.conectaControlador(this);

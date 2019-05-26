@@ -2,33 +2,39 @@ package presentacion;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 
-public class Men2 {
-	
+public class Men2 implements ActionListener {
+	private Controller CtrlR;
+	private CtrlPresentacion CtrlP;
 	JButton Jugar, MisProb, Ranking, Maquinas, SignOut;
+	static JButton JugarP ,MisProbP,RankingP,MaquinasP,SignOutP;
 	JLabel titulo1, titulo2;
-
+	static String cual;
 	Font f1 = new Font ("AR BONNIE", Font.BOLD,100);
 	Font f2 = new Font ("Segoe Script", Font.PLAIN,50);
 	static Font f3 = new Font ("Consolas", Font.BOLD,20);
 	Font f4 = new Font ("AR BONNIE", Font.BOLD,50);
-	 
+	JFrame f;
 	Color cbutton = new Color (252,177,85);
 	static Color mpeque = new Color (239, 247, 247);
 	
 	
-	public Men2() {}
+	public Men2() {	}
 	
-	public JFrame MenuGrande() {
+	public void MenuGrande() {
 		//FRAME
-		JFrame f = new JFrame();
+		f = new JFrame();
+		f.show();
 		f.setBounds (400,150,1089,803); //x, y, width, height
 		f.setTitle("Chess Game");
 		f.setLayout(null);
 		f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		
+		cual = "BIG";
 		
 		//PANEL 1: Main Menu
 		JPanel cp1 = new JPanel();
@@ -105,7 +111,8 @@ public class Men2 {
 		cp3.add(titulo2);
 		f.add(cp3);
 		f.setVisible(true);
-		return f;
+		AccionesGrande();
+		//return f;
 		
 
 	}
@@ -121,47 +128,79 @@ public class Men2 {
 		cpmenu.setLayout( new BoxLayout (cpmenu, BoxLayout.Y_AXIS));;
 		cpmenu.setLayout(null);
 		cpmenu.setBounds(0, 0, 230, 803);
+		cual = "SMALL";
 		
-		JButton Jugar = new JButton ("JUGAR");
-		Jugar.setBounds(0,150,230,54);
-		Jugar.setFont(f3);
-		JButton MisProb = new JButton ("MIS PROBLEMAS");
-		MisProb.setBounds(0,204,230,54);
-		MisProb.setFont(f3);
-		JButton Ranking = new JButton ("RANKING");
-		Ranking.setBounds(0,258,230,54);
-		Ranking.setFont(f3);
-		JButton Maquinas = new JButton ("EVALUAR MAQUINAS");
-		Maquinas.setBounds(0,312,230,54);
-		Maquinas.setFont(f3);
+		JugarP = new JButton ("JUGAR");
+		JugarP.setBounds(0,150,230,54);
+		JugarP.setFont(f3);
+		MisProbP = new JButton ("MIS PROBLEMAS");
+		MisProbP.setBounds(0,204,230,54);
+		MisProbP.setFont(f3);
+		RankingP = new JButton ("RANKING");
+		RankingP.setBounds(0,258,230,54);
+		RankingP.setFont(f3);
+		MaquinasP = new JButton ("EVALUAR MAQUINAS");
+		MaquinasP.setBounds(0,312,230,54);
+		MaquinasP.setFont(f3);
 		
-		JButton SignOut = new JButton("SIGN OUT");
-		SignOut.setBounds(0, 650, 230, 54);
-		SignOut.setFont(f3);
+		SignOutP = new JButton("SIGN OUT");
+		SignOutP.setBounds(0, 650, 230, 54);
+		SignOutP.setFont(f3);
 		
-		if (s=="JUGAR") Jugar.setEnabled(false);
-		else if (s=="PROBLEMAS") MisProb.setEnabled(false);
-		else if (s=="RANKING") Ranking.setEnabled(false);
-		else if (s=="MAQUINA") Maquinas.setEnabled(false);
+		if (s=="JUGAR") JugarP.setEnabled(false);
+		else if (s=="PROBLEMAS") MisProbP.setEnabled(false);
+		else if (s=="RANKING") RankingP.setEnabled(false);
+		else if (s=="MAQUINA") MaquinasP.setEnabled(false);
 		
-		cpmenu.add(Jugar);
-		cpmenu.add(MisProb);
-		cpmenu.add(Ranking);
-		cpmenu.add(Maquinas);
+		cpmenu.add(JugarP);
+		cpmenu.add(MisProbP);
+		cpmenu.add(RankingP);
+		cpmenu.add(MaquinasP);
 		//cpmenu.add(Box.createRigidArea(new Dimension(0, 30)));
-		cpmenu.add(SignOut);
-		
+		cpmenu.add(SignOutP);
 		return cpmenu;
 	
 	}
 	
-/*
-	public static void main(String[] args) {
-		Men2 em = new Men2();
-		em.MenuGrande();
-		//em.MenuPeque("Maquina");
-		em.setuser("anita.gibbs");
-		
-	}*/
+	private void AccionesGrande() {
+		Jugar.addActionListener( this);
+		Jugar.setActionCommand("JUGAR");
+		MisProb.addActionListener(this);
+		MisProb.setActionCommand("PROBLEMAS");
+		Ranking.addActionListener(this);
+		Ranking.setActionCommand("RANKING");
+		Maquinas.addActionListener(this);
+		Maquinas.setActionCommand("MAQUINAS");
+		SignOut.addActionListener(this);
+		SignOut.setActionCommand("SIGNOUT");
+	}
+	public void AccionesPeque() {
+		JugarP.addActionListener( this);
+		JugarP.setActionCommand("JUGAR");
+		MisProbP.addActionListener(this);
+		MisProbP.setActionCommand("PROBLEMAS");
+		RankingP.addActionListener(this);
+		RankingP.setActionCommand("RANKING");
+		MaquinasP.addActionListener(this);
+		MaquinasP.setActionCommand("MAQUINAS");
+		SignOutP.addActionListener(this);
+		SignOutP.setActionCommand("SIGNOUT");
+	}
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		String comando = e.getActionCommand();
+		if(comando =="JUGAR");
+		else if (comando =="PROBLEMAS") ;
+		else if (comando == "RANKING") {
+			//donde = "RANKING";
+			
+			if (cual =="BIG") f.show(false);
+			CtrlR = Controller.getInstance();
+			
+		}
+		else if (comando == "MAQUINAS") ;
+		else if (comando == "SIGNOUT") CtrlP = CtrlPresentacion.getInstance();
+	}
 }

@@ -109,13 +109,13 @@ public class Tablero implements ActionListener {
 		else if (numclicks == 2) {
 			numclicks =0;
 			destination =(int) b.getClientProperty("index");
-			if (caller == "PLAYER") {
+			//if (caller == "PLAYER") {
 			//check if destination is correct 
 			//osea aqui hay la llamada de controladores
 			buttons[destination].setIcon(buttons[source].getIcon());
 			buttons[source].setIcon(null);
-			}
-			else if (caller == "EDIT") {
+			//}
+			/*	else if (caller == "EDIT") {
 				if (buttons[destination].getIcon()==null) {
 					buttons[destination].setIcon(buttons[source].getIcon());
 					//if (boton es uno de dentro del tablero)
@@ -123,7 +123,7 @@ public class Tablero implements ActionListener {
 					//else if (boton uno del menu)
 					//No se hace nada
 				}
-			}
+			}*/
 		}
 	}
 	

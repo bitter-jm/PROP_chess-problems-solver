@@ -24,12 +24,15 @@ public class RankMen {
     protected String[] cabecera;    //Cabecera de la tabla
     protected DefaultTableModel dtm;//Unión de la cabecera y la tabla
     protected JTable tabla; //Tabla propiamente dicha
- 
-	public RankMen(Object[][] datos) {
+    
+    
+	public RankMen() {
 		RankMen.datos = datos;
 		f = new JFrame();
 		SetFrame();
-		JPanel menu = Men2.MenuPeque("RANKING");
+		Men2 m= new Men2();
+		JPanel menu = m.MenuPeque("RANKING");
+		m.AccionesPeque();
 		f.add(menu);
 		SetPanelRankMenu();
 		f.setVisible(true);
@@ -55,17 +58,17 @@ public class RankMen {
 		/*
 		list = new JList();
 		JScrollPane scroll = new JScrollPane(list);
-		*//*
+		*/
 		Object[][] data ={
 		        {"Kathy","Snowboarding", new Integer(5), new Boolean(false)},
 		        {"John","Rowing", new Integer(3), new Boolean(true)},
 		        {"Sue","Knitting", new Integer(2), new Boolean(false)},
 		        {"Jane","Speed reading", new Integer(20), new Boolean(true)},
 		        {"Joe","Pool", new Integer(10), new Boolean(false)}
-		    };*/
+		    };
 		 scroll = new JScrollPane();
 	     cabecera = new String[] {"PROBLEMA","DESCRIPCION","DIFICULTAD","VECES JUGADO"};
-	     dtm= new DefaultTableModel(datos,cabecera);
+	     dtm= new DefaultTableModel(data,cabecera);
 	     tabla= new JTable(dtm);
 	     scroll.setViewportView(tabla);
 	     scroll.setBounds(90, 100, 660, 525);

@@ -1,91 +1,103 @@
 package presentacion;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.util.Vector;
 
-import javax.swing.Box;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
-public class Ranking {
-	JFrame f;
-	JPanel ranking;
-	JList list;
-	JLabel text1;
+public class Ranking extends JFrame{
+	JFrame f ;
+	JPanel cp1;
+	Color c1= new Color (239, 255, 254);
+	String prob;
+	Font f1 = new Font ("Britannic Bold", Font.PLAIN,40);
+	Font f2 = new Font ("Consolas", Font.PLAIN,20);
 	
-	public Ranking() {
-		
-		f = new JFrame();
+	String[] columnNames = {"Nombre","Puntuacion"};
+	Object[][] data = {
+		    {"Annita.gibbs", "9.1"},
+		    {"Annita.gibbs", "9.1"},
+		    {"Annita.gibbs", "9.1"},
+		    {"Annita.gibbs", "9.1"},
+		    {"Annita.gibbs", "9.1"},
+		    {"Annita.gibbs", "9.1"},
+		    {"Annita.gibbs", "9.1"},
+		    {"Annita.gibbs", "9.1"},
+		    {"Annita.gibbs", "9.1"},
+		    {"Annita.gibbs", "9.1"},
+		    {"Annita.gibbs", "9.1"},
+		    {"Annita.gibbs", "9.1"},
+		    {"Annita.gibbs", "9.1"},
+		    {"Annita.gibbs", "9.1"},
+		};
+	
+	//Elements:
+	JButton home;
+	JTable tabla;
+	public Ranking(String prob) {
+		//f = new JFrame();
+		this.prob = prob;
 		SetFrame();
-		JPanel menu = Menu.MenuPeque("RANKING");
-		f.getContentPane().add(menu, BorderLayout.WEST);
-		ranking = new JPanel();
-		ranking.setBackground(Color.WHITE);
+		JPanel menu = Men2.MenuPeque("RANKING");
+		this.add(menu);
 		SetPanelRanking();
-		f.getContentPane().add(ranking, BorderLayout.CENTER);
-	}
-	
-	private void SetPanelRanking() {
-		ranking.setLayout(new BorderLayout());
-		//maquina.setBounds(230, 0, 859, 803);
-		ranking.setBounds(0,0, 1000, 700);
-		//PANEL 1:
-		JPanel P1 = new JPanel();
-		text1 = new JLabel();
-		//PANEL 2:
-		list = new JList();
-		JScrollPane scroll = new JScrollPane(list);
-		//PANEL 3:
-		JPanel P3 = new JPanel();
-		JButton M = new JButton("Evaluar");
-		JButton H = new JButton("Home");
-		M.setBackground(Color.YELLOW);
-		Font f1 = new Font (Font.DIALOG_INPUT, Font.BOLD, 25);
-		M.setFont(f1);
-		P3.add(M);
-		P3.add(H);
-		
-		//Add panels to panel maquina:
-		ranking.add(P1,BorderLayout.NORTH);
-		ranking.add(scroll,BorderLayout.CENTER);	         
-		ranking.add(P3, BorderLayout.SOUTH);
-	}
-	
-	public void setTitle(String s) {
-		text1.setText("Ranking " +s);
+		this.setVisible(true);
 	}
 	
 	public void SetFrame() {
-		f.setBounds (400,150,1089,803);
-		f.setVisible(true);
-		f.setTitle("Chess Game");
-		f.setLayout(new BorderLayout());
+		this.setBounds (400,150,1089,803);
+		this.setTitle("Chess Game");
+		this.setLayout(null);
+		this.setResizable(false);
+		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+	}
+	public void SetPanelRanking() {
+		cp1 = new JPanel();
+		cp1.setLayout(null);
+		cp1.setBounds(230, 0, 859,803);
+		cp1.setBackground(c1);
 		
-		f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		/*f.pack();
-        f.show();*/
-	}
-	
-    public void setListData( Vector vect ) {
-        list.setListData( vect );
-    }
-    
-	
-    public static void main(String[] args) {
-		Ranking r = new Ranking();
-		 Vector v = new Vector();
-	        for ( int i = 0; i < 100; i++ ) {
-	            v.add( "Data " + i );
-	        }
-	    r.setListData( v );
-	    r.setTitle("Problema 5");
-	}
+		JLabel text1 = new JLabel("Ranking "+prob+":");
+		text1.setBounds(90, 50, 400, 50);
+		text1.setFont(f1);
+		cp1.add(text1);
+		
+		//tengo que ponerlo en un scrollpane
+		DefaultTableModel dtm = new DefaultTableModel(data, columnNames);
+		tabla = new JTable(dtm);
+		tabla.setBounds(90, 150, 660, 450);
+		tabla.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		cp1.add(tabla);
+		
+		JLabel text2 = new JLabel("Top50 jugadores de este problema");
+		text2.setBounds(220, 650, 450, 50);
+		text2.setFont(f2);
+		cp1.add(text2);
 
+		ImageIcon house = new ImageIcon (new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/home.png").getImage().getScaledInstance(40, 40 ,java.awt.Image.SCALE_SMOOTH));
+		home = new JButton(house);
+		home.setBounds(755, 670, 68, 68);
+		home.setBackground(c1);
+		home.setBorder(null);
+		cp1.add(home);
+			
+		this.add(cp1);
+	}
+	
+
+	public void conectaControlador (Controller c) {
+		home.addActionListener(c);
+		home.setActionCommand("HOME");
+		tabla.addMouseListener(c);
+		tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+	}
+	
 }

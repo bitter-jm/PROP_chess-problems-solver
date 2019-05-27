@@ -2,11 +2,14 @@ package drivers;
 
 import java.util.concurrent.TimeUnit;
 import domain.Cronometro;
+import data.CtrlData;
+import domain.CtrlPersona;
 
 public class DriverCronometro {
 
 	public static void main(String[] args) {
-		try {
+
+			try {
 			
 			Cronometro c = new Cronometro();
 			c.start();

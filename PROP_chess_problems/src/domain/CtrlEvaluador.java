@@ -26,14 +26,17 @@ public class CtrlEvaluador {
 	 * @param maquina2 String con el nombre de la segunda maquina. Posibles valores: "MAQUINA1" o "MAQUINA2"
 	 * @return List<String> con el ganador de cada problema
 	 */
-	public List<String> evaluarProblemas(List<String> problemas, String maquina1, String maquina2) {
+	public String[][] evaluarProblemas(List<String> problemas, String maquina1, String maquina2) {
 		Jugador m1 = ctrlDB.getJugador(maquina1);
 		Jugador m2 = ctrlDB.getJugador(maquina2);
-		List<String> ganadores = new ArrayList<String>();
+		String[][] ganadores = new String[problemas.size()][2];
+		int i = 0;
 		for (String problema : problemas) {
 			Problema p = ctrlDB.getProblema(problema);
 			Partida partida = new Partida(m1, m2, p, false, true);
-			ganadores.add(this.ganador);
+			ganadores[i][0] = problema; // nombreProblema
+			ganadores[i][1] = this.ganador; // ganador
+			i++;
 		}
 		return ganadores;
 	}

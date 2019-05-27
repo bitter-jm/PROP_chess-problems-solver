@@ -44,10 +44,5 @@ public class Persona extends Jugador {
 	public String getContrasena() {
 		return this.contrasena;
 	}
-	
-	@Override
-	public boolean esPersona() {
-		return true;
-	}
 
 }

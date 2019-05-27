@@ -13,8 +13,7 @@ public class DriverPersona {
 		System.out.println("FUNCIONALIDAD 1: Constructora con nombre");
 		System.out.println("FUNCIONALIDAD 2: Constructora con nombre y contrasena");
 		System.out.println("FUNCIONALIDAD 3: Cambiar contrasena");
-		System.out.println("FUNCIONALIDAD 4: Es persona?");
-		System.out.println("FUNCIONALIDAD 5: Salir");
+		System.out.println("FUNCIONALIDAD 4: Salir");
 		System.out.println("Introduce el numero de funcionalidad a probar:");
 		int a = sc.nextInt();
 		while(a!=5) {
@@ -68,12 +67,6 @@ public class DriverPersona {
 				
 					}
 				}	
-			}
-			if(a==4) {
-				Persona p = new Persona("Usuario","Ajedrez");
-				System.out.println("Nombre de Persona creada por defecto: "+ p.getNombre());
-				System.out.println("Contrasena actual de "+ p.getNombre() + ": " +p.getContrasena());
-				System.out.println("Es persona? "+ p.esPersona());
 			}
 			System.out.println("Introduce el numero de funcionalidad a probar:");
 			a = sc.nextInt();

@@ -12,10 +12,6 @@ public abstract class Maquina extends Jugador {
 		super.nombre ="MAQUINA";
 	}
 	
-	@Override
-	public boolean esPersona() {
-		return false;
-	}
 	
 	/**
 	 * Calcula cual es el mejor movimiento a realizar

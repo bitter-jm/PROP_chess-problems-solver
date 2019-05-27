@@ -3,6 +3,7 @@ package drivers;
 import java.util.Scanner;
 import domain.Jugador;
 import domain.Maquina;
+import domain.Persona;
 import domain.M1;
 
 public class DriverMaquina {
@@ -23,7 +24,6 @@ public class DriverMaquina {
 				if(color.equals("BLANCAS")||color.equals("NEGRAS")) {
 					m.setColor(color);
 					System.out.println("La maquina creada con color " + color + " tiene nombre " + m.getNombre()+ " y produndidad " +m.getDepth());
-					System.out.println("Es persona? "+ m.esPersona());
 				}
 				else {
 					System.out.println("ERROR: Color inv�lido");

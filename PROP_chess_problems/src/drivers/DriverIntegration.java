@@ -172,7 +172,7 @@ public class DriverIntegration {
 					System.out.println("No hay ningun problema activo en el editor.");
 					break;
 				}
-				if (!ctrlPr.estaValidado()) {
+				if (ctrlPr.estaValidado()) {
 					System.out.println("El problema cargado ya está validado.");
 					break;
 				}
@@ -200,7 +200,7 @@ public class DriverIntegration {
 					System.out.println("No hay ningun problema activo en el editor.");
 					break;
 				}
-				if (!ctrlPr.estaValidado()) {
+				if (ctrlPr.estaValidado()) {
 					System.out.println("El problema cargado ya está validado.");
 					break;
 				}
@@ -218,7 +218,7 @@ public class DriverIntegration {
 					System.out.println("No hay ningun problema activo en el editor.");
 					break;
 				}
-				if (!ctrlPr.estaValidado()) {
+				if (ctrlPr.estaValidado()) {
 					System.out.println("El problema cargado ya está validado.");
 					break;
 				}
@@ -234,7 +234,7 @@ public class DriverIntegration {
 					System.out.println("No hay ningun problema activo en el editor.");
 					break;
 				}
-				if (!ctrlPr.estaValidado()) {
+				if (ctrlPr.estaValidado()) {
 					System.out.println("El problema cargado ya está validado.");
 					break;
 				}
@@ -254,7 +254,7 @@ public class DriverIntegration {
 					System.out.println("No hay ningun problema activo en el editor.");
 					break;
 				}
-				if (!ctrlPr.estaValidado()) {
+				if (ctrlPr.estaValidado()) {
 					System.out.println("El problema cargado ya está validado.");
 					break;
 				}
@@ -268,7 +268,7 @@ public class DriverIntegration {
 					System.out.println("No hay ningun problema activo en el editor.");
 					break;
 				}
-				if (!ctrlPr.estaValidado()) {
+				if (ctrlPr.estaValidado()) {
 					System.out.println("El problema cargado ya está validado.");
 					break;
 				}

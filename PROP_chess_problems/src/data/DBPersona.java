@@ -21,7 +21,7 @@ public class DBPersona {
 	
 	private DBPersona() { // DONE
 		this.cargarFichero();
-		System.out.println("Actual content: " + this.personas.toJSONString());
+		System.out.println("Personas loaded: " + this.personas.toJSONString());
 	}
 	
 	/**
@@ -39,7 +39,6 @@ public class DBPersona {
 
 				// Parsing to String
 				String content = new String(data, "UTF-8");
-				System.out.println("Content readed: " + content);
 				
 				// Parsing to JSON
 				if (content.isEmpty()) {

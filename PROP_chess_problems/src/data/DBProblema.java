@@ -23,7 +23,7 @@ public class DBProblema {
 	
 	private DBProblema() { // DONE
 		this.cargarFichero();
-		System.out.println("Actual content: " + this.problemas.toJSONString());
+		System.out.println("Problemas loaded: " + this.problemas.toJSONString());
 	}
 	
 	/**
@@ -41,7 +41,6 @@ public class DBProblema {
 
 				// Parsing to String
 				String content = new String(data, "UTF-8");
-				System.out.println("Content readed: " + content);
 				
 				// Parsing to JSON
 				if (content.isEmpty()) {

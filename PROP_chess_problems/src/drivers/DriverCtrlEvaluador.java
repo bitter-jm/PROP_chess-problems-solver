@@ -12,9 +12,10 @@ public class DriverCtrlEvaluador {
 		aEvaluar.add("P1");
 		aEvaluar.add("Problema1");
 		aEvaluar.add("Problema1");
-		List<String> ganadores = ctrlE.evaluarProblemas(aEvaluar, "MAQUINA2", "MAQUINA1");
-		for (String ganador : ganadores) {
-			System.out.println(ganador);
+		String[][] ganadores = ctrlE.evaluarProblemas(aEvaluar, "MAQUINA2", "MAQUINA1");
+		for (String[] ganador : ganadores) {
+			System.out.println(ganador[0]);
+			System.out.println(ganador[1]);
 		}
 	}
 

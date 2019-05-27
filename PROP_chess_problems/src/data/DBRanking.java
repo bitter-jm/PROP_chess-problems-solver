@@ -21,7 +21,7 @@ public class DBRanking {
 	
 	private DBRanking() { // DONE
 		this.cargarFichero();
-		System.out.println("Actual content: " + this.rankings.toJSONString());
+		System.out.println("Rankings loaded: " + this.rankings.toJSONString());
 	}
 	
 	/**
@@ -39,7 +39,6 @@ public class DBRanking {
 
 				// Parsing to String
 				String content = new String(data, "UTF-8");
-				System.out.println("Content readed: " + content);
 				
 				// Parsing to JSON
 				if (content.isEmpty()) {

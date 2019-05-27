@@ -1,5 +1,7 @@
 package drivers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import data.CtrlData;
@@ -124,31 +126,159 @@ public class DriverIntegration {
 				}
 				break;
 			case 7: // CARGAR PROBLEMA EXISTENTE AL EDITOR
-
+				if (!ctrlPe.isLoggedIn()) {
+					System.out.println("No hay una sesion de usuario iniciada.");
+					break;
+				}
+				System.out.println("Escribe el nombre del problema que quieres cargar de la siguiente lista de tus problemas:");
+				misProblemas = ctrlD.getMisProblemas();
+				for (String[] p : misProblemas) {
+					System.out.println("nombre: "+p[0]+", #Jugadas: "+p[1]+", colorAEmpezar: "+p[2]+", valido: "+p[3]+", vecesJugado: " + p[4]);
+				}
+				String nombreP = sc.next();
+				boolean exists = ctrlPr.cargarProblema(nombreP);
+				if (!exists) {
+					System.out.println("El problema seleccionado no existe.");
+					break;
+				}
+				System.out.println("Problema cargado correctamente");
+				ctrlPr.imprimirEstadoProblemaConsola();
+				
 				break;
 			case 8: // CREAR NUEVO PROBLEMA EN EL EDITOR
-
+				if (!ctrlPe.isLoggedIn()) {
+					System.out.println("No hay una sesion de usuario iniciada.");
+					break;
+				}
+				System.out.println("Creando problema vacio:");
+				ctrlPr.crearProblema();
+				boolean valid = false;
+				while (!valid) {
+					System.out.println("Introduce un nombre para el problema:");
+					valid = ctrlPr.setNombre(sc.next());
+					if (!valid) System.out.println("Ya existe un problema con ese nombre");
+				}
+				System.out.print("Que Jugador empieza? (B/N): ");
+				boolean color = true;
+				if (sc.next().equals("B")) color = false;
+				ctrlPr.setColorAGanar(color);
+				System.out.println("Indica el maximo de movimientos permitidos para hacer mate: ");
+				ctrlPr.setMaxMovimientos(sc.nextInt());
+				System.out.println("Problema vacio creado");
+				ctrlPr.imprimirEstadoProblemaConsola();
 				break;
 			case 9: // GUARDAR PROBLEMA
-
+				if (!ctrlPr.hayProblemaCargado()) {
+					System.out.println("No hay ningun problema activo en el editor.");
+					break;
+				}
+				if (!ctrlPr.estaValidado()) {
+					System.out.println("El problema cargado ya está validado.");
+					break;
+				}
+				if (!ctrlPe.isLoggedIn()) {
+					System.out.println("No hay una sesion de usuario iniciada.");
+					break;
+				}
+				ctrlPr.guardarProblema();
+				System.out.println("Problema guardado.");
 				break;
 			case 10: // ELIMINAR PROBLEMA
-
+				if (!ctrlPr.hayProblemaCargado()) {
+					System.out.println("No hay ningun problema activo en el editor.");
+					break;
+				}
+				if (!ctrlPr.haSidoJugado()) {
+					System.out.println("El problema ya ha sido jugado. No se puede borrar.");
+					break;
+				}
+				ctrlPr.eliminarProblema();
+				System.out.println("Problema Eliminado.");
 				break;
 			case 11: // ANADIR FICHA AL PROBLEMA
-
+				if (!ctrlPr.hayProblemaCargado()) {
+					System.out.println("No hay ningun problema activo en el editor.");
+					break;
+				}
+				if (!ctrlPr.estaValidado()) {
+					System.out.println("El problema cargado ya está validado.");
+					break;
+				}
+				System.out.println("Especifique que ficha quieres anadir en formato FEN: ");
+				String fString = sc.next();
+				System.out.println("Indica en que coordenadas quieres anadir la ficha (i j):");
+				int i = sc.nextInt();
+				int j = sc.nextInt();
+				ctrlPr.anadirFicha(Ficha.newFicha(fString), i, j);
+				System.out.println("Ficha anadida correctamente");
+				ctrlPr.imprimirEstadoProblemaConsola();
 				break;
 			case 12: // RETIRAR FICHA DEL PROBLEMA
-
+				if (!ctrlPr.hayProblemaCargado()) {
+					System.out.println("No hay ningun problema activo en el editor.");
+					break;
+				}
+				if (!ctrlPr.estaValidado()) {
+					System.out.println("El problema cargado ya está validado.");
+					break;
+				}
+				System.out.println("Indica las coordenadas de la casilla que quieres vaciar (i j):");
+				i = sc.nextInt();
+				j = sc.nextInt();
+				ctrlPr.retirarFicha(i, j);
+				System.out.println("Casilla vaciada");
+				ctrlPr.imprimirEstadoProblemaConsola();
 				break;
 			case 13: // MOVER FICHA DEL PROBLEMA
-
+				if (!ctrlPr.hayProblemaCargado()) {
+					System.out.println("No hay ningun problema activo en el editor.");
+					break;
+				}
+				if (!ctrlPr.estaValidado()) {
+					System.out.println("El problema cargado ya está validado.");
+					break;
+				}
+				System.out.println("Introduce el movimiento a realizar: (ficha, coordInicialI, coordInicialJ, coordFinalI, coordFinalJ)");
+				String f = sc.next();
+				int ii = sc.nextInt();
+				int ij = sc.nextInt();
+				int fi = sc.nextInt();
+				int fj = sc.nextInt();
+				Movimiento m = new Movimiento(ii, ij, fi, fj, Ficha.newFicha(f));
+				ctrlPr.moverFicha(m);
+				System.out.println("Ficha movida");
+				ctrlPr.imprimirEstadoProblemaConsola();
 				break;
 			case 14: // CARGAR FEN A PROBLEMA
-
+				if (!ctrlPr.hayProblemaCargado()) {
+					System.out.println("No hay ningun problema activo en el editor.");
+					break;
+				}
+				if (!ctrlPr.estaValidado()) {
+					System.out.println("El problema cargado ya está validado.");
+					break;
+				}
+				System.out.println("Introduce el FEN del problema (sin espacios): ");
+				ctrlPr.setFEN(sc.next());
+				System.out.println("FEN cargado correctamente");
+				ctrlPr.imprimirEstadoProblemaConsola();
 				break;
 			case 15: // VALIDAR PROBLEMA
-
+				if (!ctrlPr.hayProblemaCargado()) {
+					System.out.println("No hay ningun problema activo en el editor.");
+					break;
+				}
+				if (!ctrlPr.estaValidado()) {
+					System.out.println("El problema cargado ya está validado.");
+					break;
+				}
+				if (!ctrlPe.isLoggedIn()) {
+					System.out.println("No hay una sesion de usuario iniciada.");
+					break;
+				}
+				valid = ctrlPr.validarProblema();
+				if (valid) System.out.println("El problema ha sido validado");
+				else System.out.println("El problema no es valido");
 				break;
 			case 16: // EMPEZAR PARTIDA
 				if (!ctrlPe.isLoggedIn()) {
@@ -190,7 +320,7 @@ public class DriverIntegration {
 				}
 				boolean movimientoAceptado = false;
 				while (!movimientoAceptado) {
-					Movimiento m = DriverIntegration.leerMovimientoDeConsola(sc);
+					m = DriverIntegration.leerMovimientoDeConsola(sc);
 					movimientoAceptado = ctrlPa.personaRealizaMovimiento(m);
 					if (!movimientoAceptado) System.out.println("Movimiento no valido");
 				}					
@@ -232,7 +362,27 @@ public class DriverIntegration {
 				}
 				break;
 			case 21: // EVALUAR PROBLEMAS
-
+				System.out.println("Selecciona que maquina jugara como Jugador 1 (\"MAQUINA1\", \"MAQUINA2\"):");
+				j1 = sc.next();
+				System.out.println("Selecciona que maquina jugara como Jugador 2 (\"MAQUINA1\", \"MAQUINA2\"):");
+				j2 = sc.next();
+				System.out.println("Listando problemas jugables:");
+				problemasJugables = ctrlD.getProblemasJugables();
+				for (String[] pJugable : problemasJugables) {
+					System.out.println("nombre: "+pJugable[0]+", #Jugadas: "+pJugable[1]+", colorAEmpezar: "+pJugable[2]+", dificultad: "+pJugable[3]+", vecesJugado: " + pJugable[4]);
+				}
+				System.out.println("Escribe los nombres de los problemas a evaluar acabado con \"END\":");
+				List<String> aEvaluar = new ArrayList<String>();
+				String nextP = sc.next();
+				while (!nextP.equals("END")) {
+					aEvaluar.add(nextP);
+					nextP = sc.next();
+				}
+				String[][] ganadores = ctrlE.evaluarProblemas(aEvaluar, "MAQUINA2", "MAQUINA1");
+				System.out.println("\nListando resultados:");
+				for (String[] ganador : ganadores) {
+					System.out.println("Problema: " + ganador[0] + " - Ganador: " + ganador[1]);
+				}
 				break;
 			case 22:
 				exit = true;

@@ -72,6 +72,17 @@ public class CtrlProblema {
 	}
 	
 	/**
+	 * Consulta si el problema cargado ha sido jugado
+	 * @return True si ha sido jugado. False en caso contrario.
+	 */
+	public boolean haSidoJugado() {
+		if (this.prob != null) {
+			return 0 < this.prob.getVecesJugado();
+		} 
+		return false;
+	}
+	
+	/**
 	 * Valida el problema activo
 	 * @return True si el problema es valido. False en caso contrario
 	 */

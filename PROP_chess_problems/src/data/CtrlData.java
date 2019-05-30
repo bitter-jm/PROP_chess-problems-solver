@@ -111,6 +111,94 @@ public class CtrlData {
 	}
 	
 	/**
+	 * Obtiene los problemas jugables de todo el sistema en orden de dificultad
+	 * @return String[][] donde <em>i</em> es cada problema ordenado por dificultad y <em>j</em> un atributo del problema i. Los atributos son los siguientes:
+	 * j = 0: nombre, 1: numeroJugadas, 2: color, 3: dificultad, 4: vecesJugado
+	 */
+	public String[][] getProblemasJugablesOrdenadosPorDificultad() { // TODO
+		List<String> problemas = dbPr.getProblemasJugables();
+		String[][] mat = new String[problemas.size()][5];
+		int i = 0;
+		for (String problema : problemas) {
+			String[] data = problema.split("\n");
+			if ("EASY".equals(data[7])) {				
+				String color = "BLANCAS";
+				if (data[3].equals("true")) color = "NEGRAS";
+				mat[i][0] = data[0]; //nombre
+				mat[i][1] = data[1]; //numeroJugadas
+				mat[i][2] = color; //color
+				mat[i][3] = data[7]; //dificultad
+				mat[i][4] = data[5]; //vecesJugado
+				i++;
+			}
+		}
+		for (String problema : problemas) {
+			String[] data = problema.split("\n");
+			if ("MEDIUM".equals(data[7])) {				
+				String color = "BLANCAS";
+				if (data[3].equals("true")) color = "NEGRAS";
+				mat[i][0] = data[0]; //nombre
+				mat[i][1] = data[1]; //numeroJugadas
+				mat[i][2] = color; //color
+				mat[i][3] = data[7]; //dificultad
+				mat[i][4] = data[5]; //vecesJugado
+				i++;
+			}
+		}
+		for (String problema : problemas) {
+			String[] data = problema.split("\n");
+			if ("HARD".equals(data[7])) {				
+				String color = "BLANCAS";
+				if (data[3].equals("true")) color = "NEGRAS";
+				mat[i][0] = data[0]; //nombre
+				mat[i][1] = data[1]; //numeroJugadas
+				mat[i][2] = color; //color
+				mat[i][3] = data[7]; //dificultad
+				mat[i][4] = data[5]; //vecesJugado
+				i++;
+			}
+		}
+		return mat;
+	}
+	
+	/**
+	 * Obtiene los problemas jugables de todo el sistema ordenado por movimientos máximos
+	 * @return String[][] donde i es cada problema y j un atributo del problema i. Los atributos son los siguientes:
+	 * j = 0: nombre, 1: numeroJugadas, 2: color, 3: dificultad, 4: vecesJugado
+	 */
+	public String[][] getProblemasJugablesOrdenadosPorMovimientos() { // TODO
+		List<String> problemas = dbPr.getProblemasJugables();
+		
+		int maxNumJugadas = 1;
+		for (String problema : problemas) {
+			String[] data = problema.split("\n");
+			if (Integer.valueOf(data[1]) > maxNumJugadas) {
+				maxNumJugadas = Integer.valueOf(data[1]);
+			}
+		}
+		
+		String[][] mat = new String[problemas.size()][5];
+		int i = 0;
+		
+		for (int j = 0; j < maxNumJugadas; ++j) {
+			for (String problema : problemas) {
+				String[] data = problema.split("\n");
+				if (Integer.valueOf(data[1]).equals(j)) {
+					String color = "BLANCAS";
+					if (data[3].equals("true")) color = "NEGRAS";
+					mat[i][0] = data[0]; //nombre
+					mat[i][1] = data[1]; //numeroJugadas
+					mat[i][2] = color; //color
+					mat[i][3] = data[7]; //dificultad
+					mat[i][4] = data[5]; //vecesJugado
+					i++;
+				}
+			}
+		}
+		return mat;
+	}
+	
+	/**
 	 * Obtiene los problemas de la persona registrada en el sistema
 	 * @return String[][] donde i es cada problema y j un atributo del problema i. Los atributos son los siguientes:
 	 * j = 0: nombre, 1: numeroJugadas, 2: color, 3: valid, 4: vecesJugado

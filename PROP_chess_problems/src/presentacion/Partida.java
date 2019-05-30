@@ -12,12 +12,14 @@ import javax.swing.JPanel;
 
 public class Partida {
 	JFrame f;
+	Tablero t;
 	JButton cancel;
+	
 	Color c1= new Color (239, 255, 254);
 	Color c2= new Color (197, 25, 25);
 	Color darkblue = new Color(0, 119, 204);
 	Font f1 = new Font ("Britannic Bold", Font.PLAIN,25);
-	Tablero t;
+	
 	public Partida() {
 		f = new JFrame();
 		t = new Tablero("PARTIDA");
@@ -47,7 +49,6 @@ public class Partida {
 		JPanel n = t.t;
 		n.setBounds(250, 70, 580, 580);
 		cp1.add(n);
-		
 		
 		cancel = new JButton("Cancelar Partida");
 		cancel.setBounds(300, 680, 450, 50);

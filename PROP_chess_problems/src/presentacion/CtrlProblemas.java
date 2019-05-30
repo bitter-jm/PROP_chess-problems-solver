@@ -8,12 +8,14 @@ import java.util.Vector;
 
 import data.CtrlData;
 import domain.CtrlPersona;
+import domain.CtrlProblema;
 import presentacion.Evaluacion;
 import presentacion.EvMaq;
 import presentacion.Men2;
 
 public class CtrlProblemas extends CtrlPresentacion implements ActionListener, MouseListener {
 	private static  CtrlProblemas single_instance = null;
+	private CtrlProblema CP;
 	private CtrlData CData; 
 	private Prob mp;
 	private Editar e;
@@ -21,13 +23,16 @@ public class CtrlProblemas extends CtrlPresentacion implements ActionListener, M
 	
 	public CtrlProblemas() {
 		CData = CtrlData.getInstance();
+		CP = CtrlProblema.getInstance();
 		String[][] data = CData.getMisProblemas();
 		mp = new Prob(data);
 		mp.m.conectaControlador(super.getInstance());
 		mp.f.show(true);
 		mp.conectaControlador(this);
 	}
-	
+	public void show() {
+		mp.f.show();
+	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
@@ -39,10 +44,17 @@ public class CtrlProblemas extends CtrlPresentacion implements ActionListener, M
 			
 		}
 		if(comando =="EDIT") {
+			CP.cargarProblema(prob);
+			String FEN = CP.getFEN();
+			e = new Editar();
+			e.t.initializeBoardFEN(FEN);
 			
 		}
 		if (comando == "ELIMINAR") {
-			
+			CP.cargarProblema(prob);
+			CP.eliminarProblema();
+			String[][] data = CData.getMisProblemas();
+			mp.setdata(data);
 		}
 		
 	}

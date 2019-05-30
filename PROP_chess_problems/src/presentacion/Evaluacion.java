@@ -26,11 +26,10 @@ public class Evaluacion {
 
 	String[] columnNames = {"Problema","Descripcion","Dificultad","Ganador"};
 	 private JScrollPane scroll; //Panel de scroll que contiene la tabla
-	 public static Object[][] datos; //Cuerpo de la tabla
+	 public static String[][] datos; //Cuerpo de la tabla
 	 protected String[] cabecera;    //Cabecera de la tabla
 	 protected DefaultTableModel dtm;//Unión de la cabecera y la tabla
 	 protected JTable tabla; //Tabla propiamente dicha
-	//Elements:
 
 	public Evaluacion(String a, String b,String[][] datam) {
 		s1 = a;
@@ -40,7 +39,7 @@ public class Evaluacion {
 		SetFrame();
 		JPanel menu = Men2.MenuPeque("MAQUINA");
 		f.add(menu);
-		SetPanelRanking();
+		SetPanelEvaluacion();
 		f.setVisible(true);
 	}
 	
@@ -52,7 +51,7 @@ public class Evaluacion {
 		f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 	}
 	
-	public void SetPanelRanking() {
+	public void SetPanelEvaluacion() {
 		cp1 = new JPanel();
 		cp1.setLayout(null);
 		cp1.setBounds(230, 0, 859,803);
@@ -80,7 +79,6 @@ public class Evaluacion {
 		text5.setFont(f2);
 		cp1.add(text5);
 		
-	
 		scroll = new JScrollPane();
 	    cabecera = new String[] {"Problema","Descripcion","Dificultad","Ganador"};
 	    dtm= new DefaultTableModel(datos,cabecera);
@@ -109,7 +107,6 @@ public class Evaluacion {
 		home.setBorder(null);
 		cp1.add(home);
 		
-
 		f.add(cp1);
 	
 	}

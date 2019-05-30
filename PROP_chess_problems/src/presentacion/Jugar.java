@@ -16,14 +16,15 @@ import javax.swing.JScrollPane;
 
 public class Jugar {
 	JFrame f;
-	JComboBox<String> cb1;
-	JComboBox<String> cb2;
+	JComboBox<String> cb1, cb2;
 	JButton play, home;
 	JList<String> list;
+	Tablero t;
+	
 	Font f0 = new Font ("AR BONNIE", Font.BOLD,70);
 	Font f1 = new Font ("Britannic Bold", Font.PLAIN,25);
 	Font f2 = new Font ("Consolas", Font.BOLD,18);
-	Tablero t;
+	
 	Color c1= new Color (239, 255, 254);
 	Color green = new Color (163, 255, 186);
 	Color darkgreen = new Color (57,155,85);
@@ -53,7 +54,6 @@ public class Jugar {
 		cp1.setLayout(null);
 		cp1.setBounds(230, 0, 859,803);
 		cp1.setBackground(c1);
-		
 		
 		JLabel titulo = new JLabel("CONFIGURA LA PARTIDA:");
 		titulo.setBounds(90,50,660,54);
@@ -90,13 +90,11 @@ public class Jugar {
 		cb2.setBounds(530, 290, 280, 30);
 		cp1.add(cb2);
 		
-		
 		list = new JList<String>();
 		JScrollPane scroll = new JScrollPane(list);
 		scroll.setBounds(40, 150, 470, 460);
 		scroll.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		cp1.add(scroll);
-		
 		
 		play = new JButton("¡JUGAR!");
 		play.setBounds(200, 650, 450, 50);

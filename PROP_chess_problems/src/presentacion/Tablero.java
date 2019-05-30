@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 import javax.swing.*;
 
+import domain.Ficha;
+
 	//Esto sera de ser de mi clase de button que extenderea
 	//JButton y implementara los listners
 public class Tablero implements ActionListener {
@@ -20,28 +22,39 @@ public class Tablero implements ActionListener {
 	private String caller;
 	
 	
-	public Tablero() {
-		f = new JFrame();
+	public Tablero(String s) {
+		//f = new JFrame();
+		caller = s;
 		t = new JPanel();
-		setFrame();
-		setIcons();
+		//setFrame();
+		int x=0;
+		if (caller == "PARTIDA") {
+			x=50;
+		}
+		else if (caller=="EDITAR") {
+			x=56;
+		}
+		else if (caller=="JUGAR") {
+			x=31;
+		}
+		setIcons(x);
 		setTablero();
 		
-		f.setVisible(true);
+		//f.setVisible(true);
 	}
-	public void setIcons() {
-		peon = new ImageIcon (new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/Peon.svg.png").getImage().getScaledInstance(50, 50 ,java.awt.Image.SCALE_SMOOTH));
-		peonN = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/PeonN.svg.png").getImage().getScaledInstance(50, 50 ,java.awt.Image.SCALE_SMOOTH));
-		torre = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/Torre.svg.png").getImage().getScaledInstance(50, 50 ,java.awt.Image.SCALE_SMOOTH));
-		torreN = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/TorreN.svg.png").getImage().getScaledInstance(50, 50 ,java.awt.Image.SCALE_SMOOTH));
-		caballo = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/Caballo.svg.png").getImage().getScaledInstance(50, 50 ,java.awt.Image.SCALE_SMOOTH));
-		caballoN = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/CaballoN.svg.png").getImage().getScaledInstance(50, 50 ,java.awt.Image.SCALE_SMOOTH));
-		alfil = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/Alfil.svg.png").getImage().getScaledInstance(50, 50 ,java.awt.Image.SCALE_SMOOTH));
-		alfilN = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/AlfilN.svg.png").getImage().getScaledInstance(50, 50 ,java.awt.Image.SCALE_SMOOTH));
-		reina = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/Reina.svg.png").getImage().getScaledInstance(50, 50 ,java.awt.Image.SCALE_SMOOTH));
-		reinaN = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/ReinaN.svg.png").getImage().getScaledInstance(50, 50 ,java.awt.Image.SCALE_SMOOTH));
-		rey = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/King.svg.png").getImage().getScaledInstance(50, 50 ,java.awt.Image.SCALE_SMOOTH));
-		reyN = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/KingN.png").getImage().getScaledInstance(50, 50 ,java.awt.Image.SCALE_SMOOTH));	
+	public void setIcons(int x) {
+		peon = new ImageIcon (new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/Peon.svg.png").getImage().getScaledInstance(x, x ,java.awt.Image.SCALE_SMOOTH));
+		peonN = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/PeonN.svg.png").getImage().getScaledInstance(x, x ,java.awt.Image.SCALE_SMOOTH));
+		torre = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/Torre.svg.png").getImage().getScaledInstance(x, x ,java.awt.Image.SCALE_SMOOTH));
+		torreN = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/TorreN.svg.png").getImage().getScaledInstance(x, x ,java.awt.Image.SCALE_SMOOTH));
+		caballo = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/Caballo.svg.png").getImage().getScaledInstance(x, x ,java.awt.Image.SCALE_SMOOTH));
+		caballoN = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/CaballoN.svg.png").getImage().getScaledInstance(x, x ,java.awt.Image.SCALE_SMOOTH));
+		alfil = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/Alfil.svg.png").getImage().getScaledInstance(x, x ,java.awt.Image.SCALE_SMOOTH));
+		alfilN = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/AlfilN.svg.png").getImage().getScaledInstance(x, x ,java.awt.Image.SCALE_SMOOTH));
+		reina = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/Reina.svg.png").getImage().getScaledInstance(x, x ,java.awt.Image.SCALE_SMOOTH));
+		reinaN = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/ReinaN.svg.png").getImage().getScaledInstance(x, x ,java.awt.Image.SCALE_SMOOTH));
+		rey = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/King.svg.png").getImage().getScaledInstance(x, x ,java.awt.Image.SCALE_SMOOTH));
+		reyN = new ImageIcon(new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/KingN.png").getImage().getScaledInstance(x, x ,java.awt.Image.SCALE_SMOOTH));	
 	}
 	private void setTablero() {
 		t.setLayout(new GridLayout(8,8));
@@ -56,7 +69,7 @@ public class Tablero implements ActionListener {
 			buttons[i].putClientProperty("index", i);
 			t.add(buttons[i]);
 		}
-		f.add(t);
+		//f.add(t);
 	}
 	
 	private void setFrame() {
@@ -71,7 +84,52 @@ public class Tablero implements ActionListener {
 		num = fila*8 +columna;
 		return num;
 	}
+	public void limpiarTablero() {
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				removeIcon(i,j);
+			}
+		}
+	}
 	
+	public void initializeBoardFEN (String FEN) {
+		this.limpiarTablero();
+		boolean stop = false;
+		int i = 0;
+		int j = 0;
+		for (int it = 0; it < FEN.length() && !stop; ++it) {
+			String c = String.valueOf(FEN.charAt(it));
+			if (Character.isDigit(c.charAt(0))) {
+				j += Integer.parseInt(c);
+			}
+			else if (c.equals("/")) {
+				i++;
+				j = 0;
+			}
+			else if (c.equals(" ")) stop = true;
+			else {		
+			/*	K	White King	k	Black King
+				Q	White Queen	q	Black Queen
+				R	White Rook	r	Black Rook
+				B	White Bishop	b	Black Bishop
+				N	White Knight	n	Black Knight
+				P	White Pawn	p	Black Pawn*/
+				if (c=="K") setIconBoard("BLANCAS", "rey",i,j);
+				else if (c=="Q") setIconBoard("BLANCAS", "reina",i,j);
+				else if (c=="R") setIconBoard("BLANCAS", "torre",i,j);
+				else if (c=="B") setIconBoard("BLANCAS", "alfil",i,j);
+				else if (c=="N") setIconBoard("BLANCAS", "caballo",i,j);
+				else if (c=="P") setIconBoard("BLANCAS", "peon",i,j);
+				else if (c=="k") setIconBoard("NEGRAS", "rey",i,j);
+				else if (c=="q") setIconBoard("NEGRAS", "reina",i,j);
+				else if (c=="r") setIconBoard("NEGRAS", "torre",i,j);
+				else if (c=="b") setIconBoard("NEGRAS", "alfil",i,j);
+				else if (c=="n") setIconBoard("NEGRAS", "caballo",i,j);
+				else if (c=="p") setIconBoard("NEGRAS", "peon",i,j);
+				if (j < 7) j++;
+			}
+		}
+	}
 	public void setIconBoard (String Color, String figura, int fila, int columna) {
 		ImageIcon fig= getIcon(figura,Color);
 		buttons[PosToSquare(fila,columna)].setIcon(fig);
@@ -126,51 +184,12 @@ public class Tablero implements ActionListener {
 			}*/
 		}
 	}
-	
+	/*
 	public String getCaller() {
 		return caller;
 	}
 	public void setCaller(String caller) {
 		this.caller = caller;
-	}
-	public static void main(String[] args) {
-	 Tablero tab = new Tablero();
-	 //Columnas, filas osea quizas esta al reves
-	 tab.setIconBoard("NEGRAS", "peon",1,0);
-	 tab.setIconBoard("NEGRAS", "peon",1,1);
-	 tab.setIconBoard("NEGRAS", "peon",1,2);
-	 tab.setIconBoard("NEGRAS", "peon",1,3);
-	 tab.setIconBoard("NEGRAS", "peon",1,4);
-	 tab.setIconBoard("NEGRAS", "peon",1,5);
-	 tab.setIconBoard("NEGRAS", "peon",1,6);
-	 tab.setIconBoard("NEGRAS", "peon",1,7);
-
-	 tab.setIconBoard("BLANCAS", "peon",6,0);
-	 tab.setIconBoard("BLANCAS", "peon",6,1);
-	 tab.setIconBoard("BLANCAS", "peon",6,2);
-	 tab.setIconBoard("BLANCAS", "peon",6,3);
-	 tab.setIconBoard("BLANCAS", "peon",6,4);
-	 tab.setIconBoard("BLANCAS", "peon",6,5);
-	 tab.setIconBoard("BLANCAS", "peon",6,6);
-	 tab.setIconBoard("BLANCAS", "peon",6,7);
-	 
-	 tab.setIconBoard("NEGRAS", "torre",0,0);
-	 tab.setIconBoard("NEGRAS", "caballo",0,1);
-	 tab.setIconBoard("NEGRAS", "alfil",0,2);
-	 tab.setIconBoard("NEGRAS", "reina",0,3);
-	 tab.setIconBoard("NEGRAS", "rey",0,4);
-	 tab.setIconBoard("NEGRAS", "alfil",0,5);
-	 tab.setIconBoard("NEGRAS", "caballo",0,6);
-	 tab.setIconBoard("NEGRAS", "torre",0,7);
-	  
-	 tab.setIconBoard("BLANCAS", "torre",7,0);
-	 tab.setIconBoard("BLANCAS", "caballo",7,1);
-	 tab.setIconBoard("BLANCAS", "alfil",7,2);
-	 tab.setIconBoard("BLANCAS", "reina",7,3);
-	 tab.setIconBoard("BLANCAS", "rey",7,4);
-	 tab.setIconBoard("BLANCAS", "alfil",7,5);
-	 tab.setIconBoard("BLANCAS", "caballo",7,6);
-	 tab.setIconBoard("BLANCAS", "torre",7,7);
-	}
-
+	}*/
+	 //tab.setIconBoard("NEGRAS", "peon",1,0);
 }

@@ -18,6 +18,8 @@ public class RankMen {
 	Color darkgreen = new Color (57,155,85);
 	JButton ver;
 	JButton home;
+	Object[][] data;
+	Men2 m;
 	  //DEFINICIÓN DE LOS OBJETOS PARA LA TABLA
     private JScrollPane scroll; //Panel de scroll que contiene la tabla
     public static Object[][] datos; //Cuerpo de la tabla
@@ -26,13 +28,13 @@ public class RankMen {
     protected JTable tabla; //Tabla propiamente dicha
     
     
-	public RankMen() {
-		RankMen.datos = datos;
+	public RankMen(Object[][] data) {
+		RankMen.datos = data;
 		f = new JFrame();
 		SetFrame();
-		Men2 m= new Men2();
+		m= new Men2();
 		JPanel menu = m.MenuPeque("RANKING");
-		m.AccionesPeque();
+		//m.AccionesPeque();
 		f.add(menu);
 		SetPanelRankMenu();
 		f.setVisible(true);
@@ -55,25 +57,15 @@ public class RankMen {
 		text1.setBounds(90, 50, 350, 30);
 		text1.setFont(f1);
 		cp1.add(text1);
-		/*
-		list = new JList();
-		JScrollPane scroll = new JScrollPane(list);
-		*/
-		Object[][] data ={
-		        {"Kathy","Snowboarding", new Integer(5), new Boolean(false)},
-		        {"John","Rowing", new Integer(3), new Boolean(true)},
-		        {"Sue","Knitting", new Integer(2), new Boolean(false)},
-		        {"Jane","Speed reading", new Integer(20), new Boolean(true)},
-		        {"Joe","Pool", new Integer(10), new Boolean(false)}
-		    };
-		 scroll = new JScrollPane();
-	     cabecera = new String[] {"PROBLEMA","DESCRIPCION","DIFICULTAD","VECES JUGADO"};
-	     dtm= new DefaultTableModel(data,cabecera);
-	     tabla= new JTable(dtm);
-	     scroll.setViewportView(tabla);
-	     scroll.setBounds(90, 100, 660, 525);
-	     scroll.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		 cp1.add(scroll);
+		
+		scroll = new JScrollPane();
+	    cabecera = new String[] {"PROBLEMA","DESCRIPCION","DIFICULTAD","VECES JUGADO"};
+	    dtm= new DefaultTableModel(datos,cabecera);
+	    tabla= new JTable(dtm);
+	    scroll.setViewportView(tabla);
+	    scroll.setBounds(90, 100, 660, 525);
+	    scroll.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		cp1.add(scroll);
 		
 		ver = new JButton("VER RANKING");
 		ver.setBounds(200, 670, 450, 50);
@@ -96,7 +88,7 @@ public class RankMen {
 		  list.setListData(data);
 	  }
 	  
-	  public void conectaControlador (Controller c) {
+	  public void conectaControlador (CtrlRanking c) {
 			home.addActionListener(c);
 			home.setActionCommand("HOME");
 			ver.addActionListener(c);
@@ -104,14 +96,5 @@ public class RankMen {
 			tabla.addMouseListener(c);
 			tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		}
-	  
-
-	public static Object[][] getDatos() {
-		return datos;
-	}
-	
-	public static void setDatos(Object[][] datos) {
-		RankMen.datos = datos;
-	}
 
 }

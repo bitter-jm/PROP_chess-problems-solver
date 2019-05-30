@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.Border;
 
-public class Men2 implements ActionListener {
-	private Controller CtrlR;
+public class Men2 /*implements ActionListener */{
+	private CtrlRanking CtrlR;
 	private CtrlPresentacion CtrlP;
 	JButton Jugar, MisProb, Ranking, Maquinas, SignOut;
 	static JButton JugarP ,MisProbP,RankingP,MaquinasP,SignOutP;
@@ -29,7 +29,7 @@ public class Men2 implements ActionListener {
 	public void MenuGrande() {
 		//FRAME
 		f = new JFrame();
-		f.show();
+		f.show(true);
 		f.setBounds (400,150,1089,803); //x, y, width, height
 		f.setTitle("Chess Game");
 		f.setLayout(null);
@@ -42,9 +42,13 @@ public class Men2 implements ActionListener {
 		cp1.setBounds(0,0, 1089, 180);
 		cp1.setLayout(null);
 				
-		JButton home1 = new JButton("iconocasa");
-		home1.setBounds(330, 70, 80,80);
-		cp1.add(home1);
+		ImageIcon house = new ImageIcon (new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/home.png").getImage().getScaledInstance(100, 100 ,java.awt.Image.SCALE_SMOOTH));
+		JLabel label = new JLabel(house, JLabel.CENTER);
+		label.setBounds(330, 70, 80, 80);
+		cp1.add(label);
+		
+		
+		//cp1.add(home1);
 				
 		titulo1 = new JLabel("Main Menu");
 		titulo1.setBounds(430,70,380,80);
@@ -111,7 +115,7 @@ public class Men2 implements ActionListener {
 		cp3.add(titulo2);
 		f.add(cp3);
 		f.setVisible(true);
-		AccionesGrande();
+	//	AccionesGrande();
 		//return f;
 		
 
@@ -161,7 +165,7 @@ public class Men2 implements ActionListener {
 		return cpmenu;
 	
 	}
-	
+	/*
 	private void AccionesGrande() {
 		Jugar.addActionListener( this);
 		Jugar.setActionCommand("JUGAR");
@@ -185,8 +189,33 @@ public class Men2 implements ActionListener {
 		MaquinasP.setActionCommand("MAQUINAS");
 		SignOutP.addActionListener(this);
 		SignOutP.setActionCommand("SIGNOUT");
-	}
-
+	}*/
+	public void conectaControlador (CtrlPresentacion c) {
+		if (cual == "BIG") {
+		Jugar.addActionListener( c);
+		Jugar.setActionCommand("JUGAR");
+		MisProb.addActionListener(c);
+		MisProb.setActionCommand("PROBLEMAS");
+		Ranking.addActionListener(c);
+		Ranking.setActionCommand("RANKING");
+		Maquinas.addActionListener(c);
+		Maquinas.setActionCommand("MAQUINAS");
+		SignOut.addActionListener(c);
+		SignOut.setActionCommand("SIGNOUT");
+		}
+		if (cual =="SMALL") {
+		JugarP.addActionListener( c);
+		JugarP.setActionCommand("JUGAR");
+		MisProbP.addActionListener(c);
+		MisProbP.setActionCommand("PROBLEMAS");
+		RankingP.addActionListener(c);
+		RankingP.setActionCommand("RANKING");
+		MaquinasP.addActionListener(c);
+		MaquinasP.setActionCommand("MAQUINAS");
+		SignOutP.addActionListener(c);
+		SignOutP.setActionCommand("SIGNOUT");
+		}
+	}/*
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -196,11 +225,12 @@ public class Men2 implements ActionListener {
 		else if (comando == "RANKING") {
 			//donde = "RANKING";
 			
-			if (cual =="BIG") f.show(false);
-			CtrlR = Controller.getInstance();
+			if (cual =="BIG") f.show(false);// f.dispose();
+			CtrlR = new CtrlRanking();
+			//CtrlR = CtrlRanking.getInstance();
 			
 		}
 		else if (comando == "MAQUINAS") ;
 		else if (comando == "SIGNOUT") CtrlP = CtrlPresentacion.getInstance();
-	}
+	}*/
 }

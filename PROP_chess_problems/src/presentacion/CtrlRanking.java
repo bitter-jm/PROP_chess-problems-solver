@@ -6,29 +6,29 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Vector;
 
+import data.CtrlData;
+import domain.CtrlPersona;
 import presentacion.RankMen;
 import presentacion.Ranking;
 import presentacion.Men2;
-
-public class Controller implements ActionListener, MouseListener {
-	private static  Controller single_instance = null;
-	public  RankMen m;
-	public Ranking r;
-	public String prob;
-	private Men2 menu;
+//extends CtrlPresentacion 
+public class CtrlRanking extends CtrlPresentacion implements ActionListener, MouseListener {
+	private static  CtrlRanking single_instance = null;
+	private CtrlData CData; 
+	private  RankMen mr;
+	private Ranking r;
+	private String prob;
+	//private Men2 menu;
 	//CONTROLLER
 
-	public Controller() {
-		//get de dominio los problemas
-		Vector<String> v = new Vector<String>();
-        for ( int i = 0; i < 100; i++ ) {
-            v.add( "Problema " + i + "   Mate en " + (i+1)*2 + " de las blancas" );
-        }
-        
-		this.m = new RankMen();
-		//m.setListData( v );
-		//m.setTable(JTable);
-		m.conectaControlador(this);
+	public CtrlRanking() {
+		l.f.show(false);
+		CData = CtrlData.getInstance();
+        String [][] data = CData.getProblemasJugables();
+		this.mr = new RankMen(data);
+		mr.m.conectaControlador(super.getInstance());
+		mr.f.show(true);
+		mr.conectaControlador(this);
 		
 	}
 
@@ -36,9 +36,9 @@ public class Controller implements ActionListener, MouseListener {
 	 * Obtiene la instacia del singleton CtrlRanking
 	 * @return Objeto CtrlProblema
 	 */
-	public static Controller getInstance() { 
+	public static CtrlRanking getInstance() { 
         if (single_instance == null) 
-            single_instance = new Controller(); 
+            single_instance = new CtrlRanking(); 
         return single_instance;
     }
 	
@@ -46,38 +46,47 @@ public class Controller implements ActionListener, MouseListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		//Necesito un objeto para ejecutar los procedimientos
-		//en el controlador de dominio
-		//CtrlDom d;
-		
+	
 		//COMANDO EJECUTADO
 		String comando = arg0.getActionCommand();
 		
 		if(comando =="HOME") {
 			
-			menu = new Men2();
-			menu.MenuGrande();
-			m.f.show(false);
-			r.show(false);
+			//menu = new Men2();
+			//menu.MenuGrande();
+		//	super.menu.f.show(true);
+			//m.f.dispose();
+			//m.f.show(false);
+			if (r != null) r.dispose();//r.show(false);
 			
 		}
 		if (comando == "RANKING") {
 			
-			if (prob != null) {
-				this.r = new Ranking(prob);
-				r.prob=prob;
+			//CENTRAR DATOS
+			/*String s = CData.getRanking(prob);
+			s=s.replace("?", "\n");
+			String[] data = s.split("\n");
+			int n = data.length/2;
+			String[][] datam =  new String[n][2];
+			for (int i=0; i<n; ++i) {
+				datam[i][0]=data[i*2];
+				datam[i][1]=data[(i*2)+1];
 				
-				//
-				m.f.show(false);
-				r.conectaControlador(this);
+			}*/
+			
+			r = new Ranking(prob, CData.getMatrixRanking(prob));
+			mr.f.dispose();
+			//m.f.show(false);
+			r.conectaControlador(this);
+				
 			}
 		}
 		
 		//limpiarformulario
-		//limpia();
+		//limpia();l
 		//cargartabla nueva
 
-	}
+
 	//Método para limpiar los campos de la ventana
     /*private void limpia(){
         
@@ -90,8 +99,8 @@ public class Controller implements ActionListener, MouseListener {
 	public void mouseClicked(MouseEvent c) {
 		// TODO Auto-generated method stub
 	    	 int column = 0;
-	    	 int row = m.tabla.getSelectedRow();
-	    	this.prob = m.tabla.getModel().getValueAt(row, column).toString();
+	    	 int row = mr.tabla.getSelectedRow();
+	    	this.prob = mr.tabla.getModel().getValueAt(row, column).toString();
 	}
 
 	@Override

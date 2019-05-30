@@ -2,13 +2,16 @@ package presentacion;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -20,31 +23,20 @@ public class Ranking extends JFrame{
 	String prob;
 	Font f1 = new Font ("Britannic Bold", Font.PLAIN,40);
 	Font f2 = new Font ("Consolas", Font.PLAIN,20);
+	JList list;
 	
-	String[] columnNames = {"Nombre","Puntuacion"};
-	Object[][] data = {
-		    {"Annita.gibbs", "9.1"},
-		    {"Annita.gibbs", "9.1"},
-		    {"Annita.gibbs", "9.1"},
-		    {"Annita.gibbs", "9.1"},
-		    {"Annita.gibbs", "9.1"},
-		    {"Annita.gibbs", "9.1"},
-		    {"Annita.gibbs", "9.1"},
-		    {"Annita.gibbs", "9.1"},
-		    {"Annita.gibbs", "9.1"},
-		    {"Annita.gibbs", "9.1"},
-		    {"Annita.gibbs", "9.1"},
-		    {"Annita.gibbs", "9.1"},
-		    {"Annita.gibbs", "9.1"},
-		    {"Annita.gibbs", "9.1"},
-		};
-	
+	 private JScrollPane scroll; //Panel de scroll que contiene la tabla
+	 public static Object[][] datos; //Cuerpo de la tabla
+	 protected String[] cabecera;    //Cabecera de la tabla
+	 protected DefaultTableModel dtm;//Unión de la cabecera y la tabla
+	 protected JTable tabla; //Tabla propiamente dicha
 	//Elements:
 	JButton home;
-	JTable tabla;
-	public Ranking(String prob) {
-		//f = new JFrame();
+	
+	public Ranking(String prob, String[][] datam) {
+		f = new JFrame();
 		this.prob = prob;
+		datos = datam;
 		SetFrame();
 		JPanel menu = Men2.MenuPeque("RANKING");
 		this.add(menu);
@@ -70,12 +62,15 @@ public class Ranking extends JFrame{
 		text1.setFont(f1);
 		cp1.add(text1);
 		
-		//tengo que ponerlo en un scrollpane
-		DefaultTableModel dtm = new DefaultTableModel(data, columnNames);
-		tabla = new JTable(dtm);
-		tabla.setBounds(90, 150, 660, 450);
-		tabla.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		cp1.add(tabla);
+		scroll = new JScrollPane();
+	    cabecera = new String[] {"NOMBRE","PUNTUACION"};
+	    dtm= new DefaultTableModel(datos,cabecera);
+	    tabla= new JTable(dtm);
+	    scroll.setViewportView(tabla);
+	    scroll.setBounds(90, 100, 660, 525);
+	    scroll.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		cp1.add(scroll);
+		
 		
 		JLabel text2 = new JLabel("Top50 jugadores de este problema");
 		text2.setBounds(220, 650, 450, 50);
@@ -93,11 +88,8 @@ public class Ranking extends JFrame{
 	}
 	
 
-	public void conectaControlador (Controller c) {
+	public void conectaControlador (CtrlRanking c) {
 		home.addActionListener(c);
 		home.setActionCommand("HOME");
-		tabla.addMouseListener(c);
-		tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	}
-	
+	}	
 }

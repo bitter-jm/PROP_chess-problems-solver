@@ -52,7 +52,14 @@ public class LogIn2{
 		cp.setBackground(null);
 		cp.setBounds(500, 0, 351, 200);
 		cp.setLayout(null);
-		 cp.setOpaque(false);
+		cp.setOpaque(false);
+		//FALLA EL ICONO 
+		/*
+		ImageIcon caballo = new ImageIcon (new ImageIcon("C:/Users/natal/git/PROP_chess-problems/PROP_chess_problems/src/presentacion/horse.png").getImage().getScaledInstance(100, 100 ,java.awt.Image.SCALE_SMOOTH));
+		JLabel label = new JLabel(caballo, JLabel.CENTER);
+		label.setBounds(2, 50, 500, 500);
+		label.setOpaque(true);
+		cp.add(label);*/
 		
 		JLabel title = new JLabel("Chess");
 		title.setBounds(10,40, 200, 80);

@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -18,22 +19,37 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
 public class EvMaq {
 	JFrame f;
 	JList list;
-	
+	Men2 m;
 	Font f1 = new Font ("Britannic Bold", Font.PLAIN,25);
 	Font f2 = new Font ("Consolas", Font.BOLD,18);
-	
+	JComboBox cb1;
+	JComboBox cb2;
 	Color c1= new Color (239, 255, 254);
 	Color green = new Color (163, 255, 186);
 	Color darkgreen = new Color (57,155,85);
+	JButton Ev;
 	
-	public EvMaq() {
+	  //DEFINICIÓN DE LOS OBJETOS PARA LA TABLA
+    private JScrollPane scroll; //Panel de scroll que contiene la tabla
+    public static Object[][] datos; //Cuerpo de la tabla
+    protected String[] cabecera;    //Cabecera de la tabla
+    protected DefaultTableModel dtm;//Unión de la cabecera y la tabla
+    protected JTable tabla; //Tabla propiamente dicha
+    
+	
+	public EvMaq( Object[][] data) {
+		datos = data;
 		f = new JFrame();
 		SetFrame();
-		JPanel menu = Men2.MenuPeque("MAQUINA");
+		m= new Men2();
+		JPanel menu = m.MenuPeque("MAQUINA");
 		f.add(menu);
 		SetPanelMaquina();
 		f.setVisible(true);
@@ -73,20 +89,23 @@ public class EvMaq {
 		Vector<String> maq = new Vector<String>();
 		maq.add("Maquina 1");
 		maq.add("Maquina 2");
-		JComboBox cb1 = new JComboBox(maq);
+		cb1 = new JComboBox(maq);
 		cb1.setBounds( 330, 75, 420, 30);
 		cp1.add(cb1);
-		JComboBox cb2 = new JComboBox(maq);
+		cb2 = new JComboBox(maq);
 		cb2.setBounds( 330, 125, 420, 30);
 		cp1.add(cb2);
 				
-		list = new JList();
-		JScrollPane scroll = new JScrollPane(list);
+		scroll = new JScrollPane();
+	    cabecera = new String[] {"PROBLEMA","DESCRIPCION","DIFICULTAD","VECES JUGADO"};
+	    dtm= new DefaultTableModel(datos,cabecera);
+	    tabla= new JTable(dtm);
+	    scroll.setViewportView(tabla);
 		scroll.setBounds(90, 200, 660, 450);
 		scroll.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		cp1.add(scroll);
 			
-		JButton Ev = new JButton("EVALUAR");
+		Ev = new JButton("EVALUAR");
 		Ev.setBounds(200, 670, 450, 50);
 		Ev.setBackground(green);
 		Ev.setForeground(darkgreen);
@@ -103,16 +122,15 @@ public class EvMaq {
 		f.add(cp1);
 	}
 	
+	public void conectaControlador (CtrlEvaluaciones c) {
+		Ev.addActionListener(c);
+		Ev.setActionCommand("EVALUAR");
+		tabla.addMouseListener(c);
+		tabla.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+	}	
+	
     public void setListData( Vector<String> vect ) {
         list.setListData(vect);
     }
 	
-	public static void main(String[] args) {
-		EvMaq e = new EvMaq();
-	     Vector<String> v = new Vector<String>();
-	        for ( int i = 0; i < 100; i++ ) {
-	            v.add( "Data " + i );
-	        }
-	        e.setListData( v );
-	}
 }

@@ -16,7 +16,7 @@ public class M1 extends Maquina {
 	 */
 	public M1() {
 		this.nombre = "MAQUINA1";
-		this.maxDepth = 3;
+		this.maxDepth = 4;
 	}
 	
 

@@ -16,7 +16,7 @@ public class Men2 /*implements ActionListener */{
 	static JButton JugarP ,MisProbP,RankingP,MaquinasP,SignOutP;
 	JLabel titulo1, titulo2;
 	static String cual;
-	
+	static String username;
 	Font f1 = new Font ("AR BONNIE", Font.BOLD,100);
 	Font f2 = new Font ("Segoe Script", Font.PLAIN,50);
 	static Font f3 = new Font ("Consolas", Font.BOLD,20);
@@ -45,7 +45,7 @@ public class Men2 /*implements ActionListener */{
 		cp1.setBounds(0,0, 1089, 180);
 		cp1.setLayout(null);
 				
-		ImageIcon house = new ImageIcon (new ImageIcon("C:/Users/natal/eclipse-workspace/Tali/src/presentacion/home.png").getImage().getScaledInstance(100, 100 ,java.awt.Image.SCALE_SMOOTH));
+		ImageIcon house = new ImageIcon (new ImageIcon(getClass().getResource("home.png")).getImage().getScaledInstance(100, 100 ,java.awt.Image.SCALE_SMOOTH));
 		JLabel label = new JLabel(house, JLabel.CENTER);
 		label.setBounds(330, 70, 80, 80);
 		cp1.add(label);
@@ -120,13 +120,14 @@ public class Men2 /*implements ActionListener */{
 		
 
 	}
-	/*
+	
 	public void setuser(String s) {
 		titulo2.setText("Welcome "+ s);
-	}*/
+		username =s;
+		
+	}
 	
 	public static JPanel MenuPeque(String s) {
-		
 		JPanel cpmenu = new JPanel();
 		cpmenu.setBackground(mpeque);
 		cpmenu.setLayout( new BoxLayout (cpmenu, BoxLayout.Y_AXIS));;
@@ -138,7 +139,7 @@ public class Men2 /*implements ActionListener */{
 		logged_as.setBounds(5, 0, 200, 20);
 		logged_as.setFont(f5);
 		
-		String nomuser = "getnomusuario";
+		String nomuser = username;
 		JLabel logname = new JLabel(nomuser);
 		logname.setBounds(5, 20, 200, 20);
 		logname.setFont(f5);
@@ -156,10 +157,10 @@ public class Men2 /*implements ActionListener */{
 		MaquinasP = new JButton ("EVALUAR MAQUINAS");
 		MaquinasP.setBounds(0,312,230,54);
 		MaquinasP.setFont(f3);
-		
+		/*
 		SignOutP = new JButton("SIGN OUT");
 		SignOutP.setBounds(0, 650, 230, 54);
-		SignOutP.setFont(f3);
+		SignOutP.setFont(f3);*/
 		
 		if (s=="JUGAR") JugarP.setEnabled(false);
 		else if (s=="PROBLEMAS") MisProbP.setEnabled(false);
@@ -173,35 +174,11 @@ public class Men2 /*implements ActionListener */{
 		cpmenu.add(RankingP);
 		cpmenu.add(MaquinasP);
 		//cpmenu.add(Box.createRigidArea(new Dimension(0, 30)));
-		cpmenu.add(SignOutP);
+	//	cpmenu.add(SignOutP);
 		return cpmenu;
 	
 	}
-	/*
-	private void AccionesGrande() {
-		Jugar.addActionListener( this);
-		Jugar.setActionCommand("JUGAR");
-		MisProb.addActionListener(this);
-		MisProb.setActionCommand("PROBLEMAS");
-		Ranking.addActionListener(this);
-		Ranking.setActionCommand("RANKING");
-		Maquinas.addActionListener(this);
-		Maquinas.setActionCommand("MAQUINAS");
-		SignOut.addActionListener(this);
-		SignOut.setActionCommand("SIGNOUT");
-	}
-	public void AccionesPeque() {
-		JugarP.addActionListener( this);
-		JugarP.setActionCommand("JUGAR");
-		MisProbP.addActionListener(this);
-		MisProbP.setActionCommand("PROBLEMAS");
-		RankingP.addActionListener(this);
-		RankingP.setActionCommand("RANKING");
-		MaquinasP.addActionListener(this);
-		MaquinasP.setActionCommand("MAQUINAS");
-		SignOutP.addActionListener(this);
-		SignOutP.setActionCommand("SIGNOUT");
-	}*/
+	
 	public void conectaControlador (CtrlPresentacion c) {
 		if (cual == "BIG") {
 		Jugar.addActionListener( c);
@@ -224,8 +201,8 @@ public class Men2 /*implements ActionListener */{
 		RankingP.setActionCommand("RANKING");
 		MaquinasP.addActionListener(c);
 		MaquinasP.setActionCommand("MAQUINAS");
-		SignOutP.addActionListener(c);
-		SignOutP.setActionCommand("SIGNOUT");
+		//SignOutP.addActionListener(c);
+		//SignOutP.setActionCommand("SIGNOUT");
 		}
 	}/*
 	@Override

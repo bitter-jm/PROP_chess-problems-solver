@@ -43,8 +43,8 @@ public class CtrlRanking extends CtrlPresentacion implements ActionListener, Mou
         return single_instance;
     }
 	
-	public void show() {
-		mr.f.show();
+	public void show(Boolean b) {
+		mr.f.show(b);
 	}
 	
 	@Override

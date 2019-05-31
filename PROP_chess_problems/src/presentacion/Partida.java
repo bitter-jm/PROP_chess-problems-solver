@@ -2,6 +2,8 @@ package presentacion;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 import presentacion.Tablero;
 
@@ -10,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Partida {
+public class Partida implements ActionListener {
 	JFrame f;
 	Tablero t;
 	JButton cancel;
@@ -22,7 +24,7 @@ public class Partida {
 	
 	public Partida() {
 		f = new JFrame();
-		t = new Tablero("PARTIDA");
+		t = new Tablero("PARTIDA",this);
 		SetFrame();
 		SetPanel();
 		f.setVisible(true);
@@ -58,8 +60,18 @@ public class Partida {
 		cp1.add(cancel);
 		f.add(cp1);
 	}
+
 	public static void main(String[] args) {
 		Partida p = new Partida();
+	}
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void conectaControlador(CtrlPartida c) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

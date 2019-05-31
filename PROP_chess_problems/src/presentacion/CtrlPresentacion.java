@@ -16,6 +16,7 @@ import presentacion.LogIn2;
 public class CtrlPresentacion implements ActionListener {
 	public static  CtrlPresentacion single_instance = null;
 	private CtrlPersona CDpers; 
+	private CtrlPartida CPar;
 	private CtrlRanking CtrlR;
 	private CtrlEvaluaciones CtrlE;
 	private CtrlProblemas CtrlP;
@@ -40,8 +41,11 @@ public class CtrlPresentacion implements ActionListener {
 				//l.f.show(false);
 				menu = new Men2();
 				menu.MenuGrande();
+				menu.setuser(u);
 				menu.cual ="BIG";
 				menu.conectaControlador(this);
+				l.tusernamelog.setText(null);
+				l.tpasswordlog.setText(null);
 				 l.f.dispose();	
 			}
 			else {
@@ -51,16 +55,16 @@ public class CtrlPresentacion implements ActionListener {
 			}
 		}
 		if (comando == "SIGNIN") {
-			String u = l.tusernamesign.getText();
-			String p= l.tpasswordsign.getText();
+			String u1 = l.tusernamesign.getText();
+			String p1= l.tpasswordsign.getText();
 			String p2= l.tpasswordsign2.getText();
-			if (p.equals(p2)) {
-				if(CDpers.signIn(u,p)) {
-					menu = new Men2();
-					menu.MenuGrande();
-					menu.cual ="BIG";
-					menu.conectaControlador(this);
-					 l.f.dispose();	
+			if (p1.equals(p2)) {
+				if(CDpers.signIn(u1,p1)) {
+					int op = JOptionPane.showConfirmDialog(null, "¡Usuario creado con exito!","WARNING", JOptionPane.CLOSED_OPTION);
+					 l.tusernamesign.setText(null);
+					 l.tpasswordsign.setText(null);
+					 l.tpasswordsign2.setText(null);
+					
 				}
 				else {
 					int op = JOptionPane.showConfirmDialog(null, "Ya existe un usuario con ese nombre","WARNING", JOptionPane.CLOSED_OPTION);
@@ -76,28 +80,46 @@ public class CtrlPresentacion implements ActionListener {
 				 l.tpasswordsign2.setText(null);
 			}
 		}
-		if(comando =="JUGAR");
+		if(comando =="JUGAR") {
+			if (menu.cual =="BIG") menu.f.show(false);
+			CPar = CtrlPartida.getInstance();
+			CPar.show(true);
+			if (CtrlR != null)CtrlR.show(false);
+			if (CtrlE != null)CtrlE.show(false);
+			if (CtrlP != null)CtrlE.show(false);
+		}
 		else if (comando =="PROBLEMAS") {
 			if (menu.cual =="BIG") menu.f.show(false);
 			CtrlP = CtrlProblemas.getInstance();
-			CtrlP.show();
+			CtrlP.show(true);
+			if (CtrlR != null)CtrlR.show(false);
+			if (CtrlE != null)CtrlE.show(false);
+			if (CPar != null)CtrlE.show(false);
 		}
 		else if (comando == "RANKING") {
 		
 			if (menu.cual =="BIG") menu.f.show(false);
 	
 			CtrlR = CtrlRanking.getInstance();
-			CtrlR.show();
-			
+			CtrlR.show(true);
+			if (CtrlE != null)CtrlE.show(false);
+			if (CtrlP != null)CtrlP.show(false);
+			if (CPar != null)CtrlE.show(false);
 		}
 		else if (comando == "MAQUINAS") {
 			if (menu.cual =="BIG") menu.f.show(false);
 			CtrlE = CtrlEvaluaciones.getInstance();
-			CtrlE.show();
+			CtrlE.show(true);
+			if (CtrlR != null)CtrlR.show(false);
+			if (CtrlP != null)CtrlP.show(false);
+			if (CPar != null)CtrlE.show(false);
 		}
 		else if (comando == "SIGNOUT") {
 			int op = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres cerrar sesion?","WARNING", JOptionPane.OK_CANCEL_OPTION);
-			
+			if (op == 0) {
+				menu.f.show(false);
+				l.f.show();
+			}
 			//CtrlP = CtrlPresentacion.getInstance();
 		}
 	

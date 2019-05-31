@@ -6,6 +6,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Vector;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 import data.CtrlData;
 import domain.CtrlPersona;
 import domain.CtrlProblema;
@@ -20,8 +23,10 @@ public class CtrlProblemas extends CtrlPresentacion implements ActionListener, M
 	private Prob mp;
 	private Editar e;
 	private String prob;
+	private int row;
 	
 	public CtrlProblemas() {
+		l.f.show(false);
 		CData = CtrlData.getInstance();
 		CP = CtrlProblema.getInstance();
 		String[][] data = CData.getMisProblemas();
@@ -30,8 +35,8 @@ public class CtrlProblemas extends CtrlPresentacion implements ActionListener, M
 		mp.f.show(true);
 		mp.conectaControlador(this);
 	}
-	public void show() {
-		mp.f.show();
+	public void show(Boolean b) {
+		mp.f.show(b);
 	}
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -41,22 +46,54 @@ public class CtrlProblemas extends CtrlPresentacion implements ActionListener, M
 			
 		}
 		if (comando == "NUEVO") {
-			
+			e = new Editar("BLANCAS");
 		}
+		
 		if(comando =="EDIT") {
-			CP.cargarProblema(prob);
-			String FEN = CP.getFEN();
-			e = new Editar();
+			//CP.cargarProblema(prob);
+			String info =CData.getProblema(prob);
+			String[] infovec = info.split("\n");
+			String maxmov = infovec[1];
+			String FEN = infovec[2];
+			String Color = infovec[3];
+			//String FEN = CP.getFEN();
+			
+			e = new Editar(Color);
 			e.t.initializeBoardFEN(FEN);
+			e.setInfo(maxmov, Color);
+			e.conectaControlador(this);
 			
 		}
 		if (comando == "ELIMINAR") {
 			CP.cargarProblema(prob);
 			CP.eliminarProblema();
-			String[][] data = CData.getMisProblemas();
-			mp.setdata(data);
+			DefaultTableModel modelo = (DefaultTableModel) mp.tabla.getModel();
+			modelo.removeRow(row);
 		}
 		
+		if (comando =="CARGAR") {
+			String FEN = e.fen.getText();
+			e.t.initializeBoardFEN(FEN);
+		}
+		if (comando =="VALIDAR") {
+			CP.cargarProblema(prob);
+			CP.guardarProblema();
+			Boolean b = CP.validarProblema();
+			if (b) JOptionPane.showConfirmDialog(null, "¡El problema es valido!", "WARNING", JOptionPane.CLOSED_OPTION);
+			else JOptionPane.showConfirmDialog(null, "¡El problema NO es valido!", "WARNING", JOptionPane.CLOSED_OPTION);
+		}
+		if (comando =="TERMINAR") {
+			String nomp = e.nombre.getText();
+			String num = e.num.getText();
+			String col = (String) e.cb1.getSelectedItem();
+			String w = e.t.getFenFromMatrix();
+			String s = nomp + "\n" +num  + "\n" + w  + "\n" + col + "\n";
+			//CData.saveProblema(nomp);
+			mp.f.show(true);
+			e.f.show(false);
+			
+			}
+
 	}
 	
 	public static CtrlProblemas getInstance() { 
@@ -68,7 +105,7 @@ public class CtrlProblemas extends CtrlPresentacion implements ActionListener, M
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		 int column = 0;
-    	 int row = mp.tabla.getSelectedRow();
+    	 row = mp.tabla.getSelectedRow();
     	this.prob = mp.tabla.getModel().getValueAt(row, column).toString();
 	
 	}

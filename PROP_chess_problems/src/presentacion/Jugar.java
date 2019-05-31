@@ -2,10 +2,13 @@ package presentacion;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 import presentacion.Tablero;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -13,13 +16,17 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
-public class Jugar {
+public class Jugar implements ActionListener{
 	JFrame f;
 	JComboBox<String> cb1, cb2;
-	JButton play, home;
+	JButton play, home, ord_tema, ord_hard;
 	JList<String> list;
 	Tablero t;
+	Men2 m;
 	
 	Font f0 = new Font ("AR BONNIE", Font.BOLD,70);
 	Font f1 = new Font ("Britannic Bold", Font.PLAIN,25);
@@ -30,12 +37,21 @@ public class Jugar {
 	Color darkgreen = new Color (57,155,85);
 	Color blue = new Color(122, 221, 255);
 	Color darkblue = new Color(0, 119, 204);
+	Color violet = new Color(207, 186, 255);
+	
+	 private JScrollPane scroll; //Panel de scroll que contiene la tabla
+	 public static Object[][] datos; //Cuerpo de la tabla
+	 protected String[] cabecera;    //Cabecera de la tabla
+	 protected DefaultTableModel dtm;//Unión de la cabecera y la tabla
+	 protected JTable tabla; //Tabla propiamente dicha
 	
 	public Jugar() {
 		f = new JFrame();
-		t = new Tablero("JUGAR");
+		//datos = d;
+		t = new Tablero("JUGAR", this);
 		SetFrame();
-		JPanel menu = Men2.MenuPeque("JUGAR");
+		m= new Men2();
+		JPanel menu = m.MenuPeque("JUGAR");
 		f.add(menu);
 		SetPanelJugar();
 		f.setVisible(true);
@@ -90,41 +106,70 @@ public class Jugar {
 		cb2.setBounds(530, 290, 280, 30);
 		cp1.add(cb2);
 		
-		list = new JList<String>();
-		JScrollPane scroll = new JScrollPane(list);
-		scroll.setBounds(40, 150, 470, 460);
-		scroll.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		scroll = new JScrollPane();
+	    cabecera = new String[] {"NOMBRE","NºJUGADAS", "COLOR", "DIFICULTAD","VECES JUGADO"};
+	    dtm= new DefaultTableModel(datos,cabecera);
+	    tabla= new JTable(dtm);
+	    scroll.setViewportView(tabla);
+	    scroll.setBounds(40, 150, 470, 460);
+	    scroll.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		cp1.add(scroll);
 		
+		ord_tema = new JButton("Ordenar por tema");
+		ord_tema.setBounds(520, 350, 160, 30);
+		ord_tema.setBackground(violet);
+		ord_tema.setForeground(Color.white);
+		cp1.add(ord_tema);
+		ord_hard = new JButton("Ordenar por dificultad");
+		ord_hard.setBounds(680, 350, 160, 30);
+		ord_hard.setBackground(violet);
+		ord_hard.setForeground(Color.white);
+		cp1.add(ord_hard);
+		
 		play = new JButton("¡JUGAR!");
-		play.setBounds(200, 650, 450, 50);
+		play.setBounds(40, 650, 460, 50);
 		play.setBackground(blue);
 		play.setForeground(darkblue);
 		play.setFont(f1);
 		cp1.add(play);
 		
-		home = new JButton("iconohome");
+		ImageIcon house = new ImageIcon (new ImageIcon(getClass().getResource("home.png")).getImage().getScaledInstance(50, 50 ,java.awt.Image.SCALE_SMOOTH));
+		home = new JButton(house);
 		home.setBounds(755, 670, 68, 68);
-		home.setBackground(c1);
+		home.setBackground(Color.WHITE);
 		home.setBorder(null);
 		cp1.add(home);
 			
 		JPanel n = t.t;
-		n.setBounds(550, 350, 250, 250);
+		n.setBounds(550, 400, 250, 250);
 		cp1.add(n);
 		f.add(cp1);
 		
 	}
-	public void setListData( Vector<String> vect ) {
-        list.setListData(vect);
-    }
+	public void conectaControlador (CtrlPartida c) {
+		play.addActionListener(c);
+		play.setActionCommand("JUGAR");
+		home.addActionListener(c);
+		home.setActionCommand("HOME");
+		ord_tema.addActionListener(c);
+		ord_tema.setActionCommand("TEMA");
+		ord_hard.addActionListener(c);
+		ord_hard.setActionCommand("HARD");
+		tabla.addMouseListener(c);
+		tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+	}	
 	
-	public static void main(String[] args) {
-		Jugar j = new Jugar();
-	     Vector<String> v = new Vector<String>();
-	        for ( int i = 0; i < 100; i++ ) {
-	            v.add( "Data " + i );
-	        }
-	        j.setListData( v );
+	public void setData( String[][] d ) {
+        datos = d;
+        dtm= new DefaultTableModel(datos,cabecera);
+        tabla= new JTable(dtm);
+        scroll.setViewportView(tabla);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -36,8 +36,8 @@ public class CtrlEvaluaciones extends CtrlPresentacion implements ActionListener
 		me.f.show(true);
 		
 	}
-	public void show() {
-		me.f.show();
+	public void show(Boolean b) {
+		me.f.show(b);
 	}
 
 	@Override

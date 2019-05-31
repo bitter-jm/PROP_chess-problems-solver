@@ -3,8 +3,10 @@ package presentacion;
 import presentacion.Tablero;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -13,6 +15,7 @@ import javax.swing.JLabel;
 public class Editar {
 	JFrame f;
 	JTextField num, color, fen;
+	JComboBox cb1;
 	JButton home, eliminar, pawn, pawnN, knight, knightN, bishop, bishopN, rook, rookN, queen, queenN, king, kingN;
 	Font f1 = new Font ("Britannic Bold", Font.PLAIN,25);
 	Font f2 = new Font ("Consolas", Font.BOLD,18);
@@ -67,11 +70,14 @@ public class Editar {
 		cp1.add(text2);
 		
 		
-		color = new JTextField();
-		color.setBounds(415, 100, 80, 25);
-		color.setBackground(Color.WHITE);
-		color.setFont(f2);
-		cp1.add(color);
+		Vector<String> color = new Vector<String>();
+		color.add("BLANCAS");
+		color.add("NEGRAS");
+		cb1 = new JComboBox(color);
+		cb1.setBounds(415, 100, 100, 25);
+		cb1.setBackground(Color.WHITE);
+		cb1.setFont(f2);
+		cp1.add(cb1);
 		
 		JLabel text3 = new JLabel("Estado del problema: ");
 		text3.setBounds(70,135,300,20);
@@ -98,6 +104,7 @@ public class Editar {
 		l.setBackground(Color.ORANGE);
 		f.add(l);
 	}
+	
 	public void SetPanelEditar2() {
 		JPanel cp2 = new JPanel();
 		cp2.setLayout(null);

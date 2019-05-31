@@ -9,19 +9,19 @@ import javax.swing.*;
 
 public class LogIn2{
 	JFrame f;
-	JPanel cp;
-	JPanel cplog;
-	JPanel cpsign;
-	JPanel fondo;
-	JButton submit1;
-	JButton submit2;
+	JPanel cp, cplog,cpsign,fondo;
+	JTextField tusernamelog, tusernamesign;
+	JPasswordField tpasswordlog,tpasswordsign, tpasswordsign2;
+	JButton submit1,submit2;
+
 	Font f1 = new Font ("Segoe Script", Font.BOLD,30);
 	Font f2 = new Font ("Consolas", Font.PLAIN,20);
 	Font f3 = new Font ("AR ESSENCE", Font.PLAIN,100);
+	
 	Color cbutton = new Color(72,173,229);
 	Color cinsert = new Color(242,242,242);
-	JTextField tusernamelog;
-	JTextField tpasswordlog;
+
+	
 	public LogIn2() {
 		f = new JFrame();
 		SetFrame();
@@ -29,7 +29,6 @@ public class LogIn2{
 		SetTitle();
 		SetPanelLogin();
 		SetPanelSignin();
-		f.setResizable(true);
 		f.setVisible(true);
 	}
 	
@@ -38,8 +37,8 @@ public class LogIn2{
 		f.setTitle("Chess Game");
 		f.setLayout(null);
 		f.setLocationRelativeTo(null);
+		f.setResizable(false);
 		f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		
 	}
 	
 	private void SetFondoPic() {
@@ -73,6 +72,7 @@ public class LogIn2{
 		cp.add(title2);
 		f.add(cp);
 	}
+	
 	public void SetPanelLogin() {
 		cplog = new JPanel();
 		cplog.setBackground(Color.WHITE);
@@ -93,6 +93,7 @@ public class LogIn2{
 		tusernamelog = new JTextField(30);
 		tusernamelog.setBounds(40, 120, 268, 40);
 		tusernamelog.setBackground(cinsert);
+		tusernamelog.setFont(f2);
 		cplog.add(tusernamelog);
 		
 		JLabel password = new JLabel("Password:");
@@ -100,7 +101,7 @@ public class LogIn2{
 		password.setFont(f2);
 		cplog.add(password);
 		
-		tpasswordlog = new JTextField();
+		tpasswordlog = new JPasswordField();
 		tpasswordlog.setBounds(40, 205, 268, 40);
 		tpasswordlog.setBackground(cinsert);
 		cplog.add(tpasswordlog);
@@ -132,9 +133,10 @@ public class LogIn2{
 		username2.setFont(f2);
 		cpsign.add(username2);
 				
-		JTextField tusernamesign = new JTextField();
+		tusernamesign = new JTextField();
 		tusernamesign.setBounds(40, 120, 268, 40);
 		tusernamesign.setBackground(cinsert);
+		tusernamesign.setFont(f2);
 		cpsign.add(tusernamesign);
 		
 		JLabel cpassword = new JLabel("Password:");
@@ -142,9 +144,10 @@ public class LogIn2{
 		cpassword.setFont(f2);
 		cpsign.add(cpassword);
 		
-		JTextField tpasswordsign = new JTextField();
+		tpasswordsign = new JPasswordField();
 		tpasswordsign.setBounds(40, 205, 268, 40);
 		tpasswordsign.setBackground(cinsert);
+		
 		cpsign.add(tpasswordsign);
 		
 		JLabel password2 = new JLabel("Confirm Password:");
@@ -152,7 +155,7 @@ public class LogIn2{
 		password2.setFont(f2);
 		cpsign.add(password2);
 		
-		JTextField tpasswordsign2 = new JTextField();
+		tpasswordsign2 = new JPasswordField();
 		tpasswordsign2.setBounds(40, 290, 268, 40);
 		tpasswordsign2.setBackground(cinsert);
 		cpsign.add(tpasswordsign2);

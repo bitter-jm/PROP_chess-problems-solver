@@ -27,16 +27,17 @@ public class EvMaq {
 	JFrame f;
 	JList list;
 	Men2 m;
+	JButton Ev;
+	JComboBox cb1,cb2;
+	
 	Font f1 = new Font ("Britannic Bold", Font.PLAIN,25);
 	Font f2 = new Font ("Consolas", Font.BOLD,18);
-	JComboBox cb1;
-	JComboBox cb2;
+
 	Color c1= new Color (239, 255, 254);
 	Color green = new Color (163, 255, 186);
 	Color darkgreen = new Color (57,155,85);
-	JButton Ev;
 	
-	  //DEFINICIÓN DE LOS OBJETOS PARA LA TABLA
+	//DEFINICIÓN DE LOS OBJETOS PARA LA TABLA
     private JScrollPane scroll; //Panel de scroll que contiene la tabla
     public static Object[][] datos; //Cuerpo de la tabla
     protected String[] cabecera;    //Cabecera de la tabla
@@ -87,8 +88,8 @@ public class EvMaq {
 		cp1.add(text4);
 		
 		Vector<String> maq = new Vector<String>();
-		maq.add("Maquina 1");
-		maq.add("Maquina 2");
+		maq.add("MAQUINA1");
+		maq.add("MAQUINA2");
 		cb1 = new JComboBox(maq);
 		cb1.setBounds( 330, 75, 420, 30);
 		cp1.add(cb1);

@@ -11,28 +11,31 @@ import javax.swing.border.Border;
 public class Men2 /*implements ActionListener */{
 	private CtrlRanking CtrlR;
 	private CtrlPresentacion CtrlP;
+	JFrame f;
 	JButton Jugar, MisProb, Ranking, Maquinas, SignOut;
 	static JButton JugarP ,MisProbP,RankingP,MaquinasP,SignOutP;
 	JLabel titulo1, titulo2;
 	static String cual;
+	
 	Font f1 = new Font ("AR BONNIE", Font.BOLD,100);
 	Font f2 = new Font ("Segoe Script", Font.PLAIN,50);
 	static Font f3 = new Font ("Consolas", Font.BOLD,20);
 	Font f4 = new Font ("AR BONNIE", Font.BOLD,50);
-	JFrame f;
+	static Font f5 = new Font ("Arial", Font.BOLD,15);
+	
 	Color cbutton = new Color (252,177,85);
 	static Color mpeque = new Color (239, 247, 247);
-	
-	
+		
 	public Men2() {	}
 	
 	public void MenuGrande() {
 		//FRAME
 		f = new JFrame();
 		f.show(true);
-		f.setBounds (400,150,1089,803); //x, y, width, height
+		f.setBounds (400,150,1089,803);
 		f.setTitle("Chess Game");
 		f.setLayout(null);
+		f.setResizable(false);
 		f.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		cual = "BIG";
 		
@@ -47,9 +50,6 @@ public class Men2 /*implements ActionListener */{
 		label.setBounds(330, 70, 80, 80);
 		cp1.add(label);
 		
-		
-		//cp1.add(home1);
-				
 		titulo1 = new JLabel("Main Menu");
 		titulo1.setBounds(430,70,380,80);
 		titulo1.setFont(f1);
@@ -120,10 +120,10 @@ public class Men2 /*implements ActionListener */{
 		
 
 	}
-	
+	/*
 	public void setuser(String s) {
 		titulo2.setText("Welcome "+ s);
-	}
+	}*/
 	
 	public static JPanel MenuPeque(String s) {
 		
@@ -133,6 +133,16 @@ public class Men2 /*implements ActionListener */{
 		cpmenu.setLayout(null);
 		cpmenu.setBounds(0, 0, 230, 803);
 		cual = "SMALL";
+		
+		JLabel logged_as = new JLabel("Logged as:");
+		logged_as.setBounds(5, 0, 200, 20);
+		logged_as.setFont(f5);
+		
+		String nomuser = "getnomusuario";
+		JLabel logname = new JLabel(nomuser);
+		logname.setBounds(5, 20, 200, 20);
+		logname.setFont(f5);
+		
 		
 		JugarP = new JButton ("JUGAR");
 		JugarP.setBounds(0,150,230,54);
@@ -156,6 +166,8 @@ public class Men2 /*implements ActionListener */{
 		else if (s=="RANKING") RankingP.setEnabled(false);
 		else if (s=="MAQUINA") MaquinasP.setEnabled(false);
 		
+		cpmenu.add(logged_as);
+		cpmenu.add(logname);
 		cpmenu.add(JugarP);
 		cpmenu.add(MisProbP);
 		cpmenu.add(RankingP);

@@ -12,21 +12,20 @@ public class RankMen {
 	JFrame f;
 	JPanel cp1;
 	JList list;
+	JButton ver, home;
+	Object[][] data;
+	Men2 m;
 	Font f1 = new Font ("Britannic Bold", Font.PLAIN,25);
 	Color c1= new Color (239, 255, 254);
 	Color green = new Color (163, 255, 186);
 	Color darkgreen = new Color (57,155,85);
-	JButton ver;
-	JButton home;
-	Object[][] data;
-	Men2 m;
+
 	  //DEFINICIÓN DE LOS OBJETOS PARA LA TABLA
     private JScrollPane scroll; //Panel de scroll que contiene la tabla
     public static Object[][] datos; //Cuerpo de la tabla
     protected String[] cabecera;    //Cabecera de la tabla
     protected DefaultTableModel dtm;//Unión de la cabecera y la tabla
     protected JTable tabla; //Tabla propiamente dicha
-    
     
 	public RankMen(Object[][] data) {
 		RankMen.datos = data;
@@ -52,6 +51,7 @@ public class RankMen {
 		cp1.setBounds(230,0,859,803);
 		cp1.setLayout(null);
 		cp1.setBackground(c1);
+		
 		
 		JLabel text1 = new JLabel("Elige el problema:");
 		text1.setBounds(90, 50, 350, 30);

@@ -12,9 +12,11 @@ public class Prob {
 	JFrame f;
 	JPanel cp1, cp2, cp3;
 	JList list;
-
-	Font f1 = new Font ("Britannic Bold", Font.PLAIN,25);
+	JButton CrearP, EditP, EliminarP,casa;
 	Men2 m;
+	
+	Font f1 = new Font ("Britannic Bold", Font.PLAIN,25);
+
 	Color c1= new Color (255, 201, 168);
 	Color c2= new Color (239, 255, 254);
 	Color green = new Color (163, 255, 186);
@@ -22,7 +24,7 @@ public class Prob {
 	Color yellow = new Color (250, 255, 183);
 	Color red = new Color(255, 126, 117);
 	Color darkred = new Color(255, 184, 183);
-	JButton CrearP, EditP, EliminarP,casa;
+
 	
 	 private JScrollPane scroll; //Panel de scroll que contiene la tabla
 	 public static Object[][] datos; //Cuerpo de la tabla
@@ -76,10 +78,8 @@ public class Prob {
 	    tabla= new JTable(dtm);
 	    scroll.setViewportView(tabla);
 	    scroll.setBounds(90, 0, 660, 525);
-	   // scroll.setBounds(200, 100, 660, 525);
 	    scroll.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		cp2.add(scroll);
-	   // f.add(scroll);
 		f.add(cp2);
 		
 		//PANEL 3:
@@ -122,6 +122,12 @@ public class Prob {
 		  tabla.addMouseListener(c);
 		  tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	  }
+	  
+	  public void setdata( String[][] datam ) {
+	        datos=datam;
+	        f.getContentPane().revalidate();
+	       f.getContentPane().repaint();
+	    }
 
 
  

@@ -1,6 +1,9 @@
 package presentacion;
 
-import java.awt.List;
+import java.util.List;
+
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -16,20 +19,25 @@ public class CtrlEvaluaciones extends CtrlPresentacion implements ActionListener
 	private CtrlEvaluador CE;
 	public EvMaq me;
 	public Evaluacion e;
-	public List l;
+	public List<String> prob;
 	public CtrlEvaluaciones() {
 		crearMenuEva();
 	}
 	
 	private void crearMenuEva() {
+		l.f.show(false);
 		// TODO Auto-generated method stub
 		CData = CtrlData.getInstance();
+		CE = CtrlEvaluador.getInstance();
 		String [][] data = CData.getProblemasJugables();
 		me = new EvMaq(data);
 		me.m.conectaControlador(super.getInstance());
 		me.conectaControlador(this);
 		me.f.show(true);
 		
+	}
+	public void show() {
+		me.f.show();
 	}
 
 	@Override
@@ -39,10 +47,10 @@ public class CtrlEvaluaciones extends CtrlPresentacion implements ActionListener
 		if(comando =="EVALUAR") {
 			String s1 = me.cb1.getSelectedItem().toString();
 			String s2 = me.cb2.getSelectedItem().toString();
-			//String[][] datam = CE.evaluarProblemas(l, s1, s2);
-			String[][] datam = null;
+			String[][] datam = CE.evaluarProblemas(prob, s1, s2);
 			e = new Evaluacion(s1,s2,datam);
-			
+			e.f.show();
+
 		}
 	}
 	
@@ -50,11 +58,13 @@ public class CtrlEvaluaciones extends CtrlPresentacion implements ActionListener
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if (me.tabla.getSelectedRowCount() > 0) {
-			 int selectedRow[] = me.tabla.getSelectedRows();
-			 for (int i : selectedRow) {
-				// List<String> prob = new ArrayList<String>();
-				 
-		//		 l.add(me.tabla.getModel().getValueAt(i, 0).toString());
+			 int[] selectedRow = me.tabla.getSelectedRows();
+			 DefaultTableModel modelo = (DefaultTableModel) me.tabla.getModel();
+			 for (int i = 0; i < selectedRow.length; ++i) {
+				int pos = selectedRow[i];
+				prob = new ArrayList<>();
+				String nom = (String) modelo.getValueAt(pos, 0);
+				prob.add(nom);
 			 }
 		}
 	}

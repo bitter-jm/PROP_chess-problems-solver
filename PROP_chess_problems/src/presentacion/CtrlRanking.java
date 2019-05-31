@@ -31,6 +31,7 @@ public class CtrlRanking extends CtrlPresentacion implements ActionListener, Mou
 		mr.conectaControlador(this);
 		
 	}
+	
 
 	/**
 	 * Obtiene la instacia del singleton CtrlRanking
@@ -42,7 +43,9 @@ public class CtrlRanking extends CtrlPresentacion implements ActionListener, Mou
         return single_instance;
     }
 	
-	
+	public void show() {
+		mr.f.show();
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

@@ -177,10 +177,11 @@ public class CtrlData {
 			}
 		}
 		
+		
 		String[][] mat = new String[problemas.size()][5];
 		int i = 0;
 		
-		for (int j = 0; j < maxNumJugadas; ++j) {
+		for (int j = 0; j <= maxNumJugadas; ++j) {
 			for (String problema : problemas) {
 				String[] data = problema.split("\n");
 				if (Integer.valueOf(data[1]).equals(j)) {

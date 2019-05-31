@@ -16,8 +16,10 @@ public class M1 extends Maquina {
 	 */
 	public M1() {
 		this.nombre = "MAQUINA1";
+		this.maxDepth = 3;
 	}
 	
+
 	/**
 	 * Calcula cual es el mejor movimiento a realizar
 	 * @param fen String con el estado del tablero en formato FEN

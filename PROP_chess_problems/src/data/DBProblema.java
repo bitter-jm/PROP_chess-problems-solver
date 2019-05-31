@@ -47,6 +47,11 @@ public class DBProblema {
 					this.problemas = new JSONArray();
 					// Insertar problemas DEFAULT
 					this.createProblema("Problema1\n2\n8/8/8/8/3p4/5K2/3kNN2/2R5\nfalse\ntrue\n0\nDEFAULT\nEASY");
+					this.createProblema("Problema2\n2\n8/6N1/6pp/6k1/4P1N1/6K/8/8\nfalse\ntrue\n0\nDEFAULT\nEASY");
+					this.createProblema("Problema3\n2\n5Br1/6P1/5KBk/8/8/8/8/8\nfalse\ntrue\n0\nDEFAULT\nEASY");
+					this.createProblema("Problema4\n3\n6K1/3r3r/5kn1/5p2/5P2/6N1/8/4R1R1\nfalse\ntrue\n0\nDEFAULT\nMEDIUM");
+					this.createProblema("Problema5\n3\nr6k/pp2BpRp/8/8/5N3/7P/qPP5/2KR4\nfalse\ntrue\n0\nDEFAULT\nMEDIUM");
+					this.createProblema("Problema6\n3\nkr5Q/p3q3/3R1p2/1P2B3/8/8/1K6/8\nfalse\ntrue\n0\nDEFAULT\nMEDIUM");
 					this.guardarFichero();
 				}
 				else {
@@ -58,7 +63,12 @@ public class DBProblema {
 				this.fichero.createNewFile();
 		        this.problemas = new JSONArray();
 		        // Insertar problemas DEFAULT
-		        this.createProblema("Problema1\n2\n8/8/8/8/3p4/5K2/3kNN2/2R5\nfalse\ntrue\n0\nDEFAULT\nEASY");
+				this.createProblema("Problema1\n2\n8/8/8/8/3p4/5K2/3kNN2/2R5\nfalse\ntrue\n0\nDEFAULT\nEASY");
+				this.createProblema("Problema2\n2\n8/6N1/6pp/6k1/4P1N1/6K/8/8\nfalse\ntrue\n0\nDEFAULT\nEASY");
+				this.createProblema("Problema3\n2\n5Br1/6P1/5KBk/8/8/8/8/8\nfalse\ntrue\n0\nDEFAULT\nEASY");
+				this.createProblema("Problema4\n3\n6K1/3r3r/5kn1/5p2/5P2/6N1/8/4R1R1\nfalse\ntrue\n0\nDEFAULT\nMEDIUM");
+				this.createProblema("Problema5\n3\nr6k/pp2BpRp/8/8/5N3/7P/qPP5/2KR4\nfalse\ntrue\n0\nDEFAULT\nMEDIUM");
+				this.createProblema("Problema6\n3\nkr5Q/p3q3/3R1p2/1P2B3/8/8/1K6/8\nfalse\ntrue\n0\nDEFAULT\nMEDIUM");
 		        this.guardarFichero();
 			}
 			

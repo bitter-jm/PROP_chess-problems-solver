@@ -188,7 +188,7 @@ public class DriverIntegration {
 					System.out.println("No hay ningun problema activo en el editor.");
 					break;
 				}
-				if (!ctrlPr.haSidoJugado()) {
+				if (ctrlPr.haSidoJugado()) {
 					System.out.println("El problema ya ha sido jugado. No se puede borrar.");
 					break;
 				}
